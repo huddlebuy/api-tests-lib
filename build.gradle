@@ -1,9 +1,7 @@
-plugins {
-    id 'java'
-}
-
 group 'com.perkbox'
-version '1.0.0'
+version '1.0.1'
+
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -12,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    compile "io.rest-assured:rest-assured:3.0.2",
-            "org.testng:testng:6.9.4",
-            "com.jayway.jsonpath:json-path:2.4.0",
-            "com.google.code.gson:gson:2.3.1",
-            "io.jsonwebtoken:jjwt:0.6.0"
+    compile 'io.rest-assured:rest-assured:3.0.2',
+            'org.testng:testng:6.9.4',
+            'com.jayway.jsonpath:json-path:2.4.0',
+            'com.google.code.gson:gson:2.3.1',
+            'io.jsonwebtoken:jjwt:0.6.0'
 }
