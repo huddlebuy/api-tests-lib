@@ -21,9 +21,13 @@ public class Requests {
     private String body;
 
     public Requests(String resourcePath) {
+        this(resourcePath, Config.get("BASE_URI"));
+    }
+
+    public Requests(String resourcePath, String baseUri) {
         request = given()
                 .config(RestAssured.config().encoderConfig(encoderConfig().
-                 appendDefaultContentCharsetToContentTypeIfUndefined(false)))
+                        appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                 .contentType("application/json");
 
         request.baseUri(Config.get("BASE_URI"));
