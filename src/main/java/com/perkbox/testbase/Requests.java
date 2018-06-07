@@ -1,6 +1,6 @@
 package com.perkbox.testbase;
 
-import com.perkbox.util.Config;
+import com.perkbox.util.Env;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -21,7 +21,7 @@ public class Requests {
     private String body;
 
     public Requests(String resourcePath) {
-        this(resourcePath, Config.get("BASE_URI"));
+        this(resourcePath, Env.get("BASE_URI"));
     }
 
     public Requests(String resourcePath, String baseUri) {
@@ -30,7 +30,7 @@ public class Requests {
                         appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                 .contentType("application/json");
 
-        request.baseUri(Config.get("BASE_URI"));
+        request.baseUri(baseUri);
         request.basePath(resourcePath);
 
         headers = new HashMap<>();
