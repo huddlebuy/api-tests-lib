@@ -28,7 +28,7 @@ public class Responses {
         if (response.statusCode() != statusCode) return false;
         if (fields != null) {
             for (Map.Entry<String, String> entry: fields.entrySet()) {
-                if (!JsonHelper.getField(response.asString(), entry.getKey()).equals(entry.getValue()))
+                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue()))
                     return false;
             }
         }

@@ -1,6 +1,6 @@
 package com.perkbox.util.token;
 
-import com.perkbox.util.Config;
+import com.perkbox.util.Env;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -25,7 +25,7 @@ public class TokenBuilder {
 
         try {
             token = (new TokenBuilder()).withUser(UserUuid).withTenant(tenant).withEmail(userEmail)
-                    .withPermissions(permissionJson).expiresIn(expiry).lock(Config.get("TOKEN_SIGNER")).build();
+                    .withPermissions(permissionJson).expiresIn(expiry).lock(Env.get("PERKBOX_TOKEN_KEY")).build();
         }
         catch (IOException e) {
             System.out.println("Unable to generate createToken: " + e.getMessage());
@@ -88,12 +88,8 @@ public class TokenBuilder {
     }
 
     private String JsonToEncoded(String json) throws IOException {
-        try {
-            byte[] compressed = zip(json.getBytes());
-            return Base64.getEncoder().encodeToString(compressed);
-        } catch (IOException e) {
-            throw e;
-        }
+        byte[] compressed = zip(json.getBytes());
+        return Base64.getEncoder().encodeToString(compressed);
     }
 
     private byte[] zip(byte[] source) throws IOException {

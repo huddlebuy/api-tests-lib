@@ -21,7 +21,7 @@ public class Requests {
     private String body;
 
     public Requests(String resourcePath) {
-        this(resourcePath, Env.get("BASE_URI"));
+        this(resourcePath, Env.get("BASE_URL"));
     }
 
     public Requests(String resourcePath, String baseUri) {
