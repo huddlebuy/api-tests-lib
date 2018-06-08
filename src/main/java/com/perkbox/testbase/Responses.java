@@ -1,6 +1,7 @@
 package com.perkbox.testbase;
 
 import com.perkbox.util.JsonHelper;
+import com.perkbox.util.MapBuilder;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
@@ -32,6 +33,10 @@ public class Responses {
             }
         }
         return true;
+    }
+
+    public boolean assertTrue(int statusCode, MapBuilder mapBuilder) {
+        return assertTrue(statusCode, mapBuilder.getMap());
     }
 
     public String getHeader(String headerName) {
