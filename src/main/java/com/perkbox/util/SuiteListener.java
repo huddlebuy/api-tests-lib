@@ -31,7 +31,7 @@ public class SuiteListener implements ISuiteListener {
     }
     
     private ExtractableResponse<Response> callHealthz() {
-        return given().header("Content-Type", "application/json").when().get(Config.get("HEALTH_URI")).then().extract();
+        return given().header("Content-Type", "application/json").when().get(Env.get("HEALTH_URL")).then().extract();
     }
 
     public void onFinish(ISuite suite) {}
