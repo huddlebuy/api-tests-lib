@@ -25,6 +25,8 @@ public class Requests {
     }
 
     public Requests(String resourcePath, String baseUri) {
+        RestAssured.useRelaxedHTTPSValidation();
+
         request = given()
                 .config(RestAssured.config().encoderConfig(encoderConfig().
                         appendDefaultContentCharsetToContentTypeIfUndefined(false)))

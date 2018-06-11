@@ -1,4 +1,4 @@
-## API Tests Library from Perkbox
+# API Tests Library from Perkbox
 
 This library simplifies the api tests process. It is built on rest-assured and testng.
 
