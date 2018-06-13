@@ -5,18 +5,18 @@ import java.util.Map;
 
 public class MapBuilder {
 
-    private Map<String, String> map;
+    private Map<String, Object> map;
 
     public MapBuilder() {
-        map = new HashMap<String, String>();
+        map = new HashMap<String, Object>();
     }
 
-    public MapBuilder add(String key, String value) {
+    public MapBuilder add(String key, Object value) {
         map.put(key, value);
         return this;
     }
 
-    public Map<String, String> getMap() {
+    public Map<String, Object> getMap() {
         return this.map;
     }
 }

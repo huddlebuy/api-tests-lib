@@ -24,11 +24,11 @@ public class Responses {
         return response.asString().contains(textResponse);
     }
 
-    public boolean assertTrue(int statusCode, Map<String, String> fields) {
+    public boolean assertTrue(int statusCode, Map<String, Object> fields) {
         if (response.statusCode() != statusCode) return false;
         if (fields != null) {
-            for (Map.Entry<String, String> entry: fields.entrySet()) {
-                if (!JsonHelper.getParamAsStr(response, entry.getKey()).equals(entry.getValue()))
+            for (Map.Entry<String, Object> entry: fields.entrySet()) {
+                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue()))
                     return false;
             }
         }
