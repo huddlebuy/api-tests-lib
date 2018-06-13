@@ -28,7 +28,7 @@ public class Responses {
         if (response.statusCode() != statusCode) return false;
         if (fields != null) {
             for (Map.Entry<String, String> entry: fields.entrySet()) {
-                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue()))
+                if (!JsonHelper.getParamAsStr(response, entry.getKey()).equals(entry.getValue()))
                     return false;
             }
         }
@@ -45,5 +45,9 @@ public class Responses {
 
     public String getParam(String jsonPath) {
         return response.body().jsonPath().getString(jsonPath);
+    }
+
+    public ExtractableResponse<Response> getResponse() {
+        return this.response;
     }
 }
