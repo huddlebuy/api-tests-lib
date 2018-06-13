@@ -38,7 +38,7 @@ public class JsonHelper {
         String body = readFile();
 
         for(String path: jsonPaths){
-            JsonPath.parse(body).delete(path);
+            body = JsonPath.parse(body).delete(path).jsonString();
         }
 
         return body;
@@ -52,8 +52,7 @@ public class JsonHelper {
         String body = readFile();
 
         for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
-            Object obj = entry.getValue();
-            JsonPath.parse(body).set(entry.getKey(), obj);
+            body = JsonPath.parse(body).set(entry.getKey(), entry.getValue()).jsonString();
         }
 
         return body;
