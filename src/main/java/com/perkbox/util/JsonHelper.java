@@ -52,7 +52,8 @@ public class JsonHelper {
         String body = readFile();
 
         for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
-            JsonPath.parse(body).set(entry.getKey(), entry.getValue());
+            Object obj = entry.getValue();
+            JsonPath.parse(body).set(entry.getKey(), obj);
         }
 
         return body;
