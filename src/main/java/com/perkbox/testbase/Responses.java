@@ -12,8 +12,8 @@ public class Responses {
 
     private ExtractableResponse<Response> response;
 
-    public Responses(Requests req) {
-        this.response = req.extractResponse();
+    public Responses(ExtractableResponse<Response> response) {
+        this.response = response;
     }
 
     public boolean assertTrue(int statusCode) {
