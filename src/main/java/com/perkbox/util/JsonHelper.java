@@ -58,8 +58,12 @@ public class JsonHelper {
         return body;
     }
 
-    public String getParam(String jsonPath) {
+    public Object getParam(String jsonPath) {
         return JsonPath.parse(readFile()).read(jsonPath);
+    }
+
+    public String getParamAsStr(String jsonPath) {
+        return getParam(jsonPath).toString();
     }
 
     //Static methods
@@ -84,12 +88,20 @@ public class JsonHelper {
         return (new JsonHelper(file)).modifyParams(jsonPaths);
     }
 
-    public static String getParam(String file, String jsonPath) {
+    public static Object getParam(String file, String jsonPath) {
         return (new JsonHelper(file)).getParam(jsonPath);
     }
 
-    // This method does not have instance equivalent
-    public static String getParam(ExtractableResponse<Response> response, String jsonPath) {
+    public static Object getParamAsStr(String file, String jsonPath) {
+        return (new JsonHelper(file)).getParamAsStr(jsonPath);
+    }
+
+    // These methods do not have instance equivalent
+    public static Object getParam(ExtractableResponse<Response> response, String jsonPath) {
         return JsonPath.parse(response.asString()).read(jsonPath);
+    }
+
+    public static String getParamAsStr(ExtractableResponse<Response> response, String jsonPath) {
+        return getParam(response, jsonPath).toString();
     }
 }
