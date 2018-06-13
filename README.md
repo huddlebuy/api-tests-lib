@@ -38,9 +38,9 @@ This library simplifies the api tests process. It is built on rest-assured and t
         JsonHelper json = new JsonHelper("endpointOne/CreateOne-code");
 
         MapBuilder map = (new MapBuilder())
-                .add("$.uuid", json.getParam("$.uuid"))
-                .add("$.endpoint", json.getParam("$.endpoint"))
-                .add("$.create", json.getParam("$.create"));
+                .add("$.uuid", json.getParamAsStr("$.uuid"))
+                .add("$.endpoint", json.getParamAsStr("$.endpoint"))
+                .add("$.create", json.getParamAsStr("$.create"));
 
         Assert.assertTrue(resp.assertTrue(200, map));
     }
@@ -59,7 +59,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
         JsonHelper json = new JsonHelper("endpointTwo/ListTwo-valid");
 
         MapBuilder map = (new MapBuilder())
-                .add("$.data", json.getParam("$.data"));
+                .add("$.data", json.getParamAsStr("$.data"));
 
         Assert.assertTrue(resp.assertTrue(200, map));
     }
