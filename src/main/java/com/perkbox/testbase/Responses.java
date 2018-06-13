@@ -25,18 +25,32 @@ public class Responses {
     }
 
     public boolean assertTrue(int statusCode, Map<String, Object> fields) {
+        return assertTrue(statusCode, fields, false);
+    }
+
+    public boolean assertTrue(int statusCode, Map<String, Object> fields, boolean log) {
         if (response.statusCode() != statusCode) return false;
         if (fields != null) {
             for (Map.Entry<String, Object> entry: fields.entrySet()) {
-                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue()))
+                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
+                    if (log) {
+                        System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
+                        System.out.println("Expected: " + entry.getValue());
+                    }
+
                     return false;
+                }
             }
         }
         return true;
     }
 
+    public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log) {
+        return assertTrue(statusCode, mapBuilder.getMap(), log);
+    }
+
     public boolean assertTrue(int statusCode, MapBuilder mapBuilder) {
-        return assertTrue(statusCode, mapBuilder.getMap());
+        return assertTrue(statusCode, mapBuilder, false);
     }
 
     public String getHeader(String headerName) {
