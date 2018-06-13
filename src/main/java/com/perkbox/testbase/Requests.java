@@ -90,27 +90,23 @@ public class Requests {
         return request;
     }
 
-    public ExtractableResponse<Response> extractResponse() {
-        return this.response;
-    }
-
-    public Requests get() {
+    public Responses get() {
         this.response = this.build().when().get().then().extract();
-        return this;
+        return new Responses(this.response);
     }
 
-    public Requests post() {
+    public Responses post() {
         this.response = this.build().when().post().then().extract();
-        return this;
+        return new Responses(this.response);
     }
 
-    public Requests put() {
+    public Responses put() {
         this.response = this.build().when().put().then().extract();
-        return this;
+        return new Responses(this.response);
     }
 
-    public Requests delete() {
+    public Responses delete() {
         this.response = this.build().when().delete().then().extract();
-        return this;
+        return new Responses(this.response);
     }
 }
