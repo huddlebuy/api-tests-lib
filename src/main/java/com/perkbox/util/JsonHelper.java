@@ -48,10 +48,10 @@ public class JsonHelper {
         return JsonPath.parse(readFile()).set(jsonPath,value).jsonString();
     }
 
-    public String modifyParams(Map<String, String> jsonPaths) {
+    public String modifyParams(Map<String, Object> jsonPaths) {
         String body = readFile();
 
-        for (Map.Entry<String, String> entry : jsonPaths.entrySet()) {
+        for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
             JsonPath.parse(body).set(entry.getKey(), entry.getValue());
         }
 
@@ -84,7 +84,7 @@ public class JsonHelper {
         return (new JsonHelper(file)).modifyParam(jsonPath, value);
     }
 
-    public static String modifyParams(String file, Map<String, String> jsonPaths) {
+    public static String modifyParams(String file, Map<String, Object> jsonPaths) {
         return (new JsonHelper(file)).modifyParams(jsonPaths);
     }
 
