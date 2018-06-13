@@ -6,6 +6,7 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Responses {
 
@@ -20,8 +21,33 @@ public class Responses {
     }
 
     public boolean assertTrue(int statusCode, String textResponse) {
-        if (response.statusCode() != statusCode) return false;
-        return response.asString().contains(textResponse);
+        return assertTrue(statusCode, textResponse, false);
+    }
+
+    public boolean assertTrue(int statusCode, String textResponse, boolean log) {
+        if (response.statusCode() != statusCode || !(response.asString().contains(textResponse))) {
+            if (log) {
+                System.out.println("Actual: " + response.asString());
+                System.out.println("Expected (for contains): " + textResponse);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public boolean assertMatch(int statusCode, String regex, boolean log) {
+        if (response.statusCode() != statusCode || !(Pattern.compile(regex).matcher(response.asString()).find())) {
+            if (log) {
+                System.out.println("Actual: " + response.asString());
+                System.out.println("Expected (regex): " + regex);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public boolean assertMatch(int statusCode, String regex) {
+        return assertMatch(statusCode, regex, false);
     }
 
     public boolean assertTrue(int statusCode, Map<String, Object> fields) {
@@ -37,7 +63,6 @@ public class Responses {
                         System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
                         System.out.println("Expected: " + entry.getValue());
                     }
-
                     return false;
                 }
             }
