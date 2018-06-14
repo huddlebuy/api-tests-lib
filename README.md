@@ -16,10 +16,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
                 .withBody(JsonHelper.readFile("endpointOne/CreateOne-valid"))
                 .post();
 
-        MapBuilder map = (new MapBuilder())
-                .add("$.message", "The item was successfully created");
-
-        Assert.assertTrue(resp.assertTrue(201, map));
+        Assert.assertTrue(resp.assertMatch(201, "\\{\"links\":\\{\"self\":\"/v1/endpointOne/.*\"\\}\\}"));
     }
 ```
 
@@ -66,16 +63,21 @@ This library simplifies the api tests process. It is built on rest-assured and t
     @Test
     public void validUpdate () {
         String resourcePath = "/endpointTwo/7dab6d55-755e-418e-a932-08061913142f3";
+
+        String updatedBody = JsonHelper.modifyParams("endpointTwo/UpdateTwo-valid", (new MapBuilder())
+                .add("$.endpoint", "twoA")
+                .add("$.update", "twoA"));
+
         Responses resp = (new Requests(resourcePath))
                 .withAuthorization(Token.update())
-                .withBody(JsonHelper.readFile("endpointTwo/UpdateTwo-valid"))
-                .withIfMatch("the-etag-uuid-of-this")
+                .withBody(updatedBody)
+                .withIfMatch("4e666f2a4fa329c100016d239fad257f")
                 .put();
 
-        MapBuilder map = (new MapBuilder())
+        MapBuilder result = (new MapBuilder())
                 .add("$.message", "The item was successfully updated");
 
-        Assert.assertTrue(resp.assertTrue(200, map));
+        Assert.assertTrue(resp.assertTrue(200, result));
     }
 ```
 
