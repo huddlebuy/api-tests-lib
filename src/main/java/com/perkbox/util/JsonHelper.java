@@ -58,6 +58,10 @@ public class JsonHelper {
         return body;
     }
 
+    public String modifyParams(MapBuilder jsonPaths) {
+        return modifyParams(jsonPaths.getMap());
+    }
+
     public Object getParam(String jsonPath) {
         return JsonPath.parse(readFile()).read(jsonPath);
     }
@@ -86,6 +90,10 @@ public class JsonHelper {
 
     public static String modifyParams(String file, Map<String, Object> jsonPaths) {
         return (new JsonHelper(file)).modifyParams(jsonPaths);
+    }
+
+    public static String modifyParams(String file, MapBuilder jsonPaths) {
+        return modifyParams(file, jsonPaths.getMap());
     }
 
     public static Object getParam(String file, String jsonPath) {
