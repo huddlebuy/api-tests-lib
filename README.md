@@ -16,7 +16,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
                 .withBody(JsonHelper.readFile("endpointOne/CreateOne-valid"))
                 .post();
 
-        Assert.assertTrue(resp.assertMatch(201, "\\{\"links\":\\{\"self\":\"/v1/endpointOne/.*\"\\}\\}"));
+        Assert.assertTrue(resp.assertMatch(201, "\\{\"links\":\\{\"self\":\"/v1/endpointOne/" + Regex.UUID + "\"\\}\\}"));
     }
 ```
 
