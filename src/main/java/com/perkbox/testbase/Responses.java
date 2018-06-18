@@ -2,6 +2,7 @@ package com.perkbox.testbase;
 
 import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
+import io.restassured.http.Header;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
@@ -14,6 +15,11 @@ public class Responses {
 
     public Responses(ExtractableResponse<Response> response) {
         this.response = response;
+    }
+
+    public void log(String filter) {
+        System.out.printf("Response::%s:: %s%n", filter, this.response.asString());
+        System.out.printf("StatusCode::%s:: %s%n", filter, this.response.statusCode());
     }
 
     public boolean assertTrue(int statusCode) {
