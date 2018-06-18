@@ -16,6 +16,8 @@ This library simplifies the api tests process. It is built on rest-assured and t
                 .withBody(JsonHelper.readFile("endpointOne/CreateOne-valid"))
                 .post();
 
+        resp.log("validCreate"); // log response and statusCode
+
         Assert.assertTrue(resp.assertMatch(201, "\\{\"links\":\\{\"self\":\"/v1/endpointOne/" + Regex.UUID + "\"\\}\\}"));
     }
 ```
@@ -36,7 +38,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
                 .add("$.endpoint", json.getParamAsStr("$.endpoint"))
                 .add("$.create", json.getParamAsStr("$.create"));
 
-        Assert.assertTrue(resp.assertTrue(200, map));
+        Assert.assertTrue(resp.assertTrue(200, map, true)); // Third true parameter is to log expected and actual values
     }
 ```
 
