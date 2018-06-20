@@ -41,19 +41,28 @@ public class Responses {
         return true;
     }
 
-    public boolean assertMatch(int statusCode, String regex, boolean log) {
-        if (response.statusCode() != statusCode || !(Pattern.compile(regex).matcher(response.asString()).find())) {
-            if (log) {
-                System.out.println("Actual: " + response.asString());
-                System.out.println("Expected (regex): " + regex);
-            }
+    public boolean assertMatch(int statusCode, String expect, String ... regexParams) {
+        int placeholders = expect.split("%REGEX", -1).length - 1;
+        if (regexParams.length != placeholders) {
+            System.out.println("Error: %REGEX count does equal to regexParams count.");
             return false;
         }
-        return true;
-    }
 
-    public boolean assertMatch(int statusCode, String regex) {
-        return assertMatch(statusCode, regex, false);
+        String[] arr = expect.split("%REGEX");
+        StringBuilder regex = new StringBuilder();
+        int count = 0;
+
+        for (String str : arr) {
+            regex.append(Pattern.quote(str));
+
+            if (count < regexParams.length) {
+                regex.append(regexParams[count]);
+            }
+
+            count++;
+        }
+
+        return (response.statusCode() == statusCode && Pattern.compile(regex.toString()).matcher(response.asString()).find());
     }
 
     public boolean assertTrue(int statusCode, Map<String, Object> fields) {
