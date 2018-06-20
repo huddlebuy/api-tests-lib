@@ -34,6 +34,10 @@ public class JsonHelper {
         }
     }
 
+    public String getJson() {
+        return documentContext.jsonString();
+    }
+
     public String removeParam(String jsonPath) {
         return documentContext.delete(jsonPath).jsonString();
     }
