@@ -18,7 +18,9 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
         resp.log("validCreate"); // log response and statusCode
 
-        Assert.assertTrue(resp.assertMatch(201, "\\{\"links\":\\{\"self\":\"/v1/endpointOne/" + Regex.UUID + "\"\\}\\}"));
+        String expect = "{\"links\":{\"self\":\"/v1/endpointOne/%REGEX\"}}";
+
+        Assert.assertTrue(resp.assertMatch(201, expect, Regex.UUID));
     }
 ```
 
