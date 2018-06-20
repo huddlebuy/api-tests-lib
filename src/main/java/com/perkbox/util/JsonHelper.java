@@ -1,6 +1,7 @@
 package com.perkbox.util;
 
 import com.google.gson.JsonParser;
+import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -14,8 +15,11 @@ public class JsonHelper {
 
     private String file;
 
+    private DocumentContext documentContext;
+
     public JsonHelper(String file) {
         this.file = file;
+        this.documentContext = JsonPath.parse(readFile());
     }
 
     public String readFile() {
@@ -31,28 +35,28 @@ public class JsonHelper {
     }
 
     public String removeParam(String jsonPath) {
-        return JsonPath.parse(readFile()).delete(jsonPath).jsonString();
+        return documentContext.delete(jsonPath).jsonString();
     }
 
     public String removeParams(List<String> jsonPaths) {
-        String body = readFile();
+        String body = "";
 
         for(String path: jsonPaths){
-            body = JsonPath.parse(body).delete(path).jsonString();
+            body = documentContext.delete(path).jsonString();
         }
 
         return body;
     }
 
     public String modifyParam(String jsonPath, String value) {
-        return JsonPath.parse(readFile()).set(jsonPath,value).jsonString();
+        return documentContext.set(jsonPath,value).jsonString();
     }
 
     public String modifyParams(Map<String, Object> jsonPaths) {
-        String body = readFile();
+        String body = "";
 
         for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
-            body = JsonPath.parse(body).set(entry.getKey(), entry.getValue()).jsonString();
+            body = documentContext.set(entry.getKey(), entry.getValue()).jsonString();
         }
 
         return body;
@@ -63,7 +67,7 @@ public class JsonHelper {
     }
 
     public Object getParam(String jsonPath) {
-        return JsonPath.parse(readFile()).read(jsonPath);
+        return documentContext.read(jsonPath);
     }
 
     public String getParamAsStr(String jsonPath) {
