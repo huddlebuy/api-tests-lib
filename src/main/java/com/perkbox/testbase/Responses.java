@@ -101,6 +101,15 @@ public class Responses {
         return response.body().jsonPath().getString(jsonPath);
     }
 
+    public String getUuid(String link) {
+        return link.substring(link.lastIndexOf('/') + 1);
+    }
+
+    public String getUuid() {
+        String link = response.body().jsonPath().get("links.self");
+        return getUuid(link);
+    }
+
     public ExtractableResponse<Response> getResponse() {
         return this.response;
     }
