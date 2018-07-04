@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -119,5 +120,20 @@ public class JsonHelper {
 
     public static String getParamAsStr(ExtractableResponse<Response> response, String jsonPath) {
         return getParam(response, jsonPath).toString();
+    }
+
+    // Search List By a unique column: This returns json of the item found in the list
+
+    public static String searchListByUniqueColumn(ExtractableResponse<Response> response, String id, String column) {
+        ArrayList filtered = JsonPath.read(response.asString(), "$.data[?(@." + column + " == '" + id + "')]");
+        return JsonPath.parse(filtered.get(0)).jsonString();
+    }
+
+    public static String searchListById(ExtractableResponse<Response> response, String id) {
+        return searchListByUniqueColumn(response, id, "id");
+    }
+
+    public static String searchListByUuid(ExtractableResponse<Response> response, String uuid) {
+        return searchListByUniqueColumn(response, uuid, "uuid");
     }
 }
