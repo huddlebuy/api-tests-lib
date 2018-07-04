@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perkbox QA Library</title>
+</head>
+<style>
+#container {
+    width: 800px;
+    margin: 20px auto;
+
+    padding: 45px;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c0341d;
+    background-color: #fcedea;
+    border-radius: 3px;
+}
+
+pre {
+
+    font-size: 85%;
+
+    padding-top: 15px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+
+}
+
+h2 {
+    border-bottom: 1px solid #eaeaea;
+}
+
+h4 {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c0341d;
+    border-radius: 3px;
+
+    font-family: monospace;
+    margin-top: 50px;
+    background-color: #fcedea;
+    border-bottom: 1px solid #c0341d;
+}
+</style>
+<body>
+<div id="container">
+
+
+    <h1>Perkbox QA Library</h1>
+
+
+    <h2>JsonHelper</h2>
+
+
+    <h4><a name="JsonHelper">public JsonHelper(String file)</a></h4>
+    <small>Constructor which requires a reference to a JSON <code>file</code> in the <code>data/input</code> directory. The library adds the <code>.json</code> extension, and therefore does not require it in the argument.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+    </pre>
+
+
+    <h4><a name="readFile">public String readFile()</a></h4>
+    <small>Returns a string of the <code>.json</code> file provided.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String string = json.readFile();
+    </pre>
+
+
+    <h4><a name="getJson">public String getJson()</a></h4>
+    <small>Returns a JSON string of the <code>.json</code> file provided.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String jsonString = json.getJson();
+    </pre>
+
+
+    <h4><a name="removeParam">public String removeParam(String jsonPath)</a></h4>
+    <small>Removes a JSON parameter from a JSON body based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would remove <code>text</code> from the JSON body.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String jsonString = json.removeParam("$.text");
+    </pre>
+
+
+    <h4><a name="removeParams">public String removeParams(List&lt;String&gt; jsonPaths)</a></h4>
+    <small>Removes a list of JSON parameters from a JSON body based on the specified <code>jsonPaths</code>, and returns the resulting JSON string. The example below would remove <code>text</code> and <code>answers</code> from the JSON body.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+
+        List&lt;String&gt; jsonPaths = new ArrayList<>();
+        jsonPaths.add("$.text");
+        jsonPaths.add("$.answers");
+
+        String jsonString = json.removeParams(jsonPaths);
+    </pre>
+
+
+    <h4><a name="modifyParam">public String modifyParam(String jsonPath, String value)</a></h4>
+    <small>Replaces the value of the JSON parameter in a JSON body with the specified <code>value</code> based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String jsonString = json.modifyParam("$.text", "This is a new value");
+    </pre>
+
+
+</div>
+</body>
+</html>
