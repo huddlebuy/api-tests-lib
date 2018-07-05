@@ -20,20 +20,6 @@ public class TokenBuilder {
     private String secret;
     private int expiresIn;
 
-    public String generateToken(String permissionJson, String UserUuid, String tenant, String userEmail, int expiry) {
-        String token = null;
-
-        try {
-            token = (new TokenBuilder()).withUser(UserUuid).withTenant(tenant).withEmail(userEmail)
-                    .withPermissions(permissionJson).expiresIn(expiry).lock(Env.get("PERKBOX_TOKEN_KEY")).build();
-        }
-        catch (IOException e) {
-            System.out.println("Unable to generate createToken: " + e.getMessage());
-        }
-
-        return token;
-    }
-
     public TokenBuilder() {
         this.expiresIn = 1800;
     }
@@ -85,6 +71,20 @@ public class TokenBuilder {
                 .setExpiration(new Date(System.currentTimeMillis() + (this.expiresIn * 1000))).claim("usr", this.email)
                 .claim("ten", this.tenant).claim("aut", JsonToEncoded(this.permissionsJson))
                 .signWith(SignatureAlgorithm.HS256, this.secret.getBytes()).compact();
+    }
+
+    public String generateToken(String permissionJson, String UserUuid, String tenant, String userEmail, int expiry) {
+        String token = null;
+
+        try {
+            token = (new TokenBuilder()).withUser(UserUuid).withTenant(tenant).withEmail(userEmail)
+                    .withPermissions(permissionJson).expiresIn(expiry).lock(Env.get("PERKBOX_TOKEN_KEY")).build();
+        }
+        catch (IOException e) {
+            System.out.println("Unable to generate createToken: " + e.getMessage());
+        }
+
+        return token;
     }
 
     private String JsonToEncoded(String json) throws IOException {

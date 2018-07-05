@@ -7,6 +7,33 @@
 </head>
 <style>
 
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-out;
+}
+
 #container {
     width: 820px;
     margin: 20px auto;
@@ -36,9 +63,8 @@ li.sub-header {
     font-weight:600;
 }
 
-li.package {
-    list-style-type: none;
-    font-size: 12px;
+.package {
+    font-size: 13px;
     text-align: center;
 }
 
@@ -61,33 +87,6 @@ h3 {
 
 small.version {
     float: right;
-}
-
-/* Style the buttons that are used to open and close the accordion panel */
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-    background-color: #ccc;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
 }
 
 .intro {
@@ -114,12 +113,75 @@ small.version {
     </div>
 
 
+    <div class="package">Package: com.perkbox.testbase</div>
+
+
+    <button class="accordion">Requests</button>
+    <div class="panel">
+        <ul>
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Requests.html#Requests">public Requests(String resourcePath)</a></li>
+            <li><a href="Requests.html#Requests_baseUri">public Requests(String resourcePath, String baseUri)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Requests.html#withHeader">public Requests withHeader(String key, String value)</a></li>
+            <li><a href="Requests.html#withAuthorization">public Requests withAuthorization(String authorization)</a></li>
+            <li><a href="Requests.html#withContentType">public Requests withContentType(String contentType)</a></li>
+            <li><a href="Requests.html#withIfMatch">public Requests withIfMatch(String ifMatch)</a></li>
+            <li><a href="Requests.html#withBody">public Requests withBody(String body)</a></li>
+            <li><a href="Requests.html#withQueryParam">public Requests withQueryParam(String key, String value)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Requests.html#get">public Responses get()</a></li>
+            <li><a href="Requests.html#post">public Responses post()</a></li>
+            <li><a href="Requests.html#put">public Responses put()</a></li>
+            <li><a href="Requests.html#delete">public Responses delete()</a></li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <button class="accordion">Responses</button>
+    <div class="panel">
+        <ul>
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Responses.html#Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Responses.html#assertTrue">public boolean assertTrue(int statusCode)</a></li>
+            <li><a href="Responses.html#assertTrue_textResponse">public boolean assertTrue(int statusCode, String textResponse)</a></li>
+            <li><a href="Responses.html#assertTrue_textResponse_log">public boolean assertTrue(int statusCode, String textResponse, boolean log)</a></li>
+            <li><a href="Responses.html#assertTrue_fields">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></li>
+            <li><a href="Responses.html#assertTrue_fields_log">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a></li>
+            <li><a href="Responses.html#assertTrue_mapBuilder">public boolean assertTrue(int statusCode, MapBuilder mapBuilder)</a></li>
+            <li><a href="Responses.html#assertTrue_mapBuilder_log">public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></li>
+            <li><a href="Responses.html#assertMatch">public boolean assertMatch(int statusCode, String expect, String ... regexParams)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Responses.html#getHeader">public String getHeader(String headerName)</a></li>
+            <li><a href="Responses.html#getParam">public String getParam(String jsonPath)</a></li>
+            <li><a href="Responses.html#getUuid">public String getUuid()</a></li>
+            <li><a href="Responses.html#getUuid_link">public String getUuid(String link)</a></li>
+            <li><a href="Responses.html#getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Responses.html#log">public void log(String filter)</a></li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <br><br>
+    <div class="package">Package: com.perkbox.util</div>
+
+
     <button class="accordion">Config <span class="float-right">&#10004;</span></button>
     <div class="panel">
     <ul>
-        <li class="package">Package: com.perkbox.util</li>
-        <li class="separator">&nbsp;</li>
-
         <li class="sub-header">Static Methods</li>
         <li class="separator">&nbsp;</li>
 
@@ -132,9 +194,6 @@ small.version {
     <button class="accordion">Env <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
-            <li class="package">Package: com.perkbox.util</li>
-            <li class="separator">&nbsp;</li>
-
             <li class="sub-header">Static Methods</li>
             <li class="separator">&nbsp;</li>
 
@@ -147,9 +206,6 @@ small.version {
     <button class="accordion">JsonHelper <span class="float-right">&#10004;</span></button>
     <div class="panel">
     <ul>
-        <li class="package">Package: com.perkbox.util</li>
-        <li class="separator">&nbsp;</li>
-
         <li class="sub-header">Instance Methods</li>
         <li class="separator">&nbsp;</li>
 
@@ -213,10 +269,16 @@ small.version {
     <button class="accordion">MapBuilder</button>
     <div class="panel">
         <ul>
-            <li class="package">Package: com.perkbox.util</li>
+            <li class="sub-header">Instance Methods</li>
             <li class="separator">&nbsp;</li>
 
-            <li class="sub-header">Instance Methods</li>
+            <li><a href="MapBuilder.html#MapBuilder">public MapBuilder()</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="MapBuilder.html#getMap">public Map&lt;String, Object&gt; getMap()</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="MapBuilder.html#add">public MapBuilder add(String key, Object value)</a></li>
             <li class="separator">&nbsp;</li>
         </ul>
     </div>
@@ -225,10 +287,11 @@ small.version {
     <button class="accordion">Regex</button>
     <div class="panel">
         <ul>
-            <li class="package">Package: com.perkbox.util</li>
+            <li class="sub-header">Static Members</li>
             <li class="separator">&nbsp;</li>
 
-            <li class="sub-header">Instance Methods</li>
+            <li><a href="Regex.html#static_ANY">public static final String ANY</a></li>
+            <li><a href="Regex.html#static_UUID">public static final String UUID</a></li>
             <li class="separator">&nbsp;</li>
         </ul>
     </div>
@@ -237,14 +300,45 @@ small.version {
     <button class="accordion">SuiteListener</button>
     <div class="panel">
         <ul>
-            <li class="package">Package: com.perkbox.util</li>
+            <li class="sub-header">Instance Methods</li>
             <li class="separator">&nbsp;</li>
 
-            <li class="sub-header">Instance Methods</li>
+            <li><a href="SuiteListener.html#onStart">public void onStart(ISuite iSuite)</a></li>
+            <li><a href="SuiteListener.html#onFinish">public void onFinish(ISuite suite)</a></li>
             <li class="separator">&nbsp;</li>
         </ul>
     </div>
 
+
+    <br><br>
+    <div class="package">Package: com.perkbox.util.token</div>
+
+
+    <button class="accordion">Token</button>
+    <div class="panel">
+        <ul>
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Token.html#Token">public Token(String uuid, String tenant, String email)</a></li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <button class="accordion">TokenBuilder</button>
+    <div class="panel">
+        <ul>
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="TokenBuilder.html#TokenBuilder">public TokenBuilder()</a></li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <br><br>
 
 </div>
 <script>

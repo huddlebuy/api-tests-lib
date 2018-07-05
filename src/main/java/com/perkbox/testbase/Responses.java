@@ -17,11 +17,6 @@ public class Responses {
         this.response = response;
     }
 
-    public void log(String filter) {
-        System.out.printf("Response::%s:: %s%n", filter, this.response.asString());
-        System.out.printf("StatusCode::%s:: %s%n", filter, this.response.statusCode());
-    }
-
     public boolean assertTrue(int statusCode) {
         return (response.statusCode() == statusCode);
     }
@@ -39,6 +34,34 @@ public class Responses {
             return false;
         }
         return true;
+    }
+
+    public boolean assertTrue(int statusCode, Map<String, Object> fields) {
+        return assertTrue(statusCode, fields, false);
+    }
+
+    public boolean assertTrue(int statusCode, Map<String, Object> fields, boolean log) {
+        if (response.statusCode() != statusCode) return false;
+        if (fields != null) {
+            for (Map.Entry<String, Object> entry: fields.entrySet()) {
+                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
+                    if (log) {
+                        System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
+                        System.out.println("Expected: " + entry.getValue());
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean assertTrue(int statusCode, MapBuilder mapBuilder) {
+        return assertTrue(statusCode, mapBuilder, false);
+    }
+
+    public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log) {
+        return assertTrue(statusCode, mapBuilder.getMap(), log);
     }
 
     public boolean assertMatch(int statusCode, String expect, String ... regexParams) {
@@ -65,34 +88,6 @@ public class Responses {
         return (response.statusCode() == statusCode && Pattern.compile(regex.toString()).matcher(response.asString()).find());
     }
 
-    public boolean assertTrue(int statusCode, Map<String, Object> fields) {
-        return assertTrue(statusCode, fields, false);
-    }
-
-    public boolean assertTrue(int statusCode, Map<String, Object> fields, boolean log) {
-        if (response.statusCode() != statusCode) return false;
-        if (fields != null) {
-            for (Map.Entry<String, Object> entry: fields.entrySet()) {
-                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
-                    if (log) {
-                        System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
-                        System.out.println("Expected: " + entry.getValue());
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log) {
-        return assertTrue(statusCode, mapBuilder.getMap(), log);
-    }
-
-    public boolean assertTrue(int statusCode, MapBuilder mapBuilder) {
-        return assertTrue(statusCode, mapBuilder, false);
-    }
-
     public String getHeader(String headerName) {
         return response.header(headerName);
     }
@@ -101,16 +96,21 @@ public class Responses {
         return response.body().jsonPath().getString(jsonPath);
     }
 
-    public String getUuid(String link) {
-        return link.substring(link.lastIndexOf('/') + 1);
-    }
-
     public String getUuid() {
         String link = response.body().jsonPath().get("links.self");
         return getUuid(link);
     }
 
+    public String getUuid(String link) {
+        return link.substring(link.lastIndexOf('/') + 1);
+    }
+
     public ExtractableResponse<Response> getResponse() {
         return this.response;
+    }
+
+    public void log(String filter) {
+        System.out.printf("Response::%s:: %s%n", filter, this.response.asString());
+        System.out.printf("StatusCode::%s:: %s%n", filter, this.response.statusCode());
     }
 }
