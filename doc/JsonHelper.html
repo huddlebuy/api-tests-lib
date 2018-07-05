@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="https://d33e3vv6sjfy9c.cloudfront.net/assets/meta/favicon-white-32x32-ea7672b223119f07d17a6f64b032e3db61c24164ea80267a9c5f82e82eed1aec.png" sizes="32x32">
 </head>
 <style>
+
 #container {
     width: 820px;
     margin: 20px auto;
@@ -37,6 +38,7 @@ pre {
     font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 
     padding-top: 15px;
+    padding-right: 13px;
     overflow: auto;
     line-height: 1.45;
     background-color: #f6f8fa;
@@ -51,7 +53,7 @@ h3 {
     color: #333;
 
     background-color: #ccc;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #a0a0a0;
 
     margin-top: 50px;
     padding: 1px 5px;
@@ -68,6 +70,17 @@ h4 {
     background-color: #fcedea;
     border-bottom: 1px solid #c0341d;
 }
+
+small.menu {
+    float: right;
+    font-size: 12px;
+}
+
+.sample {
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
 </style>
 <body>
 <div id="container">
@@ -76,7 +89,11 @@ h4 {
     <h1>Perkbox QA Library</h1>
 
 
+    <small class="menu"><< <a href="Documentation.html">Home menu</a></small>
+
+
     <h2>JsonHelper</h2>
+    <small>Package: <code>com.perkbox.util</code></small>
 
 
     <h3>Instance Methods</h3>
@@ -183,6 +200,164 @@ h4 {
     <small>Achieves the same function as <a href="#readFile"><code>public String readFile()</code></a>, however in a static context.</small>
     <pre>
         String string = JsonHelper.readFile("questions/question");
+    </pre>
+
+
+    <h4><a name="static_getJson">public static String getJson(String file)</a></h4>
+    <small>Achieves the same function as <a href="#getJson"><code>public String getJson()</code></a>, however in a static context.</small>
+    <pre>
+        String jsonString = JsonHelper.getJson("questions/question");
+    </pre>
+
+
+    <h4><a name="static_getParam">public static Object getParam(String file, String jsonPath)</a></h4>
+    <small>Achieves the same function as <a href="#getParam"><code>public Object getParam(String jsonPath)</code></a>, however in a static context.</small>
+    <pre>
+        Object objValue = JsonHelper.getParam("questions/question", "$.answers");
+    </pre>
+
+
+    <h4><a name="static_getParamAsStr">public static Object getParamAsStr(String file, String jsonPath)</a></h4>
+    <small>Achieves the same function as <a href="#getParamAsStr"><code>public String getParamAsStr(String jsonPath)</code></a>, however in a static context.</small>
+    <pre>
+        String strValue = JsonHelper.getParamAsStr("questions/question", "$.text");
+    </pre>
+
+
+    <h4><a name="static_modifyParam">public static String modifyParam(String file, String jsonPath, String value)</a></h4>
+    <small>Achieves the same function as <a href="#modifyParam"><code>public String modifyParam(String jsonPath, String value)</code></a>, however in a static context.</small>
+    <pre>
+        String jsonString = JsonHelper.modifyParam("questions/question", "$.text", "This is a new value");
+    </pre>
+
+
+    <h4><a name="static_modifyParams">public static String modifyParams(String file, Map&lt;String, Object&gt; jsonPaths)</a></h4>
+    <small>Achieves the same function as <a href="#modifyParams"><code>public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however in a static context.</small>
+    <pre>
+        Map&lt;String, Object&gt; jsonPaths = new HashMap<>();
+        jsonPaths.put("$.text", "This is a new value");
+        jsonPaths.put("$.status", "enabled");
+
+        String jsonString = JsonHelper.modifyParams("questions/question", jsonPaths);
+    </pre>
+
+
+    <h4><a name="static_modifyParams_MapBuilder">public static String modifyParams(String file, MapBuilder jsonPaths)</a></h4>
+    <small>Achieves the same function as <a href="#modifyParams_MapBuilder"><code>public String modifyParams(MapBuilder jsonPaths)</code></a>, however in a static context.</small>
+    <pre>
+        MapBuilder jsonPaths = (new MapBuilder())
+                .add("$.text", "This is a new value")
+                .add("$.status", "enabled");
+
+        String jsonString = JsonHelper.modifyParams("questions/question", jsonPaths);
+    </pre>
+
+
+    <h4><a name="static_removeParam">public static String removeParam(String file, String jsonPath)</a></h4>
+    <small>Achieves the same function as <a href="#removeParam"><code>public String removeParam(String jsonPath)</code></a>, however in a static context.</small>
+    <pre>
+        String jsonString = JsonHelper.removeParam("questions/question", "$.text");
+    </pre>
+
+
+    <h4><a name="static_removeParams">public static String removeParams(String file, List&lt;String&gt; jsonPaths)</a></h4>
+    <small>Achieves the same function as <a href="#removeParams"><code>public String removeParams(List&lt;String&gt; jsonPaths)</code></a>, however in a static context.</small>
+    <pre>
+        List&lt;String&gt; jsonPaths = new ArrayList<>();
+        jsonPaths.add("$.text");
+        jsonPaths.add("$.answers");
+
+        String jsonString = JsonHelper.removeParams("questions/question", jsonPaths);
+    </pre>
+
+
+    <h3>Static ONLY Methods: These do not have instance equivalent.</h3>
+
+
+    <h4><a name="staticOnly_getParam">public static Object getParam(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></h4>
+    <small>Similar to <a href="#static_getParam"><code>public static Object getParam(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
+    <pre>
+        Responses resp = (new Requests("http://localhost:8080/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
+                .get();
+
+        Object objValue = JsonHelper.getParam(resp, "$.answers");
+    </pre>
+
+
+    <h4><a name="staticOnly_getParamAsStr">public static String getParamAsStr(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></h4>
+    <small>Similar to <a href="#static_getParamAsStr"><code>public static Object getParamAsStr(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
+    <pre>
+        Responses resp = (new Requests("http://localhost:8080/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
+                .get();
+
+        String strValue = JsonHelper.getParamAsStr(resp, "$.text");
+    </pre>
+
+
+    <h4><a name="staticOnly_searchListByUniqueColumn">public static String searchListByUniqueColumn<br>&emsp;&emsp;&emsp; (ExtractableResponse&lt;Response&gt; response, String columnValue, String columnName)</a></h4>
+    <small>Searches a list endpoint by a unique column (e.g. id or uuid) to return the json of that identifier. Given a <i>Sample JSON</i> body as below, the <code>searchListByUniqueColumn</code> method would return the <i>Resultant JSON</i> as below.</small>
+    <pre class="sample">
+    Sample JSON:
+    ------------
+        {
+            "links": {...},
+            "page": 0,
+            "count": 3,
+            "total": 0,
+            "data": [
+                {
+                    "id": "06dcdb79-b391-4891-9ef9-daa12c22ab83",
+                    "text": "We are moving in the right strategic direction"
+                },
+                {
+                    "id": "13d32246-1cf4-4aae-8483-12b62d5920c0",
+                    "text": "I feel that my contributions at work are valued"
+                },
+                {
+                    "id": "1666e938-d1a5-4288-b6c4-21ef0bdd8dbd",
+                    "text": "The amount of work I am asked to do is reasonable"
+                }
+            ]
+        }
+    </pre>
+    <pre>
+        Responses resp = (new Requests("http://localhost:8080/questions"))
+                .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
+                .get();
+
+        String jsonString = JsonHelper.searchListByUniqueColumn(resp, "06dcdb79-b391-4891-9ef9-daa12c22ab83", "id");
+    </pre>
+    <pre class="sample">
+    Resultant JSON:
+    ---------------
+        {
+            "id": "06dcdb79-b391-4891-9ef9-daa12c22ab83",
+            "text": "We are moving in the right strategic direction"
+        }
+    </pre>
+
+
+    <h4><a name="staticOnly_searchListById">public static String searchListById(ExtractableResponse&lt;Response&gt; response, String id)</a></h4>
+    <small>Searches a list endpoint by the <code>id</code> column to return the json of that id. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
+    <pre>
+        Responses resp = (new Requests("http://localhost:8080/questions"))
+                .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
+                .get();
+
+        String jsonString = JsonHelper.searchListById(resp, "06dcdb79-b391-4891-9ef9-daa12c22ab83");
+    </pre>
+
+
+    <h4><a name="staticOnly_searchListByUuid">public static String searchListByUuid(ExtractableResponse&lt;Response&gt; response, String uuid)</a></h4>
+    <small>Searches a list endpoint by the <code>uuid</code> column to return the json of that uuid. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
+    <pre>
+        Responses resp = (new Requests("http://localhost:8080/questions"))
+                .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
+                .get();
+
+        String jsonString = JsonHelper.searchListByUuid(resp, "06dcdb79-b391-4891-9ef9-daa12c22ab83");
     </pre>
 
 

@@ -130,8 +130,8 @@ public class JsonHelper {
 
     // Search List By a unique column: This returns json of the item found in the list
 
-    public static String searchListByUniqueColumn(ExtractableResponse<Response> response, String id, String column) {
-        ArrayList filtered = JsonPath.read(response.asString(), "$.data[?(@." + column + " == '" + id + "')]");
+    public static String searchListByUniqueColumn(ExtractableResponse<Response> response, String columnValue, String columnName) {
+        ArrayList filtered = JsonPath.read(response.asString(), "$.data[?(@." + columnName + " == '" + columnValue + "')]");
         return JsonPath.parse(filtered.get(0)).jsonString();
     }
 
