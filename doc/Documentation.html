@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perkbox QA Library</title>
+    <link rel="icon" type="image/png" href="https://d33e3vv6sjfy9c.cloudfront.net/assets/meta/favicon-white-32x32-ea7672b223119f07d17a6f64b032e3db61c24164ea80267a9c5f82e82eed1aec.png" sizes="32x32">
+</head>
+<style>
+#container {
+    width: 820px;
+    margin: 20px auto;
+    color: #24292e;
+
+    padding: 45px;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+li.separator {
+    margin: -5px;
+    list-style-type: none;
+}
+
+li.sub-header {
+    margin: -5px;
+    list-style-type: none;
+    font-weight:600;
+}
+
+li {
+    font-size: 15px;
+}
+
+h3 {
+    color: #333;
+
+    background-color: #ccc;
+    border-bottom: 1px solid #333;
+
+    padding: 1px 5px;
+}
+
+</style>
+<body>
+<div id="container">
+
+
+    <h1>Perkbox QA Library</h1>
+
+    <div>This documentation exemplifies the use of the library.</div>
+
+    <h3><a href="JsonHelper.html">JsonHelper</a></h3>
+
+    <ul>
+        <li class="sub-header">Instance Methods</li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#JsonHelper">public JsonHelper(String file)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#readFile">public String readFile()</a></li>
+        <li><a href="JsonHelper.html#getJson">public String getJson()</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#getParam">public Object getParam(String jsonPath)</a></li>
+        <li><a href="JsonHelper.html#getParamAsStr">public String getParamAsStr(String jsonPath)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#modifyParam">public String modifyParam(String jsonPath, String value)</a></li>
+        <li><a href="JsonHelper.html#modifyParams">public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</a></li>
+        <li><a href="JsonHelper.html#modifyParams_MapBuilder">public String modifyParams(MapBuilder jsonPaths)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#removeParam">public String removeParam(String jsonPath)</a></li>
+        <li><a href="JsonHelper.html#removeParams">public String removeParams(List&lt;String&gt; jsonPaths)</a></li>
+        <li class="separator">&nbsp;</li>
+
+
+        <li class="sub-header">Static Methods</li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#static_readFile">public static String readFile(String file)</a></li>
+        <li><a href="JsonHelper.html#static_getJson">public static String getJson(String file)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#static_getParam">public static Object getParam(String file, String jsonPath)</a></li>
+        <li><a href="JsonHelper.html#static_getParamAsStr">public static Object getParamAsStr(String file, String jsonPath)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#static_modifyParam">public static String modifyParam(String file, String jsonPath, String value)</a></li>
+        <li><a href="JsonHelper.html#static_modifyParams">public static String modifyParams(String file, Map&lt;String, Object&gt; jsonPaths)</a></li>
+        <li><a href="JsonHelper.html#static_modifyParams_MapBuilder">public static String modifyParams(String file, MapBuilder jsonPaths)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#static_removeParam">public static String removeParam(String file, String jsonPath)</a></li>
+        <li><a href="JsonHelper.html#static_removeParams">public static String removeParams(String file, List&lt;String&gt; jsonPaths)</a></li>
+        <li class="separator">&nbsp;</li>
+
+
+        <li class="sub-header">Static ONLY Methods: These do not have instance equivalent.</li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#staticOnly_getParam">public static Object getParam(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></li>
+        <li><a href="JsonHelper.html#staticOnly_getParamAsStr">public static String getParamAsStr(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#staticOnly_searchListByUniqueColumn">public static String searchListByUniqueColumn(ExtractableResponse&lt;Response&gt; response, String id, String column)</a></li>
+        <li><a href="JsonHelper.html#staticOnly_searchListById">public static String searchListById(ExtractableResponse&lt;Response&gt; response, String id)</a></li>
+        <li><a href="JsonHelper.html#staticOnly_searchListByUuid">public static String searchListByUuid(ExtractableResponse&lt;Response&gt; response, String uuid)</a></li>
+        <li class="separator">&nbsp;</li>
+
+    </ul>
+
+
+
+</div>
+</body>
+</html>
