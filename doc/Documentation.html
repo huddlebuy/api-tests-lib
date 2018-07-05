@@ -36,6 +36,12 @@ li.sub-header {
     font-weight:600;
 }
 
+li.package {
+    list-style-type: none;
+    font-size: 12px;
+    text-align: center;
+}
+
 li {
     font-size: 15px;
 }
@@ -57,18 +63,87 @@ small.version {
     float: right;
 }
 
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.intro {
+    margin-bottom: 50px;
+}
+
+.float-right {
+    float: right;
+}
+
 </style>
+
 <body>
 <div id="container">
 
 
     <h1>Perkbox QA Library</h1>
 
-    <div>This documentation exemplifies the use of the library. <small class="version">version: 1.1.12</small></div>
+    <div class="intro">
+        This documentation exemplifies the use of the library.
+        <br>
+        <small>&#10004; Completed documentation.</small>
+        <small class="version">version: 1.1.12</small>
+    </div>
 
-    <h3><a href="JsonHelper.html">JsonHelper</a></h3>
 
+    <button class="accordion">Config</button>
+    <div class="panel">
     <ul>
+        <li class="package">Package: com.perkbox.util</li>
+        <li class="separator">&nbsp;</li>
+
+        <li class="sub-header">Instance Methods</li>
+        <li class="separator">&nbsp;</li>
+    </ul>
+    </div>
+
+
+    <button class="accordion">Env</button>
+    <div class="panel">
+        <ul>
+            <li class="package">Package: com.perkbox.util</li>
+            <li class="separator">&nbsp;</li>
+
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <button class="accordion">JsonHelper <span class="float-right">&#10004;</span></button>
+    <div class="panel">
+    <ul>
+        <li class="package">Package: com.perkbox.util</li>
+        <li class="separator">&nbsp;</li>
+
         <li class="sub-header">Instance Methods</li>
         <li class="separator">&nbsp;</li>
 
@@ -125,11 +200,62 @@ small.version {
         <li><a href="JsonHelper.html#staticOnly_searchListById">public static String searchListById(ExtractableResponse&lt;Response&gt; response, String id)</a></li>
         <li><a href="JsonHelper.html#staticOnly_searchListByUuid">public static String searchListByUuid(ExtractableResponse&lt;Response&gt; response, String uuid)</a></li>
         <li class="separator">&nbsp;</li>
-
     </ul>
+    </div>
 
+
+    <button class="accordion">MapBuilder</button>
+    <div class="panel">
+        <ul>
+            <li class="package">Package: com.perkbox.util</li>
+            <li class="separator">&nbsp;</li>
+
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <button class="accordion">Regex</button>
+    <div class="panel">
+        <ul>
+            <li class="package">Package: com.perkbox.util</li>
+            <li class="separator">&nbsp;</li>
+
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
+
+
+    <button class="accordion">SuiteListener</button>
+    <div class="panel">
+        <ul>
+            <li class="package">Package: com.perkbox.util</li>
+            <li class="separator">&nbsp;</li>
+
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
 
 
 </div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
 </body>
 </html>
