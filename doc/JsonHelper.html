@@ -6,8 +6,9 @@
 </head>
 <style>
 #container {
-    width: 800px;
+    width: 820px;
     margin: 20px auto;
+    color: #24292e;
 
     padding: 45px;
     word-wrap: break-word;
@@ -31,19 +32,28 @@ code {
 }
 
 pre {
-
     font-size: 85%;
+    font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 
     padding-top: 15px;
     overflow: auto;
     line-height: 1.45;
     background-color: #f6f8fa;
     border-radius: 3px;
-
 }
 
 h2 {
     border-bottom: 1px solid #eaeaea;
+}
+
+h3 {
+    color: #333;
+
+    background-color: #ccc;
+    border-bottom: 1px solid #333;
+
+    margin-top: 50px;
+    padding: 1px 5px;
 }
 
 h4 {
@@ -68,8 +78,11 @@ h4 {
     <h2>JsonHelper</h2>
 
 
+    <h3>Instance Methods</h3>
+
+
     <h4><a name="JsonHelper">public JsonHelper(String file)</a></h4>
-    <small>Constructor which requires a reference to a JSON <code>file</code> in the <code>data/input</code> directory. The library adds the <code>.json</code> extension, and therefore does not require it in the argument.</small>
+    <small><i>The Constructor: </i> which requires a reference to a JSON <code>file</code> in the <code>data/input</code> directory. The library adds the <code>.json</code> extension, and therefore does not require it in the argument.</small>
     <pre>
         JsonHelper json = new JsonHelper("questions/question");
     </pre>
@@ -88,6 +101,56 @@ h4 {
     <pre>
         JsonHelper json = new JsonHelper("questions/question");
         String jsonString = json.getJson();
+    </pre>
+
+
+    <h4><a name="getParam">public Object getParam(String jsonPath)</a></h4>
+    <small>Returns the Object value of a JSON parameter based on the <code>jsonPath</code> provided. E.g. if <code>question.json</code> contained an <code>answers</code> parameter which has an array of answers. The variable <code>objValue</code> below would return an object containing the answers array.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        Object objValue = json.getParam("$.answers");
+    </pre>
+
+
+    <h4><a name="getParamAsStr">public String getParamAsStr(String jsonPath)</a></h4>
+    <small>Returns the String value of a JSON parameter based on the <code>jsonPath</code> provided. E.g. if <code>question.json</code> contained a <code>text</code> parameter which has the String <code>What is your name?</code> as value. The variable <code>strValue</code> below would return the String.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String strValue = json.getParamAsStr("$.text");
+    </pre>
+
+
+    <h4><a name="modifyParam">public String modifyParam(String jsonPath, String value)</a></h4>
+    <small>Replaces the value of the JSON parameter in a JSON body with the specified <code>value</code> based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String jsonString = json.modifyParam("$.text", "This is a new value");
+    </pre>
+
+
+    <h4><a name="modifyParams">public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</a></h4>
+    <small>Replaces the value of the JSON parameters in a JSON body with the specified Map <code>values</code> based on the specified <code>jsonPaths</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>, and the value of <code>status</code> with the String <code>enabled</code>.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+
+        Map&lt;String, Object&gt; jsonPaths = new HashMap<>();
+        jsonPaths.put("$.text", "This is a new value");
+        jsonPaths.put("$.status", "enabled");
+
+        String jsonString = json.modifyParams(jsonPaths);
+    </pre>
+
+
+    <h4><a name="modifyParams_MapBuilder">public String modifyParams(MapBuilder jsonPaths)</a></h4>
+    <small>Achieves the same function as <a href="#modifyParams"><code>public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however using the library's <code>MapBuilder</code> helper class.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+
+        MapBuilder jsonPaths = (new MapBuilder())
+                .add("$.text", "This is a new value")
+                .add("$.status", "enabled");
+
+        String jsonString = json.modifyParams(jsonPaths);
     </pre>
 
 
@@ -112,11 +175,13 @@ h4 {
     </pre>
 
 
-    <h4><a name="modifyParam">public String modifyParam(String jsonPath, String value)</a></h4>
-    <small>Replaces the value of the JSON parameter in a JSON body with the specified <code>value</code> based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>.</small>
+    <h3>Static Methods</h3>
+
+
+    <h4><a name="static_readFile">public static String readFile(String file)</a></h4>
+    <small>Achieves the same function as <a href="#readFile"><code>public String readFile()</code></a>, however in a static context.</small>
     <pre>
-        JsonHelper json = new JsonHelper("questions/question");
-        String jsonString = json.modifyParam("$.text", "This is a new value");
+        String string = JsonHelper.readFile("questions/question");
     </pre>
 
 

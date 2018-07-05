@@ -39,18 +39,12 @@ public class JsonHelper {
         return documentContext.jsonString();
     }
 
-    public String removeParam(String jsonPath) {
-        return documentContext.delete(jsonPath).jsonString();
+    public Object getParam(String jsonPath) {
+        return documentContext.read(jsonPath);
     }
 
-    public String removeParams(List<String> jsonPaths) {
-        String body = "";
-
-        for(String path: jsonPaths){
-            body = documentContext.delete(path).jsonString();
-        }
-
-        return body;
+    public String getParamAsStr(String jsonPath) {
+        return getParam(jsonPath).toString();
     }
 
     public String modifyParam(String jsonPath, String value) {
@@ -71,12 +65,18 @@ public class JsonHelper {
         return modifyParams(jsonPaths.getMap());
     }
 
-    public Object getParam(String jsonPath) {
-        return documentContext.read(jsonPath);
+    public String removeParam(String jsonPath) {
+        return documentContext.delete(jsonPath).jsonString();
     }
 
-    public String getParamAsStr(String jsonPath) {
-        return getParam(jsonPath).toString();
+    public String removeParams(List<String> jsonPaths) {
+        String body = "";
+
+        for(String path: jsonPaths){
+            body = documentContext.delete(path).jsonString();
+        }
+
+        return body;
     }
 
     //Static methods
@@ -85,12 +85,16 @@ public class JsonHelper {
         return (new JsonHelper(file)).readFile();
     }
 
-    public static String removeParam(String file, String jsonPath) {
-        return (new JsonHelper(file)).removeParam(jsonPath);
+    public static String getJson(String file) {
+        return (new JsonHelper(file)).getJson();
     }
 
-    public static String removeParams(String file, List<String> jsonPaths) {
-        return (new JsonHelper(file)).removeParams(jsonPaths);
+    public static Object getParam(String file, String jsonPath) {
+        return (new JsonHelper(file)).getParam(jsonPath);
+    }
+
+    public static Object getParamAsStr(String file, String jsonPath) {
+        return (new JsonHelper(file)).getParamAsStr(jsonPath);
     }
 
     public static String modifyParam(String file, String jsonPath, String value) {
@@ -105,15 +109,17 @@ public class JsonHelper {
         return modifyParams(file, jsonPaths.getMap());
     }
 
-    public static Object getParam(String file, String jsonPath) {
-        return (new JsonHelper(file)).getParam(jsonPath);
+    public static String removeParam(String file, String jsonPath) {
+        return (new JsonHelper(file)).removeParam(jsonPath);
     }
 
-    public static Object getParamAsStr(String file, String jsonPath) {
-        return (new JsonHelper(file)).getParamAsStr(jsonPath);
+    public static String removeParams(String file, List<String> jsonPaths) {
+        return (new JsonHelper(file)).removeParams(jsonPaths);
     }
 
-    // These methods do not have instance equivalent
+
+    /** Static ONLY methods: These do not have instance equivalent. **/
+
     public static Object getParam(ExtractableResponse<Response> response, String jsonPath) {
         return JsonPath.parse(response.asString()).read(jsonPath);
     }
