@@ -6,7 +6,9 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
 ### Documentation
 
-Please find the documentation [here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.12/doc/Documentation.html).
+Please find the documentation
+[here](https://rawgit.com/chinenyeze/api-tests-lib/master/doc/Documentation.html) for work in progress version or
+[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.12/doc/Documentation.html) for last tagged version.
 
 
 
