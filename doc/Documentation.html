@@ -322,6 +322,53 @@ small.version {
 
             <li><a href="Token.html#Token">public Token(String uuid, String tenant, String email)</a></li>
             <li class="separator">&nbsp;</li>
+
+            <li><a href="Token.html#build">public String build(String jsonString, int expiry)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Token.html#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildFullToken">public String buildFullToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></li>
+            <li class="separator">&nbsp;</li>
+
+
+            <li class="sub-header">Static Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Token.html#static_buildStatic">public static String buildStatic(String jsonString, int expiry)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="Token.html#static_read">public static String read()</a></li>
+            <li><a href="Token.html#static_read_endpoint">public static String read(String endpoint)</a></li>
+            <li><a href="Token.html#static_create">public static String create()</a></li>
+            <li><a href="Token.html#static_create_endpoint">public static String create(String endpoint)</a></li>
+            <li><a href="Token.html#static_update">public static String update()</a></li>
+            <li><a href="Token.html#static_update_endpoint">public static String update(String endpoint)</a></li>
+            <li><a href="Token.html#static_createAndRead">public static String createAndRead()</a></li>
+            <li><a href="Token.html#static_createAndRead_endpoint">public static String createAndRead(String endpoint)</a></li>
+            <li><a href="Token.html#static_createAndUpdate">public static String createAndUpdate()</a></li>
+            <li><a href="Token.html#static_createAndUpdate_endpoint">public static String createAndUpdate(String endpoint)</a></li>
+            <li><a href="Token.html#static_updateAndRead">public static String updateAndRead()</a></li>
+            <li><a href="Token.html#static_updateAndRead_endpoint">public static String updateAndRead(String endpoint)</a></li>
+            <li><a href="Token.html#static_fullPermission">public static String fullPermission()</a></li>
+            <li><a href="Token.html#static_fullPermission_endpoint">public static String fullPermission(String endpoint)</a></li>
+            <li><a href="Token.html#static_readRestricted">public static String readRestricted()</a></li>
+            <li><a href="Token.html#static_readRestricted_endpoint">public static String readRestricted(String endpoint)</a></li>
+            <li><a href="Token.html#static_expiredRead">public static String expiredRead()</a></li>
+            <li><a href="Token.html#static_expiredRead_endpoint">public static String expiredRead(String endpoint)</a></li>
+            <li><a href="Token.html#static_expiredCreate">public static String expiredCreate()</a></li>
+            <li><a href="Token.html#static_expiredCreate_endpoint">public static String expiredCreate(String endpoint)</a></li>
+            <li><a href="Token.html#static_expiredUpdate">public static String expiredUpdate()</a></li>
+            <li><a href="Token.html#static_expiredUpdate_endpoint">public static String expiredUpdate(String endpoint)</a></li>
+            <li class="separator">&nbsp;</li>
         </ul>
     </div>
 
@@ -333,6 +380,18 @@ small.version {
             <li class="separator">&nbsp;</li>
 
             <li><a href="TokenBuilder.html#TokenBuilder">public TokenBuilder()</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="TokenBuilder.html#withUser">public TokenBuilder withUser(String user)</a></li>
+            <li><a href="TokenBuilder.html#withTenant">public TokenBuilder withTenant(String tenant)</a></li>
+            <li><a href="TokenBuilder.html#withEmail">public TokenBuilder withEmail(String email)</a></li>
+            <li><a href="TokenBuilder.html#lock">public TokenBuilder lock(String secret)</a></li>
+            <li><a href="TokenBuilder.html#expiresIn">public TokenBuilder expiresIn(int expiresIn)</a></li>
+            <li><a href="TokenBuilder.html#withPermissions">public TokenBuilder withPermissions(String permissionsJson)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="TokenBuilder.html#build">public String build() throws MissingResourceException, IOException</a></li>
+            <li><a href="TokenBuilder.html#generateToken">public String generateToken(String permissionJson, String UserUuid, String tenant, String userEmail, int expiry)</a></li>
             <li class="separator">&nbsp;</li>
         </ul>
     </div>
