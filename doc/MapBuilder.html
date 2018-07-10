@@ -94,23 +94,35 @@
 
 
     <h4><a name="MapBuilder">public MapBuilder()</a></h4>
-    <small>explanation</small>
+    <small><i>The Constructor: </i> which creates a HashMap of <code>Map&lt;String, Object&gt;</code> type.</small>
     <pre>
-        snippet
+        MapBuilder map = new MapBuilder();
     </pre>
 
 
     <h4><a name="getMap">public Map&lt;String, Object&gt; getMap()</a></h4>
-    <small>explanation</small>
+    <small>This method is used to get the <code>Map&lt;String, Object&gt;</code> object type from the MapBuilder. This is useful for using MapBuilder in a context where HashMap or Map is required.</small>
     <pre>
-        snippet
+        MapBuilder mapBuilder = new MapBuilder();
+        ...
+        Map&lt;String, Object&gt; map = mapBuilder.getMap();
     </pre>
 
 
     <h4><a name="add">public MapBuilder add(String key, Object value)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add Object values to Map by a String key. The benefit of using MapBuilder over Java's HashMap directly is that the MapBuilder's <code>add(key, value)</code> returns a MapBuilder object which allows for nesting, thus making your code tidy, as opposed to HashMap's <code>put(key, value)</code> which returns void. E.g.: </small>
     <pre>
-        snippet
+        MapBuilder map = (new MapBuilder())
+                .add("key1", "value1")
+                .add("key2", "value2")
+                .add("key3", "value3");
+    </pre>
+    <small>Instead of the traditional Java way (which does not support nesting):</small>
+    <pre>
+        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+        map.put("key1", "value1");
+        map.put("key2", "value2")
+        map.put("key3", "value3");
     </pre>
 
 </div>
