@@ -94,86 +94,119 @@
 
 
     <h4><a name="Requests">public Requests(String resourcePath)</a></h4>
-    <small>explanation</small>
+    <small><i>The Constructor: </i> prepares a <i>RestAssured</i> request object used to make a request to a resource path. The resource path for this constructor is relative, e.g. <code>/questions</code>. The base URL (i.e. something similar to <code>http://localhost:8080</code>) is, within the library, obtained from the environment variable <code>BASE_URL</code> (using the library's <a href="Env.html#static_get"><code>Env</code></a>), and prepended to the <code>resourcePath</code> at runtime. Within the constructor, the request is set up to:
+        <ul>
+            <li>ignore HTTPS Validation,</li>
+            <li>only apply Charset, if it is defined for the request, and</li>
+            <li>use <code>application/json</code> as default Content-Type.</li>
+        </ul>
+    </small>
     <pre>
-        snippet
+        Requests req = new Requests("/questions");
     </pre>
 
 
     <h4><a name="Requests_baseUri">public Requests(String resourcePath, String baseUri)</a></h4>
-    <small>explanation</small>
+    <small><i>The Constructor: </i> which also achieves same function as <a href="#Requests"><code>Requests</code></a> constructor, however, requires a <code>baseUri</code>.</small>
     <pre>
-        snippet
+        Requests req = new Requests("/questions", "http://localhost:8080");
     </pre>
 
 
     <h4><a name="withHeader">public Requests withHeader(String key, String value)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add a header of any kind to the request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withHeader("Accept-Encoding", "*");
     </pre>
 
 
     <h4><a name="withAuthorization">public Requests withAuthorization(String authorization)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add an Authorization header to the request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withAuthorization("eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTYyMzkwMjJ9.qiaLOGZrWzQCXD5cJLb5ZN0ibZX8GukGOu2AEODwQRY");
     </pre>
 
 
     <h4><a name="withContentType">public Requests withContentType(String contentType)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add a Content-Type header to the request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withContentType("application/pdf");
     </pre>
 
 
     <h4><a name="withIfMatch">public Requests withIfMatch(String ifMatch)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add an If-Match header to the request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withIfMatch("622e4f5090a588cd7d4f71c08f74d1da");
     </pre>
 
 
     <h4><a name="withBody">public Requests withBody(String body)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add a body to the request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withBody("{\"text\": \"What is your name?\"}");
+    </pre>
+    <small><a href="JsonHelper.html"><code>JsonHelper</code></a> class can also be used to load JSON files into the request body. E.g.:</small>
+    <pre>
+        Requests req = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"));
+    </pre>
+    <pre>
+        Requests req = (new Requests("/questions"))
+                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"));
     </pre>
 
 
     <h4><a name="withQueryParam">public Requests withQueryParam(String key, String value)</a></h4>
-    <small>explanation</small>
+    <small>This method is used to add query parameters to the request. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withQueryParam("enabled", "yes")
+                .withQueryParam("limit", "3");
     </pre>
 
 
     <h4><a name="get">public Responses get()</a></h4>
-    <small>explanation</small>
+    <small>This method is used to make a HTTP GET request. E.g. first snippet below lists questions limiting to 3, the second snippet gets a question:</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withQueryParam("limit", "3")
+                .get();
+    </pre>
+    <pre>
+        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
     </pre>
 
 
     <h4><a name="post">public Responses post()</a></h4>
-    <small>explanation</small>
+    <small>This method is used to make a HTTP POST request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
     </pre>
 
 
     <h4><a name="put">public Responses put()</a></h4>
-    <small>explanation</small>
+    <small>This method is used to make a HTTP PUT request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
+                .put();
     </pre>
 
 
     <h4><a name="delete">public Responses delete()</a></h4>
-    <small>explanation</small>
+    <small>This method is used to make a HTTP DELETE request.</small>
     <pre>
-        snippet
+        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .delete();
     </pre>
 
 </div>
