@@ -4,109 +4,103 @@
     <meta charset="UTF-8">
     <title>Perkbox QA Library</title>
     <link rel="icon" type="image/png" href="https://d33e3vv6sjfy9c.cloudfront.net/assets/meta/favicon-white-32x32-ea7672b223119f07d17a6f64b032e3db61c24164ea80267a9c5f82e82eed1aec.png" sizes="32x32">
+    <style>
+    /* Style the buttons that are used to open and close the accordion panel */
+    .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+    }
+
+    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+    .active, .accordion:hover {
+        background-color: #ccc;
+    }
+
+    /* Style the accordion panel. Note: hidden by default */
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.7s ease-out;
+    }
+
+    #container {
+        width: 820px;
+        margin: 20px auto;
+        color: #24292e;
+
+        padding: 45px;
+        word-wrap: break-word;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 16px;
+        line-height: 1.5;
+        word-wrap: break-word;
+    }
+
+    li.separator {
+        margin: -5px;
+        list-style-type: none;
+    }
+
+    li.sub-header {
+        margin: -5px;
+        list-style-type: none;
+        font-weight:600;
+    }
+
+    .package {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    li {
+        font-size: 15px;
+    }
+
+    li a {
+        text-decoration: none;
+    }
+
+    h3 {
+        color: #333;
+
+        background-color: #ccc;
+        border-bottom: 1px solid #a0a0a0;
+
+        padding: 1px 5px;
+    }
+
+    small.version {
+        float: right;
+    }
+
+    .intro {
+        margin-bottom: 50px;
+    }
+
+    .float-right {
+        float: right;
+    }
+    </style>
 </head>
-<style>
-
-/* Style the buttons that are used to open and close the accordion panel */
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-    background-color: #ccc;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.7s ease-out;
-}
-
-#container {
-    width: 820px;
-    margin: 20px auto;
-    color: #24292e;
-
-    padding: 45px;
-    word-wrap: break-word;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 16px;
-    line-height: 1.5;
-    word-wrap: break-word;
-}
-
-li.separator {
-    margin: -5px;
-    list-style-type: none;
-}
-
-li.sub-header {
-    margin: -5px;
-    list-style-type: none;
-    font-weight:600;
-}
-
-.package {
-    font-size: 13px;
-    text-align: center;
-}
-
-li {
-    font-size: 15px;
-}
-
-li a {
-    text-decoration: none;
-}
-
-h3 {
-    color: #333;
-
-    background-color: #ccc;
-    border-bottom: 1px solid #a0a0a0;
-
-    padding: 1px 5px;
-}
-
-small.version {
-    float: right;
-}
-
-.intro {
-    margin-bottom: 50px;
-}
-
-.float-right {
-    float: right;
-}
-
-</style>
-
 <body>
 <div id="container">
-
-
     <h1>Perkbox QA Library</h1>
-
     <div class="intro">
-        This documentation exemplifies the use of the library.
+        This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
         <small class="version">version: 1.1.12</small>
