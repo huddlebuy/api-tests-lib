@@ -94,16 +94,20 @@
 
 
     <h4><a name="static_ANY">public static final String ANY</a></h4>
-    <small>explanation</small>
+    <small>This is a regex expression that validates any number of characters. It can be used with the <code>assertMatch</code> method of <code>Responses</code> class. <br>Regex string: <code>.*</code></small>
     <pre>
-        snippet
+        String expect = "{\"links\":{\"self\":\"/%REGEX\"}}";
+
+        Assert.assertTrue(response.assertMatch(201, expect, Regex.ANY));
     </pre>
 
 
     <h4><a name="static_UUID">public static final String UUID</a></h4>
-    <small>explanation</small>
+    <small>This is a regex expression that validates a UUID (version 4). It can be used with the <code>assertMatch</code> method of <code>Responses</code> class. <br>Regex string: <code>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}</code></small>
     <pre>
-        snippet
+        String expect = "{\"error\":\"PBERR001x12\",\"reference\":\"%REGEX\"}";
+
+        Assert.assertTrue(response.assertMatch(401, expect, Regex.UUID));
     </pre>
 
 </div>
