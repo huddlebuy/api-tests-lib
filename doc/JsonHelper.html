@@ -271,7 +271,7 @@
     <h4><a name="staticOnly_getParam">public static Object getParam(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></h4>
     <small>Similar to <a href="#static_getParam"><code>public static Object getParam(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
     <pre>
-        Responses resp = (new Requests("http://localhost:8080/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+        Responses resp = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
                 .get();
 
@@ -282,7 +282,7 @@
     <h4><a name="staticOnly_getParamAsStr">public static String getParamAsStr(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a></h4>
     <small>Similar to <a href="#static_getParamAsStr"><code>public static Object getParamAsStr(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
     <pre>
-        Responses resp = (new Requests("http://localhost:8080/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+        Responses resp = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
                 .get();
 
@@ -317,7 +317,7 @@
         }
     </pre>
     <pre>
-        Responses resp = (new Requests("http://localhost:8080/questions"))
+        Responses resp = (new Requests("/questions"))
                 .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
                 .get();
 
@@ -336,7 +336,7 @@
     <h4><a name="staticOnly_searchListById">public static String searchListById(ExtractableResponse&lt;Response&gt; response, String id)</a></h4>
     <small>Searches a list endpoint by the <code>id</code> column to return the json of that id. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
     <pre>
-        Responses resp = (new Requests("http://localhost:8080/questions"))
+        Responses resp = (new Requests("/questions"))
                 .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
                 .get();
 
@@ -347,7 +347,7 @@
     <h4><a name="staticOnly_searchListByUuid">public static String searchListByUuid(ExtractableResponse&lt;Response&gt; response, String uuid)</a></h4>
     <small>Searches a list endpoint by the <code>uuid</code> column to return the json of that uuid. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
     <pre>
-        Responses resp = (new Requests("http://localhost:8080/questions"))
+        Responses resp = (new Requests("/questions"))
                 .withAuthorization(Token.buildStatic(JsonHelper.readFile("questions/auth.read"), 3600))
                 .get();
 
