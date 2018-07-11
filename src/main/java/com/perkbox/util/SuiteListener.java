@@ -11,7 +11,7 @@ public class SuiteListener implements ISuiteListener {
 
     public void onStart(ISuite iSuite) {
         int serviceReady = 0;
-        ExtractableResponse<Response> response = callHealthz();
+        ExtractableResponse<Response> response = callHealth();
 
         String marker = "#########################################################";
         System.out.println(marker + "\nWaiting for service to be up ....");
@@ -20,7 +20,7 @@ public class SuiteListener implements ISuiteListener {
             try {
                 Thread.sleep(1000);
                 serviceReady++;
-                response = callHealthz();
+                response = callHealth();
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
@@ -30,7 +30,7 @@ public class SuiteListener implements ISuiteListener {
         System.out.println("Service ready!\nSeconds delayed to be ready: " + serviceReady + "\n" + marker);
     }
     
-    private ExtractableResponse<Response> callHealthz() {
+    private ExtractableResponse<Response> callHealth() {
         return given().header("Content-Type", "application/json").when().get(Env.get("HEALTH_URL")).then().extract();
     }
 
