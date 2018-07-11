@@ -20,17 +20,32 @@
 
 
     <h4><a name="onStart">public void onStart(ISuite iSuite)</a></h4>
-    <small>explanation</small>
+    <small>This method is executed just before the API tests are launched (by the TestNG SuiteRunner). The <code>SuiteListener</code>, which implements TestNG's <code>org.testng.ISuiteListener</code> interface, is applied as a <i>listener</i> within the <code>testng.xml</code> test entry file, as shown in the <i>Sample testng.xml</i> below.</small>
     <pre>
-        snippet
+        &lt;listener class-name="com.perkbox.util.SuiteListener"/&gt;
+    </pre>
+    <pre class="sample">
+    Sample testng.xml:
+    ------------------
+        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        &lt;!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" &gt;
+        &lt;suite name="Suite" parallel="tests" thread-count="10"&gt;
+            &lt;listeners&gt;
+                &lt;listener class-name="com.perkbox.util.SuiteListener"/&gt;
+            &lt;/listeners&gt;
+
+            &lt;test name="Questions"&gt;
+                &lt;classes&gt;
+                    &lt;class name="com.perkbox.surveys.questions.CreateQuestion"/&gt;
+                    &lt;class name="com.perkbox.surveys.questions.GetQuestion"/&gt;
+                &lt;/classes&gt;
+            &lt;/test&gt;
+        &lt;/suite&gt;
     </pre>
 
 
     <h4><a name="onFinish">public void onFinish(ISuite suite)</a></h4>
-    <small>explanation</small>
-    <pre>
-        snippet
-    </pre>
+    <small>This method is invoked after the SuiteRunner has run all the test suites. It has been added here because it's specified within <code>org.testng.ISuiteListener</code> interface. Within the <i>Perkbox API Test Library</i> this method is empty.</small>
 
 </div>
 </body>
