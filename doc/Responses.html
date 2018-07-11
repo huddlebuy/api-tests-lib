@@ -20,9 +20,25 @@
 
 
     <h4><a name="Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a></h4>
-    <small>explanation</small>
+    <small><i>The Constructor: </i> initialises a response using the RestAssured's <code>ExtractableResponse&lt;Response&gt;</code> passed as argument. This constructor is not intended to be called directly, as its purpose is to, within the library, aid the <code>Requests</code> class to retrieve responses from its action methods (<a href="Requests.html#get"><code>get</code></a>, <a href="Requests.html#post"><code>post</code></a>, <a href="Requests.html#put"><code>put</code></a> and <a href="Requests.html#delete"><code>delete</code></a>). E.g.</small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withQueryParam("limit", "3")
+                .get();
+    </pre>
+    <pre>
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+    </pre>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
+                .put();
+    </pre>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .delete();
     </pre>
 
 

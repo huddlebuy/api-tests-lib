@@ -81,3 +81,12 @@ small.menu a:hover {
     background-color: #fff;
     border: 1px solid #eee;
 }
+
+a.restyle {
+    text-decoration: none;
+    color: #3f87a6;
+}
+
+a.restyle:hover {
+    text-decoration: underline;
+}

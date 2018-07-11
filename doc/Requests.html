@@ -98,40 +98,40 @@
 
 
     <h4><a name="get">public Responses get()</a></h4>
-    <small>This method is used to make a HTTP GET request. E.g. first snippet below lists questions limiting to 3, the second snippet gets a question:</small>
+    <small>This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object. E.g. first snippet below lists questions limiting to 3, the second snippet gets a question:</small>
     <pre>
-        Requests req = (new Requests("/questions"))
+        Responses response = (new Requests("/questions"))
                 .withQueryParam("limit", "3")
                 .get();
     </pre>
     <pre>
-        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
     </pre>
 
 
     <h4><a name="post">public Responses post()</a></h4>
-    <small>This method is used to make a HTTP POST request.</small>
+    <small>This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
     <pre>
-        Requests req = (new Requests("/questions"))
+        Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
                 .post();
     </pre>
 
 
     <h4><a name="put">public Responses put()</a></h4>
-    <small>This method is used to make a HTTP PUT request.</small>
+    <small>This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
     <pre>
-        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
                 .put();
     </pre>
 
 
     <h4><a name="delete">public Responses delete()</a></h4>
-    <small>This method is used to make a HTTP DELETE request.</small>
+    <small>This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
     <pre>
-        Requests req = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .delete();
     </pre>
 

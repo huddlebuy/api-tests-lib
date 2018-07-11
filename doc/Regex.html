@@ -35,6 +35,20 @@
 
         Assert.assertTrue(response.assertMatch(401, expect, Regex.UUID));
     </pre>
+    <small>Example of using multiple <code>%REGEX</code> placeholders:</small>
+    <pre>
+        String expect = "{\"error\":\"Validation failed: found %REGEX\",\"reference\":\"%REGEX\"}";
+
+        Assert.assertTrue(response.assertMatch(400, expect, Regex.ANY, Regex.UUID));
+    </pre>
+
+
+
+    <small>
+        <br><br>
+        <b>Help!</b><br><br>
+        We have only added a very few Regex helpers that currently apply to our current need. If you have further relevant suggestions please request through <a class="restyle" href="https://github.com/chinenyeze/api-tests-lib/issues" target="_blank">our github issue page</a>.
+    </small>
 
 </div>
 </body>
