@@ -90,3 +90,10 @@ a.restyle {
 a.restyle:hover {
     text-decoration: underline;
 }
+
+button {
+    float: right;
+    cursor: pointer;
+    color: #333;
+    border: 1px solid #ccc;
+}

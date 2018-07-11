@@ -19,7 +19,10 @@
     <h3>Static Methods</h3>
 
 
-    <h4><a name="static_get">public static String get(String key)</a></h4>
+    <h4>
+        <a name="static_get">public static String get(String key)</a>
+        <button onclick="gotoSrc('L24-L26')">src</button>
+    </h4>
     <small>This gets variables declared in the <code>config.properties</code> file.</small>
     <pre>
         Config.get("VARIABLE");
@@ -27,5 +30,12 @@
 
 
 </div>
+<script>
+function gotoSrc (lines) {
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/Config.java#' + lines;
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+</script>
 </body>
 </html>

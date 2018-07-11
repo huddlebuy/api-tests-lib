@@ -19,7 +19,10 @@
     <h3>Instance Methods</h3>
 
 
-    <h4><a name="Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a></h4>
+    <h4>
+        <a name="Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a>
+        <button onclick="gotoSrc('L15-L17')">src</button>
+    </h4>
     <small><i>The Constructor: </i> initialises a response using the RestAssured's <code>ExtractableResponse&lt;Response&gt;</code> passed as argument. This constructor is not intended to be called directly, as its purpose is to, within the library, aid the <code>Requests</code> class to retrieve responses from its action methods (<a href="Requests.html#get"><code>get</code></a>, <a href="Requests.html#post"><code>post</code></a>, <a href="Requests.html#put"><code>put</code></a> and <a href="Requests.html#delete"><code>delete</code></a>). E.g.</small>
     <pre>
         Responses response = (new Requests("/questions"))
@@ -42,103 +45,182 @@
     </pre>
 
 
-    <h4><a name="assertTrue">public boolean assertTrue(int statusCode)</a></h4>
+    <h4>
+        <a name="assertTrue">public boolean assertTrue(int statusCode)</a>
+        <button onclick="gotoSrc('L19-L21')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_textResponse">public boolean assertTrue(int statusCode, String textResponse)</a></h4>
+    <h4>
+        <a name="assertTrue_textResponse">public boolean assertTrue(int statusCode, String textResponse)</a>
+        <button onclick="gotoSrc('L23-L25')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_textResponse_log">public boolean assertTrue(int statusCode, String textResponse, boolean log)</a></h4>
+    <h4>
+        <a name="assertTrue_textResponse_log">public boolean assertTrue(int statusCode, String textResponse, boolean log)</a>
+        <button onclick="gotoSrc('L27-L36')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_fields">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></h4>
+    <h4>
+        <a name="assertTrue_fields">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a>
+        <button onclick="gotoSrc('L38-L40')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_fields_log">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a></h4>
+    <h4>
+        <a name="assertTrue_fields_log">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a>
+        <button onclick="gotoSrc('L42-L56')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_mapBuilder">public boolean assertTrue(int statusCode, MapBuilder mapBuilder)</a></h4>
+    <h4>
+        <a name="assertTrue_mapBuilder">public boolean assertTrue(int statusCode, MapBuilder mapBuilder)</a>
+        <button onclick="gotoSrc('L58-L60')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertTrue_mapBuilder_log">public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></h4>
+    <h4>
+        <a name="assertTrue_mapBuilder_log">public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a>
+        <button onclick="gotoSrc('L62-L64')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="assertMatch">public boolean assertMatch(int statusCode, String expect, String ... regexParams)</a></h4>
+    <h4>
+        <a name="assertMatch">public boolean assertMatch(int statusCode, String expect, String ... regexParams)</a>
+        <button onclick="gotoSrc('L66-L88')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="getHeader">public String getHeader(String headerName)</a></h4>
+    <h4>
+        <a name="getHeader">public String getHeader(String headerName)</a>
+        <button onclick="gotoSrc('L90-L92')">src</button>
+    </h4>
+    <small>This method is used to get a header from the response using the <code>headerName</code>. For example the snippet below will return the entity tag of the HTTP response.</small>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        String etag = response.getHeader("ETag");
+    </pre>
+
+
+    <h4>
+        <a name="getParam">public String getParam(String jsonPath)</a>
+        <button onclick="gotoSrc('L94-L96')">src</button>
+    </h4>
+    <small>This method is used to retrieve (as String) the value of a parameter from the json body of a response. The path to the parameter is parsed as a <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.</small>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        String text = response.getParam("$.text");
+    </pre>
+    <pre class="sample">
+    Response JSON:
+    --------------
+        {
+            "id": "06dcdb79-b391-4891-9ef9-daa12c22ab83",
+            "text": "We are moving in the right strategic direction"
+        }
+    </pre>
+
+
+    <h4>
+        <a name="getUuid">public String getUuid()</a>
+        <button onclick="gotoSrc('L98-L101')">src</button>
+    </h4>
+    <small>
+        Note: This method (getUuid) is not for getting a uuid parameter from a response body, to do that use the getParam method, e.g. to get a uuid parameter, called <code>id</code>, similar to the example in getParam section, we use <code>response.getParam("$.id").</code>
+        <br>This method is used to get uuid from a response which has its body similar to the format in the <em>Sample response</em> below. The <em>Sample response</em> is our recommended response for create item endpoints.
+    </small>
+    <pre>
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        String uuid = response.getUuid();
+    </pre>
+    <pre class="sample">
+    Sample response:
+    ----------------
+        {
+            "links": {
+                "self": "http://localhost:8080/questions/087dbc58-421c-11e7-a919-92ebcb67fe33"
+            }
+        }
+    </pre>
+
+
+    <h4>
+        <a name="getUuid_link">public String getUuid(String link)</a>
+        <button onclick="gotoSrc('L103-L105')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="getParam">public String getParam(String jsonPath)</a></h4>
+    <h4>
+        <a name="getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a>
+        <button onclick="gotoSrc('L107-L109')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 
-    <h4><a name="getUuid">public String getUuid()</a></h4>
-    <small>explanation</small>
-    <pre>
-        snippet
-    </pre>
-
-
-    <h4><a name="getUuid_link">public String getUuid(String link)</a></h4>
-    <small>explanation</small>
-    <pre>
-        snippet
-    </pre>
-
-
-    <h4><a name="getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a></h4>
-    <small>explanation</small>
-    <pre>
-        snippet
-    </pre>
-
-
-    <h4><a name="log">public void log(String filter)</a></h4>
+    <h4>
+        <a name="log">public void log(String filter)</a>
+        <button onclick="gotoSrc('L111-L114')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 </div>
+<script>
+function gotoSrc (lines) {
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/testbase/Responses.java#' + lines;
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+</script>
 </body>
 </html>
