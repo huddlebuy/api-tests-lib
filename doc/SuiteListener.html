@@ -20,7 +20,14 @@
 
 
     <h4><a name="onStart">public void onStart(ISuite iSuite)</a></h4>
-    <small>This method is executed just before the API tests are launched (by the TestNG SuiteRunner). The <code>SuiteListener</code>, which implements TestNG's <code>org.testng.ISuiteListener</code> interface, is applied as a <i>listener</i> within the <code>testng.xml</code> test entry file, as shown in the <i>Sample testng.xml</i> below.</small>
+    <small>This method is executed just before the API tests are launched (by the TestNG SuiteRunner). The <code>SuiteListener</code>, which implements TestNG's <code>org.testng.ISuiteListener</code> interface, is applied as a <i>listener</i> within the <code>testng.xml</code> test entry file, as shown in the <i>Sample testng.xml</i> below.
+        <br>Within the <i>Perkbox API Test Library</i> this method makes a HTTP GET request to the health endpoint of the service under test (SUT). And once a <code>200</code> status code is returned then the test proceeds. If health check does not apply to your SUT, simply skip adding this listener to your <code>testng.xml</code> file. The parameters of the health request made by the library are as follows:
+        <ul>
+            <li>Method: GET</li>
+            <li>Content-Type: application/json</li>
+            <li>URL: This is the obtained using the libraries <code>Env.get("HEALTH_URL")</code>. This means that the URL used is the value of <code>HEALTH_URL</code> within the environment or in the <code>config.properties</code> file.</li>
+        </ul>
+    </small>
     <pre>
         &lt;listener class-name="com.perkbox.util.SuiteListener"/&gt;
     </pre>
@@ -45,7 +52,9 @@
 
 
     <h4><a name="onFinish">public void onFinish(ISuite suite)</a></h4>
-    <small>This method is invoked after the SuiteRunner has run all the test suites. It has been added here because it's specified within <code>org.testng.ISuiteListener</code> interface. Within the <i>Perkbox API Test Library</i> this method is empty.</small>
+    <small>This method is invoked after the SuiteRunner has run all the test suites. It has been added here because it's specified within <code>org.testng.ISuiteListener</code> interface.
+        <br>Within the <i>Perkbox API Test Library</i> this method is empty.
+    </small>
 
 </div>
 </body>
