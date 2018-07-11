@@ -2,7 +2,6 @@ package com.perkbox.testbase;
 
 import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
-import io.restassured.http.Header;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
