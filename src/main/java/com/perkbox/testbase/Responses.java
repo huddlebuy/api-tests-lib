@@ -4,6 +4,7 @@ import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.testng.Assert;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -16,75 +17,82 @@ public class Responses {
         this.response = response;
     }
 
-    public boolean assertTrue(int statusCode) {
-        return (response.statusCode() == statusCode);
+    public void assertTrue(int statusCode) {
+        Assert.assertTrue((response.statusCode() == statusCode));
     }
 
-    public boolean assertTrue(int statusCode, String textResponse) {
-        return assertTrue(statusCode, textResponse, false);
+    public void assertTrue(int statusCode, String textResponse) {
+        assertTrue(statusCode, textResponse, false);
     }
 
-    public boolean assertTrue(int statusCode, String textResponse, boolean log) {
+    public void assertTrue(int statusCode, String textResponse, boolean log) {
+        boolean result = true;
         if (response.statusCode() != statusCode || !(response.asString().contains(textResponse))) {
             if (log) {
                 System.out.println("Actual: " + response.asString());
                 System.out.println("Expected (for contains): " + textResponse);
             }
-            return false;
+            result = false;
         }
-        return true;
+        Assert.assertTrue(result);
     }
 
-    public boolean assertTrue(int statusCode, Map<String, Object> fields) {
-        return assertTrue(statusCode, fields, false);
+    public void assertTrue(int statusCode, Map<String, Object> fields) {
+        assertTrue(statusCode, fields, false);
     }
 
-    public boolean assertTrue(int statusCode, Map<String, Object> fields, boolean log) {
-        if (response.statusCode() != statusCode) return false;
-        if (fields != null) {
+    public void assertTrue(int statusCode, Map<String, Object> fields, boolean log) {
+        boolean result = true;
+        if (response.statusCode() != statusCode) {
+            result = false;
+        }
+        else if (fields != null) {
             for (Map.Entry<String, Object> entry: fields.entrySet()) {
                 if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
                     if (log) {
                         System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
                         System.out.println("Expected: " + entry.getValue());
                     }
-                    return false;
+                    result = false;
                 }
             }
         }
-        return true;
+        Assert.assertTrue(result);
     }
 
-    public boolean assertTrue(int statusCode, MapBuilder mapBuilder) {
-        return assertTrue(statusCode, mapBuilder, false);
+    public void assertTrue(int statusCode, MapBuilder mapBuilder) {
+        assertTrue(statusCode, mapBuilder, false);
     }
 
-    public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log) {
-        return assertTrue(statusCode, mapBuilder.getMap(), log);
+    public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log) {
+        assertTrue(statusCode, mapBuilder.getMap(), log);
     }
 
-    public boolean assertMatch(int statusCode, String expect, String ... regexParams) {
+    public void assertMatch(int statusCode, String expect, String ... regexParams) {
+        boolean result = true;
         int placeholders = expect.split("%REGEX", -1).length - 1;
         if (regexParams.length != placeholders) {
             System.out.println("Error: %REGEX count does equal to regexParams count.");
-            return false;
-        }
+            result = false;
+        } else {
+            String[] arr = expect.split("%REGEX");
+            StringBuilder regex = new StringBuilder();
+            int count = 0;
 
-        String[] arr = expect.split("%REGEX");
-        StringBuilder regex = new StringBuilder();
-        int count = 0;
+            for (String str : arr) {
+                regex.append(Pattern.quote(str));
 
-        for (String str : arr) {
-            regex.append(Pattern.quote(str));
+                if (count < regexParams.length) {
+                    regex.append(regexParams[count]);
+                }
 
-            if (count < regexParams.length) {
-                regex.append(regexParams[count]);
+                count++;
             }
 
-            count++;
+            result = (response.statusCode() == statusCode && Pattern.compile(regex.toString()).matcher(response.asString()).find());
         }
 
-        return (response.statusCode() == statusCode && Pattern.compile(regex.toString()).matcher(response.asString()).find());
+        Assert.assertTrue(result);
     }
 
     public String getHeader(String headerName) {
