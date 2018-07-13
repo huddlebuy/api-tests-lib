@@ -19,7 +19,10 @@
     <h3>Static Members</h3>
 
 
-    <h4><a name="static_ANY">public static final String ANY</a></h4>
+    <h4>
+        <a name="static_ANY">public static final String ANY</a>
+        <button onclick="gotoSrc('L5')">src</button>
+    </h4>
     <small>This is a regex expression that validates any number of characters. It can be used with the <code>assertMatch</code> method of <code>Responses</code> class. <br>Regex string: <code>.*</code></small>
     <pre>
         String expect = "{\"links\":{\"self\":\"/%REGEX\"}}";
@@ -28,7 +31,10 @@
     </pre>
 
 
-    <h4><a name="static_UUID">public static final String UUID</a></h4>
+    <h4>
+        <a name="static_UUID">public static final String UUID</a>
+        <button onclick="gotoSrc('L6')">src</button>
+    </h4>
     <small>This is a regex expression that validates a UUID (version 4). It can be used with the <code>assertMatch</code> method of <code>Responses</code> class. <br>Regex string: <code>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}</code></small>
     <pre>
         String expect = "{\"error\":\"PBERR001x12\",\"reference\":\"%REGEX\"}";
@@ -51,5 +57,12 @@
     </small>
 
 </div>
+<script>
+function gotoSrc (lines) {
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/Regex.java#' + lines;
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+</script>
 </body>
 </html>

@@ -189,9 +189,9 @@
         <a name="getUuid_link">public String getUuid(String link)</a>
         <button onclick="gotoSrc('L103-L105')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>This method is used to return uuid from a link passed as argument. The example below would return the uuid <code>087dbc58-421c-11e7-a919-92ebcb67fe33</code>.</small>
     <pre>
-        snippet
+        String uuid = response.getUuid("http://localhost:8080/questions/087dbc58-421c-11e7-a919-92ebcb67fe33");
     </pre>
 
 
@@ -199,9 +199,13 @@
         <a name="getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a>
         <button onclick="gotoSrc('L107-L109')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>This method is used to get an <code>ExtractableResponse&lt;Response&gt;</code> object from a <code>Responses</code> object.</small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        ExtractableResponse&lt;Response&gt; exResponse = response.getResponse();
     </pre>
 
 
@@ -209,9 +213,19 @@
         <a name="log">public void log(String filter)</a>
         <button onclick="gotoSrc('L111-L114')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>This method is used to log output on the <code>Responses</code> object. This method prints out the response as string and the status code. The <code>filter</code> argument can be any string which you deem useful to filter the log. The response log example below prints the <em>Sample output</em> below to the console.</small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        response.log("CREATE_VALID_QS");
+    </pre>
+    <pre class="sample">
+    Sample output:
+    --------------
+        Response::CREATE_VALID_QS:: {"links":{"self":"/v1/questions/ebe3684a-0386-4569-9269-059a52b757c9"}}
+        StatusCode::CREATE_VALID_QS:: 201
     </pre>
 
 </div>

@@ -19,12 +19,22 @@
     <h3>Instance Methods</h3>
 
 
-    <h4><a name="reference">method</a></h4>
+    <h4>
+        <a name="reference">method</a>
+        <button onclick="gotoSrc('L-L')">src</button>
+    </h4>
     <small>explanation</small>
     <pre>
         snippet
     </pre>
 
 </div>
+<script>
+function gotoSrc (lines) {
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/Template.java#' + lines;
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+</script>
 </body>
 </html>

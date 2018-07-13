@@ -19,14 +19,20 @@
     <h3>Instance Methods</h3>
 
 
-    <h4><a name="MapBuilder">public MapBuilder()</a></h4>
+    <h4>
+        <a name="MapBuilder">public MapBuilder()</a>
+        <button onclick="gotoSrc('L10-L12')">src</button>
+    </h4>
     <small><i>The Constructor: </i> which creates a HashMap of <code>Map&lt;String, Object&gt;</code> type.</small>
     <pre>
         MapBuilder map = new MapBuilder();
     </pre>
 
 
-    <h4><a name="getMap">public Map&lt;String, Object&gt; getMap()</a></h4>
+    <h4>
+        <a name="getMap">public Map&lt;String, Object&gt; getMap()</a>
+        <button onclick="gotoSrc('L14-L16')">src</button>
+    </h4>
     <small>This method is used to get the <code>Map&lt;String, Object&gt;</code> object type from the MapBuilder. This is useful for using MapBuilder in a context where HashMap or Map is required.</small>
     <pre>
         MapBuilder mapBuilder = new MapBuilder();
@@ -35,7 +41,10 @@
     </pre>
 
 
-    <h4><a name="add">public MapBuilder add(String key, Object value)</a></h4>
+    <h4>
+        <a name="add">public MapBuilder add(String key, Object value)</a>
+        <button onclick="gotoSrc('L18-L21')">src</button>
+    </h4>
     <small>This method is used to add Object values to Map by a String key. The benefit of using MapBuilder over Java's HashMap directly is that the MapBuilder's <code>add(key, value)</code> returns a MapBuilder object which allows for nesting, thus making your code tidy, as opposed to HashMap's <code>put(key, value)</code> which returns void. E.g.: </small>
     <pre>
         MapBuilder map = (new MapBuilder())
@@ -52,5 +61,12 @@
     </pre>
 
 </div>
+<script>
+function gotoSrc (lines) {
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/MapBuilder.java#' + lines;
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+</script>
 </body>
 </html>
