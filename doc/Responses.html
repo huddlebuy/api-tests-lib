@@ -63,9 +63,20 @@
         <a name="assertTrue_textResponse">public void assertTrue(int statusCode, String textResponse)</a>
         <button onclick="gotoSrc('L24-L26')">src</button>
     </h4>
-    <small>This method checks the the passed <code </small>
+    <small>This method fulfills the same function as <code><a href="#assertTrue">public void assertTrue(int statusCode)</a></code>, but further asserts that the response body contains the passed <code>textResponse</code>. E.g. Given a response with body of <em>Sample JSON</em>, the assertion below would pass.</small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        response.assertTrue(201, "Item successfully created");
+    </pre>
+    <pre class="sample">
+    Sample JSON:
+    ------------
+        {
+            "message": "Item successfully created."
+        }
     </pre>
 
 
