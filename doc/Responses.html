@@ -36,7 +36,7 @@
     </pre>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
-                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
+                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "Enter your ID"))
                 .put();
     </pre>
     <pre>
@@ -69,7 +69,7 @@
                 .withBody(JsonHelper.getJson("questions/question"))
                 .post();
 
-        response.assertTrue(201, "Item successfully created");
+        response.assertTrue(201, "Item successfully created");        //passes
     </pre>
     <pre class="sample">
     Sample JSON:
@@ -84,9 +84,23 @@
         <a name="assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse, boolean log)</a>
         <button onclick="gotoSrc('L28-L38')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method fulfills the same function as <code><a href="#assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
+        If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
+        The logging feature logs the <em>actual</em> response body and the <em>expected</em> <code>textResponse</code>, as shown in the <em>Sample output</em>.
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        response.assertTrue(201, "Wrong text provided", true);        //fails
+    </pre>
+    <pre class="sample">
+    Sample output:
+    --------------
+        Actual: {"message":"Item successfully created."}
+        Expected (for contains): Wrong text provided
     </pre>
 
 
@@ -94,9 +108,24 @@
         <a name="assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a>
         <button onclick="gotoSrc('L40-L42')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method first asserts that the status code of the response is same as the <code>statusCode</code> passed as argument.
+        Then it further asserts that the provided key-value pair of the <code>fields</code> map passed as argument, matches the parameter-value pair of the JSON body of the response being asserted.
+        The key(s) in the map has to be a JsonPath string (e.g. <code>$.param</code>), as the library uses JsonPath to search the response JSON body.
+        For example:
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        JsonHelper json = new JsonHelper("questions/question");
+
+        Map&lt;String, Object&gt; map = new HashMap<>();
+        map.put("$.status", "enabled");
+        map.put("$.text", "Enter your ID");
+        map.put("$.answers", json.getParam("$.answers"));             //utilising JsonHelper
+
+        response.assertTrue(200, map);                                //passes
     </pre>
 
 
@@ -104,9 +133,29 @@
         <a name="assertTrue_fields_log">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a>
         <button onclick="gotoSrc('L44-L61')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method fulfills the same function as <code><a href="#assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
+        If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
+        The logging feature logs the <em>actual</em> response param value and the <em>expected</em> param value, for the key that fails. E.g. assuming the the response body has param <code>$.text</code> containing the string <em>Enter your ID</em>, then the assertion below would <strong>fail</strong> producing the <em>Sample output</em> below.
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        JsonHelper json = new JsonHelper("questions/question");
+
+        Map&lt;String, Object&gt; map = new HashMap<>();
+        map.put("$.status", "enabled");
+        map.put("$.text", "What I am expecting");
+        map.put("$.answers", json.getParam("$.answers"));             //utilising JsonHelper
+
+        response.assertTrue(200, map);                                //fails
+    </pre>
+    <pre class="sample">
+    Sample output:
+    --------------
+        Actual: Enter your ID
+        Expected: What I am expecting
     </pre>
 
 
