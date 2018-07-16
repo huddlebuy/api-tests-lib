@@ -20,7 +20,7 @@
     <div class="package">Package: com.perkbox.testbase</div>
 
 
-    <button class="accordion">Requests <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="requests">Requests <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -47,7 +47,7 @@
     </div>
 
 
-    <button class="accordion">Responses</button>
+    <button class="accordion" id="responses">Responses</button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -56,14 +56,14 @@
             <li><a href="Responses.html#Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a></li>
             <li class="separator">&nbsp;</li>
 
-            <li><a href="Responses.html#assertTrue">public boolean assertTrue(int statusCode)</a></li>
-            <li><a href="Responses.html#assertTrue_textResponse">public boolean assertTrue(int statusCode, String textResponse)</a></li>
-            <li><a href="Responses.html#assertTrue_textResponse_log">public boolean assertTrue(int statusCode, String textResponse, boolean log)</a></li>
-            <li><a href="Responses.html#assertTrue_fields">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></li>
-            <li><a href="Responses.html#assertTrue_fields_log">public boolean assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a></li>
-            <li><a href="Responses.html#assertTrue_mapBuilder">public boolean assertTrue(int statusCode, MapBuilder mapBuilder)</a></li>
-            <li><a href="Responses.html#assertTrue_mapBuilder_log">public boolean assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></li>
-            <li><a href="Responses.html#assertMatch">public boolean assertMatch(int statusCode, String expect, String ... regexParams)</a></li>
+            <li><a href="Responses.html#assertTrue">public void assertTrue(int statusCode)</a></li>
+            <li><a href="Responses.html#assertTrue_textResponse">public void assertTrue(int statusCode, String textResponse)</a></li>
+            <li><a href="Responses.html#assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse, boolean log)</a></li>
+            <li><a href="Responses.html#assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></li>
+            <li><a href="Responses.html#assertTrue_fields_log">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a></li>
+            <li><a href="Responses.html#assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a></li>
+            <li><a href="Responses.html#assertTrue_mapBuilder_log">public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></li>
+            <li><a href="Responses.html#assertMatch">public void assertMatch(int statusCode, String expect, String ... regexParams)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="Responses.html#getHeader">public String getHeader(String headerName)</a></li>
@@ -83,7 +83,7 @@
     <div class="package">Package: com.perkbox.util</div>
 
 
-    <button class="accordion">Config <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="config">Config <span class="float-right">&#10004;</span></button>
     <div class="panel">
     <ul>
         <li class="sub-header">Static Methods</li>
@@ -95,7 +95,7 @@
     </div>
 
 
-    <button class="accordion">Env <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="env">Env <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
             <li class="sub-header">Static Methods</li>
@@ -107,7 +107,7 @@
     </div>
 
 
-    <button class="accordion">JsonHelper <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="json-helper">JsonHelper <span class="float-right">&#10004;</span></button>
     <div class="panel">
     <ul>
         <li class="sub-header">Instance Methods</li>
@@ -170,7 +170,7 @@
     </div>
 
 
-    <button class="accordion">MapBuilder <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="map-builder">MapBuilder <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -188,7 +188,7 @@
     </div>
 
 
-    <button class="accordion">Regex <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="regex">Regex <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
             <li class="sub-header">Static Members</li>
@@ -201,7 +201,7 @@
     </div>
 
 
-    <button class="accordion">SuiteListener <span class="float-right">&#10004;</span></button>
+    <button class="accordion" id="suite-listener">SuiteListener <span class="float-right">&#10004;</span></button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -218,7 +218,7 @@
     <div class="package">Package: com.perkbox.util.token</div>
 
 
-    <button class="accordion">Token</button>
+    <button class="accordion" id="token">Token</button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -277,7 +277,7 @@
     </div>
 
 
-    <button class="accordion">TokenBuilder</button>
+    <button class="accordion" id="token-builder">TokenBuilder</button>
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
@@ -305,6 +305,7 @@
 
 </div>
 <script>
+
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -312,6 +313,7 @@ for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var panel = this.nextElementSibling;
+
         if (panel.style.maxHeight){
             panel.style.maxHeight = null;
         } else {
@@ -319,6 +321,26 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
+
+(function() {
+    var hash = window.location.hash;
+    var ref = hash.substring(1);
+
+    if (ref) {
+        var selected = document.getElementById(ref);
+        selected.classList.add("active");
+        var panel = selected.nextElementSibling;
+
+        if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    }
+})();
+
+
+
 </script>
 </body>
 </html>
