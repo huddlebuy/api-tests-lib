@@ -19,16 +19,16 @@ Please find the documentation
     @Test
     public void validCreate() {
         String resourcePath = "/endpointOne";
-        Responses resp = (new Requests(resourcePath))
+        Responses response = (new Requests(resourcePath))
                 .withAuthorization(Token.create())
                 .withBody(JsonHelper.readFile("endpointOne/CreateOne-valid"))
                 .post();
 
-        resp.log("validCreate"); // log response and statusCode
+        response.log("validCreate"); // log response and statusCode
 
         String expect = "{\"links\":{\"self\":\"/v1/endpointOne/%REGEX\"}}";
 
-        Assert.assertTrue(resp.assertMatch(201, expect, Regex.UUID));
+        response.assertMatch(201, expect, Regex.UUID);
     }
 ```
 
@@ -37,7 +37,7 @@ Please find the documentation
     @Test
     public void validGet() {
         String resourcePath = "/endpointOne/7dab6d55-755e-418e-a932-08061913142f3";
-        Responses resp = (new Requests(resourcePath))
+        Responses response = (new Requests(resourcePath))
                 .withAuthorization(Token.read())
                 .get();
 
@@ -48,7 +48,7 @@ Please find the documentation
                 .add("$.endpoint", json.getParamAsStr("$.endpoint"))
                 .add("$.create", json.getParamAsStr("$.create"));
 
-        Assert.assertTrue(resp.assertTrue(200, map, true)); // Third true parameter is to log expected and actual values
+        response.assertTrue(200, map, true); // Third true parameter is to log expected and actual values
     }
 ```
 
@@ -57,7 +57,7 @@ Please find the documentation
     @Test
     public void validList() {
         String resourcePath = "/endpointTwo";
-        Responses resp = (new Requests(resourcePath))
+        Responses response = (new Requests(resourcePath))
                 .withAuthorization(Token.read())
                 .get();
 
@@ -66,7 +66,7 @@ Please find the documentation
         MapBuilder map = (new MapBuilder())
                 .add("$.data", json.getParamAsStr("$.data"));
 
-        Assert.assertTrue(resp.assertTrue(200, map));
+        response.assertTrue(200, map);
     }
 ```
 
@@ -80,7 +80,7 @@ Please find the documentation
                 .add("$.endpoint", "twoA")
                 .add("$.update", "twoA"));
 
-        Responses resp = (new Requests(resourcePath))
+        Responses response = (new Requests(resourcePath))
                 .withAuthorization(Token.update())
                 .withBody(updatedBody)
                 .withIfMatch("4e666f2a4fa329c100016d239fad257f")
@@ -89,7 +89,7 @@ Please find the documentation
         MapBuilder result = (new MapBuilder())
                 .add("$.message", "The item was successfully updated");
 
-        Assert.assertTrue(resp.assertTrue(200, result));
+        response.assertTrue(200, result);
     }
 ```
 

@@ -27,7 +27,7 @@
     <pre>
         String expect = "{\"links\":{\"self\":\"/%REGEX\"}}";
 
-        Assert.assertTrue(response.assertMatch(201, expect, Regex.ANY));
+        response.assertMatch(201, expect, Regex.ANY);
     </pre>
 
 
@@ -39,13 +39,13 @@
     <pre>
         String expect = "{\"error\":\"PBERR001x12\",\"reference\":\"%REGEX\"}";
 
-        Assert.assertTrue(response.assertMatch(401, expect, Regex.UUID));
+        response.assertMatch(401, expect, Regex.UUID);
     </pre>
     <small>Example of using multiple <code>%REGEX</code> placeholders:</small>
     <pre>
         String expect = "{\"error\":\"Validation failed: found %REGEX\",\"reference\":\"%REGEX\"}";
 
-        Assert.assertTrue(response.assertMatch(400, expect, Regex.ANY, Regex.UUID));
+        response.assertMatch(400, expect, Regex.ANY, Regex.UUID);
     </pre>
 
 

@@ -23,7 +23,10 @@
         <a name="Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a>
         <button onclick="gotoSrc('L16-L18')">src</button>
     </h4>
-    <small><i>The Constructor: </i> initialises a response using the RestAssured's <code>ExtractableResponse&lt;Response&gt;</code> passed as argument. This constructor is not intended to be called directly, as its purpose is to, within the library, aid the <code>Requests</code> class to retrieve responses from its action methods (<a href="Requests.html#get"><code>get</code></a>, <a href="Requests.html#post"><code>post</code></a>, <a href="Requests.html#put"><code>put</code></a> and <a href="Requests.html#delete"><code>delete</code></a>). E.g.</small>
+    <small>
+        <i>The Constructor: </i> initialises a response using the RestAssured's <code>ExtractableResponse&lt;Response&gt;</code> passed as argument.
+        This constructor is not intended to be called directly, as its purpose is to, within the library, aid the <code>Requests</code> class to retrieve responses from its action methods (<a href="Requests.html#get"><code>get</code></a>, <a href="Requests.html#post"><code>post</code></a>, <a href="Requests.html#put"><code>put</code></a> and <a href="Requests.html#delete"><code>delete</code></a>). E.g.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withQueryParam("limit", "3")
@@ -49,7 +52,9 @@
         <a name="assertTrue">public void assertTrue(int statusCode)</a>
         <button onclick="gotoSrc('L20-L22')">src</button>
     </h4>
-    <small>This method is used to assert that the status code of the response is same as the <code>statusCode</code> passed as argument.</small>
+    <small>
+        This method is used to assert that the status code of the response is same as the <code>statusCode</code> passed as argument.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
@@ -63,7 +68,9 @@
         <a name="assertTrue_textResponse">public void assertTrue(int statusCode, String textResponse)</a>
         <button onclick="gotoSrc('L24-L26')">src</button>
     </h4>
-    <small>This method fulfills the same function as <code><a href="#assertTrue">public void assertTrue(int statusCode)</a></code>, but further asserts that the response body contains the passed <code>textResponse</code>. E.g. Given a response with body of <em>Sample JSON</em>, the assertion below would pass.</small>
+    <small>
+        This method fulfills the same function as <code><a href="#assertTrue">public void assertTrue(int statusCode)</a></code>, but further asserts that the response body contains the passed <code>textResponse</code>. E.g. Given a response with body of <em>Sample JSON</em>, the assertion below would pass.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
@@ -86,7 +93,7 @@
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
-        If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
+        <br>If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
         The logging feature logs the <em>actual</em> response body and the <em>expected</em> <code>textResponse</code>, as shown in the <em>Sample output</em>.
     </small>
     <pre>
@@ -149,7 +156,7 @@
         map.put("$.text", "What I am expecting");
         map.put("$.answers", json.getParam("$.answers"));             //utilising JsonHelper
 
-        response.assertTrue(200, map);                                //fails
+        response.assertTrue(200, map, true);                          //fails
     </pre>
     <pre class="sample">
     Sample output:
@@ -163,9 +170,21 @@
         <a name="assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a>
         <button onclick="gotoSrc('L63-L65')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method fulfills the same function as <code><a href="#assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></code>, however, using the inbuilt MapBuilder class of the library instead of java's native Map class.
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        JsonHelper json = new JsonHelper("questions/question");
+
+        MapBuilder map = (new MapBuilder())
+                .add("$.status", "enabled")
+                .add("$.text", "Enter your ID")
+                .add("$.answers", json.getParam("$.answers"))         //utilising JsonHelper
+
+        response.assertTrue(200, map);                                //passes
     </pre>
 
 
@@ -173,9 +192,29 @@
         <a name="assertTrue_mapBuilder_log">public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a>
         <button onclick="gotoSrc('L67-L69')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method fulfills the same function as <code><a href="#assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
+        <br>If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
+        The logging feature logs the <em>actual</em> response param value and the <em>expected</em> param value, for the key that fails. E.g. assuming the the response body has param <code>$.text</code> containing the string <em>Enter your ID</em>, then the assertion below would <strong>fail</strong> producing the <em>Sample output</em> below.
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get();
+
+        JsonHelper json = new JsonHelper("questions/question");
+
+        MapBuilder map = (new MapBuilder())
+                .add("$.status", "enabled")
+                .add("$.text", "What I am expecting")
+                .add("$.answers", json.getParam("$.answers"))         //utilising JsonHelper
+
+        response.assertTrue(200, map, true);                          //fails
+    </pre>
+    <pre class="sample">
+    Sample output:
+    --------------
+        Actual: Enter your ID
+        Expected: What I am expecting
     </pre>
 
 
@@ -183,9 +222,29 @@
         <a name="assertMatch">public void assertMatch(int statusCode, String expect, String ... regexParams)</a>
         <button onclick="gotoSrc('L71-L96')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method first asserts that the status code of the response is same as the <code>statusCode</code> passed as argument.
+        It also asserts that the response body matches the expected regex string in <code>expect</code>.
+        The <code>expect</code> string can be a JSON String consisting of <code>%REGEX</code> placeholders, with each <code>%REGEX</code> placeholder, directly representing the following <code>regexParams</code> in sequence.
+        Thus, the number of <code>%REGEX</code> placeholders used in the <code>expect</code> string must match the number of <code>regexParams</code>.
+        <br><br>The example below would assert that the response status code was <code>400</code>, and that the response body was similar to the <code>expect</code> variable, with the first <code>%REGEX</code> being any word or sentence, and the second <code>%REGEX</code> being a valid uuid, as shown in the <em>Sample JSON</em> response.
+    </small>
     <pre>
-        snippet
+        Responses response = (new Requests("/questions"))
+                .withBody(JsonHelper.getJson("questions/question"))
+                .post();
+
+        String expect = "{\"error\":\"Validation failed: found %REGEX\",\"reference\":\"%REGEX\"}";
+
+        response.assertMatch(400, expect, Regex.ANY, Regex.UUID);
+    </pre>
+    <pre class="sample">
+    Sample JSON:
+    ------------
+        {
+            "error": "Validation failed: found wrongField",
+            "reference": "0969ce78-2672-44ff-95e2-733db08d388d"
+        }
     </pre>
 
 
@@ -193,7 +252,10 @@
         <a name="getHeader">public String getHeader(String headerName)</a>
         <button onclick="gotoSrc('L98-L100')">src</button>
     </h4>
-    <small>This method is used to get a header from the response using the <code>headerName</code>. For example the snippet below will return the entity tag of the HTTP response.</small>
+    <small>
+        This method is used to get a header from the response using the <code>headerName</code>.
+        For example the snippet below will return the entity tag of the HTTP response.
+    </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
@@ -206,7 +268,10 @@
         <a name="getParam">public String getParam(String jsonPath)</a>
         <button onclick="gotoSrc('L102-L104')">src</button>
     </h4>
-    <small>This method is used to retrieve (as String) the value of a parameter from the json body of a response. The path to the parameter is parsed as a <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.</small>
+    <small>
+        This method is used to retrieve (as String) the value of a parameter from the json body of a response.
+        The path to the parameter is parsed as a <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
+    </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
@@ -253,7 +318,10 @@
         <a name="getUuid_link">public String getUuid(String link)</a>
         <button onclick="gotoSrc('L111-L113')">src</button>
     </h4>
-    <small>This method is used to return uuid from a link passed as argument. The example below would return the uuid <code>087dbc58-421c-11e7-a919-92ebcb67fe33</code>.</small>
+    <small>
+        This method is used to return uuid from a link passed as argument.
+        The example below would return the uuid <code>087dbc58-421c-11e7-a919-92ebcb67fe33</code>.
+    </small>
     <pre>
         String uuid = response.getUuid("http://localhost:8080/questions/087dbc58-421c-11e7-a919-92ebcb67fe33");
     </pre>
@@ -263,7 +331,9 @@
         <a name="getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a>
         <button onclick="gotoSrc('L115-L117')">src</button>
     </h4>
-    <small>This method is used to get an <code>ExtractableResponse&lt;Response&gt;</code> object from a <code>Responses</code> object.</small>
+    <small>
+        This method is used to get an <code>ExtractableResponse&lt;Response&gt;</code> object from a <code>Responses</code> object.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
@@ -277,7 +347,10 @@
         <a name="log">public void log(String filter)</a>
         <button onclick="gotoSrc('L119-L122')">src</button>
     </h4>
-    <small>This method is used to log output on the <code>Responses</code> object. This method prints out the response as string and the status code. The <code>filter</code> argument can be any string which you deem useful to filter the log. The response log example below prints the <em>Sample output</em> below to the console.</small>
+    <small>
+        This method is used to log output on the <code>Responses</code> object. This method prints out the response as string and the status code.
+        The <code>filter</code> argument can be any string which you deem useful to filter the log. The response log example below prints the <em>Sample output</em> below to the console.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
