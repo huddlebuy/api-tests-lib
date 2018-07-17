@@ -230,9 +230,27 @@
         <a name="buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L61-L63')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a token with a read-only access where the user is restricted from accessing some fields depending on the logic specified by the service.
+        The <em>Read-restricted permission</em> format is shown below. Also an expiry of 3600 seconds is applied to the token.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildReadRestrictedToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Read-restricted permission:
+    ---------------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+read": {
+                        "*restricted": "true"
+                    }
+                }
+            }
+        }
     </pre>
 
 
@@ -240,9 +258,13 @@
         <a name="buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L65-L67')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate an expired token with read permission.
+        This function is similar to <code><a href="#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></code>, however the token life span is 1 second, so it expires before a test is run.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildExpiredReadToken("exam", "questions");
     </pre>
 
 
@@ -250,9 +272,13 @@
         <a name="buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L69-L71')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate an expired token with create permission.
+        This function is similar to <code><a href="#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></code>, however the token life span is 1 second, so it expires before a test is run.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildExpiredCreateToken("exam", "questions");
     </pre>
 
 
@@ -260,9 +286,13 @@
         <a name="buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L73-L75')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate an expired token with update permission.
+        This function is similar to <code><a href="#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></code>, however the token life span is 1 second, so it expires before a test is run.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildExpiredUpdateToken("exam", "questions");
     </pre>
 
 
