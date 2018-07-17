@@ -23,9 +23,11 @@
         <a name="Token">public Token(String uuid, String tenant, String email)</a>
         <button onclick="gotoSrc('L22-L27')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        <i>The Constructor: </i> which requires a user's <code>uuid</code>, <code>tenant</code> and <code>email</code> as arguments; which is used by the class to create the token for the user.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
     </pre>
 
 
@@ -33,9 +35,14 @@
         <a name="build">public String build(String jsonString, int expiry)</a>
         <button onclick="gotoSrc('L29-L31')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to build the token (using the <code>TokenBuilder</code> class) using two arguments: a <code>jsonString</code> which specifies the permission of the user, and an <code>expiry</code> which specifies life span of the user in seconds.
+    </small>
     <pre>
-        snippet
+        String readOnlyJson = "{ \"exam\": { \"questions\": { \"+read\": { } } } }";
+
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.build(readOnlyJson, 3600);
     </pre>
 
 
@@ -43,9 +50,24 @@
         <a name="buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L33-L35')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a read-only token for a user, using the <em>Read-only permission</em> format shown below.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildReadOnlyToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Read-only permission:
+    ---------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+read": { }
+                }
+            }
+        }
     </pre>
 
 
