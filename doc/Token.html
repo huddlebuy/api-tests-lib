@@ -51,7 +51,7 @@
         <button onclick="gotoSrc('L33-L35')">src</button>
     </h4>
     <small>
-        This method is used to generate a read-only token for a user, using the <em>Read-only permission</em> format shown below.
+        This method is used to generate a read-only token for a user, using the <em>Read-only permission</em> format shown below; and with an expiry of 3600 seconds.
         The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
     </small>
     <pre>
@@ -75,9 +75,24 @@
         <a name="buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L37-L39')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a create-only token for a user, using the <em>Create-only permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildCreateOnlyToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Create-only permission:
+    -----------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+create": { }
+                }
+            }
+        }
     </pre>
 
 
@@ -85,9 +100,24 @@
         <a name="buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L41-L43')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate an update-only token for a user, using the <em>Update-only permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildUpdateOnlyToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Update-only permission:
+    -----------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+update": { }
+                }
+            }
+        }
     </pre>
 
 
@@ -95,9 +125,25 @@
         <a name="buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L45-L47')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a token with a create and read permissions for a user, using the <em>Create and Read permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildCreateAndReadToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Create and Read permission:
+    ---------------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+create": { },
+                    "+read": { }
+                }
+            }
+        }
     </pre>
 
 
@@ -105,9 +151,25 @@
         <a name="buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L49-L51')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a token with a create and update permissions for a user, using the <em>Create and Update permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildCreateAndUpdateToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Create and Update permission:
+    -----------------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+create": { },
+                    "+update": { }
+                }
+            }
+        }
     </pre>
 
 
@@ -115,9 +177,25 @@
         <a name="buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L53-L55')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a token with an update and read permissions for a user, using the <em>Update and Read permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildUpdateAndReadToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Update and Read permission:
+    ---------------------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+update": { },
+                    "+read": { }
+                }
+            }
+        }
     </pre>
 
 
@@ -125,9 +203,26 @@
         <a name="buildFullToken">public String buildFullToken(String service, String endpoint)</a>
         <button onclick="gotoSrc('L57-L59')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to generate a token with a read, create and update permissions for a user, using the <em>Full permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
     <pre>
-        snippet
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildFullToken("exam", "questions");
+    </pre>
+    <pre class="sample">
+    Full permission:
+    ----------------
+        {
+            "%1s": {
+                "%2s": {
+                    "+read": { },
+                    "+create": { },
+                    "+update": { }
+                }
+            }
+        }
     </pre>
 
 
