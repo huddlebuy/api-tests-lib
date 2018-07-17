@@ -303,9 +303,14 @@
         <a name="static_buildStatic">public static String buildStatic(String jsonString, int expiry)</a>
         <button onclick="gotoSrc('L92-L94')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is the static equivalence of <code><a href="#build">public String build(String jsonString, int expiry)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code> and <code>EMAIL</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String readOnlyJson = "{ \"exam\": { \"questions\": { \"+read\": { } } } }";
+
+        String jwt  = Token.buildStatic(readOnlyJson, 3600);
     </pre>
 
 
@@ -313,9 +318,12 @@
         <a name="static_read">public static String read()</a>
         <button onclick="gotoSrc('L96-L98')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.read();
     </pre>
 
 
@@ -323,9 +331,12 @@
         <a name="static_read_endpoint">public static String read(String endpoint)</a>
         <button onclick="gotoSrc('L100-L105')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.read("questions");
     </pre>
 
 
@@ -333,9 +344,12 @@
         <a name="static_create">public static String create()</a>
         <button onclick="gotoSrc('L107-L109')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.create();
     </pre>
 
 
@@ -343,9 +357,12 @@
         <a name="static_create_endpoint">public static String create(String endpoint)</a>
         <button onclick="gotoSrc('L111-L116')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.create("questions");
     </pre>
 
 
@@ -353,9 +370,12 @@
         <a name="static_update">public static String update()</a>
         <button onclick="gotoSrc('L118-L120')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.update();
     </pre>
 
 
@@ -363,9 +383,12 @@
         <a name="static_update_endpoint">public static String update(String endpoint)</a>
         <button onclick="gotoSrc('L122-L127')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.update("questions");
     </pre>
 
 
@@ -373,9 +396,12 @@
         <a name="static_createAndRead">public static String createAndRead()</a>
         <button onclick="gotoSrc('L129-L131')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.createAndRead();
     </pre>
 
 
@@ -383,9 +409,12 @@
         <a name="static_createAndRead_endpoint">public static String createAndRead(String endpoint)</a>
         <button onclick="gotoSrc('L133-L138')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.createAndRead("questions");
     </pre>
 
 
@@ -393,9 +422,12 @@
         <a name="static_createAndUpdate">public static String createAndUpdate()</a>
         <button onclick="gotoSrc('L140-L142')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.createAndUpdate();
     </pre>
 
 
@@ -403,9 +435,12 @@
         <a name="static_createAndUpdate_endpoint">public static String createAndUpdate(String endpoint)</a>
         <button onclick="gotoSrc('L144-L149')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.createAndUpdate("questions");
     </pre>
 
 
@@ -413,9 +448,12 @@
         <a name="static_updateAndRead">public static String updateAndRead()</a>
         <button onclick="gotoSrc('L151-L153')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.updateAndRead();
     </pre>
 
 
@@ -423,9 +461,12 @@
         <a name="static_updateAndRead_endpoint">public static String updateAndRead(String endpoint)</a>
         <button onclick="gotoSrc('L155-L160')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.updateAndRead("questions");
     </pre>
 
 
@@ -433,9 +474,12 @@
         <a name="static_fullPermission">public static String fullPermission()</a>
         <button onclick="gotoSrc('L162-L164')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildFullToken">public String buildFullToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.fullPermission();
     </pre>
 
 
@@ -443,9 +487,12 @@
         <a name="static_fullPermission_endpoint">public static String fullPermission(String endpoint)</a>
         <button onclick="gotoSrc('L166-L171')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildFullToken">public String buildFullToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.fullPermission("questions");
     </pre>
 
 
@@ -453,9 +500,12 @@
         <a name="static_readRestricted">public static String readRestricted()</a>
         <button onclick="gotoSrc('L173-L175')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.readRestricted();
     </pre>
 
 
@@ -463,9 +513,12 @@
         <a name="static_readRestricted_endpoint">public static String readRestricted(String endpoint)</a>
         <button onclick="gotoSrc('L177-L182')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.readRestricted("questions");
     </pre>
 
 
@@ -473,9 +526,12 @@
         <a name="static_expiredRead">public static String expiredRead()</a>
         <button onclick="gotoSrc('L184-L186')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredRead();
     </pre>
 
 
@@ -483,9 +539,12 @@
         <a name="static_expiredRead_endpoint">public static String expiredRead(String endpoint)</a>
         <button onclick="gotoSrc('L188-L193')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredRead("questions");
     </pre>
 
 
@@ -493,9 +552,12 @@
         <a name="static_expiredCreate">public static String expiredCreate()</a>
         <button onclick="gotoSrc('L195-L197')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredCreate();
     </pre>
 
 
@@ -503,9 +565,12 @@
         <a name="static_expiredCreate_endpoint">public static String expiredCreate(String endpoint)</a>
         <button onclick="gotoSrc('L199-L204')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredCreate("questions");
     </pre>
 
 
@@ -513,9 +578,12 @@
         <a name="static_expiredUpdate">public static String expiredUpdate()</a>
         <button onclick="gotoSrc('L206-L208')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredUpdate();
     </pre>
 
 
@@ -523,9 +591,12 @@
         <a name="static_expiredUpdate_endpoint">public static String expiredUpdate(String endpoint)</a>
         <button onclick="gotoSrc('L210-L215')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
     <pre>
-        snippet
+        String jwt  = Token.expiredUpdate("questions");
     </pre>
 
 </div>
