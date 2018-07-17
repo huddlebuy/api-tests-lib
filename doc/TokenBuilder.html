@@ -23,9 +23,12 @@
         <a name="TokenBuilder">public TokenBuilder()</a>
         <button onclick="gotoSrc('L23-L25')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        <i>The Constructor: </i> which used to instantiate the class, also sets the token expiry to 1800 seconds by default.
+        This class is mainly utilised by the <code><a href="Token.html">Token</a></code> class - which provides helper methods to generate tokens based on specified permissions.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = new TokenBuilder();
     </pre>
 
 
@@ -33,9 +36,12 @@
         <a name="withUser">public TokenBuilder withUser(String user)</a>
         <button onclick="gotoSrc('L27-L30')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the user's UUID inside the token, using the <code>user</code> argument.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f");
     </pre>
 
 
@@ -43,9 +49,13 @@
         <a name="withTenant">public TokenBuilder withTenant(String tenant)</a>
         <button onclick="gotoSrc('L32-L35')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the user's tenant inside the token, using the <code>tenant</code> argument.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich");
     </pre>
 
 
@@ -53,9 +63,14 @@
         <a name="withEmail">public TokenBuilder withEmail(String email)</a>
         <button onclick="gotoSrc('L37-L40')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the user's email inside the token, using the <code>email</code> argument.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich")
+                .withEmail("person@restaurant.yum");
     </pre>
 
 
@@ -63,9 +78,15 @@
         <a name="lock">public TokenBuilder lock(String secret)</a>
         <button onclick="gotoSrc('L42-L45')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the secret key used to lock the token, using the <code>secret</code> argument.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich")
+                .withEmail("person@restaurant.yum")
+                .lock("secret-secure-very-a");
     </pre>
 
 
@@ -73,9 +94,16 @@
         <a name="expiresIn">public TokenBuilder expiresIn(int expiresIn)</a>
         <button onclick="gotoSrc('L47-L50')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the expiration of the token, in seconds, using the <code>expiresIn</code> argument.
+    </small>
     <pre>
-        snippet
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich")
+                .withEmail("person@restaurant.yum")
+                .lock("secret-secure-very-a")
+                .expiresIn(3600);
     </pre>
 
 
@@ -83,9 +111,19 @@
         <a name="withPermissions">public TokenBuilder withPermissions(String permissionsJson)</a>
         <button onclick="gotoSrc('L52-L55')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to specify the permissions (a JSON string) being applied to the token, using the <code>permissionsJson</code> argument.
+    </small>
     <pre>
-        snippet
+        String readOnlyJson = "{ \"exam\": { \"questions\": { \"+read\": { } } } }";
+
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich")
+                .withEmail("person@restaurant.yum")
+                .lock("secret-secure-very-a")
+                .expiresIn(3600)
+                .withPermissions(readOnlyJson);
     </pre>
 
 
@@ -93,9 +131,23 @@
         <a name="build">public String build() throws MissingResourceException, IOException</a>
         <button onclick="gotoSrc('L57-L74')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method is used to build the JWT token.
+        The required fields to call the <code>build()</code> are: the user's UUID, tenant, email, secret lock, and permissions JSON.
+        The expiry is not required as it is set in the constructor (to 1800 seconds) by default.
+    </small>
     <pre>
-        snippet
+        String readOnlyJson = "{ \"exam\": { \"questions\": { \"+read\": { } } } }";
+
+        TokenBuilder tokenBuilder = (new TokenBuilder())
+                .withUser("d32a78b2-8e18-417a-a837-4613b543553f")
+                .withTenant("sandwich")
+                .withEmail("person@restaurant.yum")
+                .lock("secret-secure-very-a")
+                .expiresIn(3600)
+                .withPermissions(readOnlyJson);
+
+        String jwt = tokenBuilder.build();
     </pre>
 
 
@@ -103,9 +155,16 @@
         <a name="generateToken">public String generateToken<br>&emsp;&emsp;&emsp; (String permissionJson, String UserUuid, String tenant, String userEmail, int expiry)</a>
         <button onclick="gotoSrc('L76-L88')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>
+        This method fulfills the same function as <code><a href="#build">public String build() throws MissingResourceException, IOException</a></code>.
+        However, all the required fields to build the token are passed as the method argument, and the secret lock is obtained from a <code>PERKBOX_TOKEN_KEY</code> environment variable, accessed using <code><a href="Env.html">Env</a></code> class.
+    </small>
     <pre>
-        snippet
+        String readOnlyJson = "{ \"exam\": { \"questions\": { \"+read\": { } } } }";
+
+        TokenBuilder tokenBuilder = new TokenBuilder();
+
+        String jwt = tokenBuilder.generateToken(readOnlyJson, "d32a78b2-8e18-417a-a837-4613b543553f", "sandwich", "person@restaurant.yum", 3600);
     </pre>
 
 </div>

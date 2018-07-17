@@ -8,7 +8,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
 Please find the documentation
 [here](https://rawgit.com/chinenyeze/api-tests-lib/master/doc/Documentation.html) for work in progress version or
-[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.13/doc/Documentation.html) for last tagged version.
+[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.14/doc/Documentation.html) for last tagged version.
 
 
 
