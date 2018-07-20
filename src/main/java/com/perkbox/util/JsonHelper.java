@@ -47,7 +47,7 @@ public class JsonHelper {
         return getParam(jsonPath).toString();
     }
 
-    public String modifyParam(String jsonPath, String value) {
+    public String modifyParam(String jsonPath, Object value) {
         return documentContext.set(jsonPath,value).jsonString();
     }
 
@@ -97,7 +97,7 @@ public class JsonHelper {
         return (new JsonHelper(file)).getParamAsStr(jsonPath);
     }
 
-    public static String modifyParam(String file, String jsonPath, String value) {
+    public static String modifyParam(String file, String jsonPath, Object value) {
         return (new JsonHelper(file)).modifyParam(jsonPath, value);
     }
 

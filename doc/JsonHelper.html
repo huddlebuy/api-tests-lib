@@ -74,7 +74,7 @@
 
 
     <h4>
-        <a name="modifyParam">public String modifyParam(String jsonPath, String value)</a>
+        <a name="modifyParam">public String modifyParam(String jsonPath, Object value)</a>
         <button onclick="gotoSrc('L50-L52')">src</button>
     </h4>
     <small>Replaces the value of the JSON parameter in a JSON body with the specified <code>value</code> based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>.</small>
@@ -187,10 +187,10 @@
 
 
     <h4>
-        <a name="static_modifyParam">public static String modifyParam(String file, String jsonPath, String value)</a>
+        <a name="static_modifyParam">public static String modifyParam(String file, String jsonPath, Object value)</a>
         <button onclick="gotoSrc('L100-L102')">src</button>
     </h4>
-    <small>Achieves the same function as <a href="#modifyParam"><code>public String modifyParam(String jsonPath, String value)</code></a>, however in a static context.</small>
+    <small>Achieves the same function as <a href="#modifyParam"><code>public String modifyParam(String jsonPath, Object value)</code></a>, however in a static context.</small>
     <pre>
         String jsonString = JsonHelper.modifyParam("questions/question", "$.text", "This is a new value");
     </pre>

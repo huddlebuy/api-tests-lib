@@ -2,6 +2,7 @@ package com.perkbox.testbase;
 
 import com.perkbox.util.Env;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -70,7 +71,7 @@ public class Requests {
         return this;
     }
 
-    private RequestSpecification build() {
+    private RequestSpecification build(boolean logRequest) {
         //add headers
         if (headers != null && !headers.isEmpty()) {
             request.headers(headers);
@@ -87,26 +88,46 @@ public class Requests {
             request.body(body);
         }
 
+        if (logRequest) {
+            request.filter(new RequestLoggingFilter());
+        }
+
         return request;
     }
 
     public Responses get() {
-        this.response = this.build().when().get().then().extract();
-        return new Responses(this.response);
+        return get(false);
+    }
+
+    public Responses get(boolean logRequest) {
+        response = build(logRequest).when().get().then().extract();
+        return new Responses(response);
     }
 
     public Responses post() {
-        this.response = this.build().when().post().then().extract();
-        return new Responses(this.response);
+        return post(false);
+    }
+
+    public Responses post(boolean logRequest) {
+        response = build(logRequest).when().post().then().extract();
+        return new Responses(response);
     }
 
     public Responses put() {
-        this.response = this.build().when().put().then().extract();
-        return new Responses(this.response);
+        return put(false);
+    }
+
+    public Responses put(boolean logRequest) {
+        response = build(logRequest).when().put().then().extract();
+        return new Responses(response);
     }
 
     public Responses delete() {
-        this.response = this.build().when().delete().then().extract();
-        return new Responses(this.response);
+        return delete(false);
+    }
+
+    public Responses delete(boolean logRequest) {
+        response = build(logRequest).when().delete().then().extract();
+        return new Responses(response);
     }
 }
