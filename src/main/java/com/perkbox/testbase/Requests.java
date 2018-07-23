@@ -3,6 +3,7 @@ package com.perkbox.testbase;
 import com.perkbox.util.Env;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -71,7 +72,7 @@ public class Requests {
         return this;
     }
 
-    private RequestSpecification build(boolean logRequest) {
+    private RequestSpecification build(boolean logRequest, boolean logResponse) {
         //add headers
         if (headers != null && !headers.isEmpty()) {
             request.headers(headers);
@@ -89,45 +90,43 @@ public class Requests {
         }
 
         if (logRequest) {
+            System.out.println("\n\n::Request Log::\n\n");
             request.filter(new RequestLoggingFilter());
+        }
+
+        if (logResponse) {
+            System.out.println("\n\n::Response Log::\n\n");
+            request.filter(new ResponseLoggingFilter());
         }
 
         return request;
     }
 
-    public Responses get() {
-        return get(false);
-    }
-
-    public Responses get(boolean logRequest) {
-        response = build(logRequest).when().get().then().extract();
+    public Responses get(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().get().then().extract();
         return new Responses(response);
     }
 
-    public Responses post() {
-        return post(false);
-    }
-
-    public Responses post(boolean logRequest) {
-        response = build(logRequest).when().post().then().extract();
+    public Responses post(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().post().then().extract();
         return new Responses(response);
     }
 
-    public Responses put() {
-        return put(false);
-    }
-
-    public Responses put(boolean logRequest) {
-        response = build(logRequest).when().put().then().extract();
+    public Responses put(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().put().then().extract();
         return new Responses(response);
     }
 
-    public Responses delete() {
-        return delete(false);
-    }
-
-    public Responses delete(boolean logRequest) {
-        response = build(logRequest).when().delete().then().extract();
+    public Responses delete(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().delete().then().extract();
         return new Responses(response);
     }
 }

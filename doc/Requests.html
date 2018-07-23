@@ -21,9 +21,10 @@
 
     <h4>
         <a name="Requests">public Requests(String resourcePath)</a>
-        <button onclick="gotoSrc('L23-L25')">src</button>
+        <button onclick="gotoSrc('L25-L27')">src</button>
     </h4>
-    <small><i>The Constructor: </i> prepares a <i>RestAssured</i> request object used to make a request to a resource path. The resource path for this constructor is relative, e.g. <code>/questions</code>. The base URL (i.e. something similar to <code>http://localhost:8080</code>) is, within the library, obtained from the environment variable <code>BASE_URL</code> (using the library's <a href="Env.html#static_get"><code>Env</code></a>), and prepended to the <code>resourcePath</code> at runtime. Within the constructor, the request is set up to:
+    <small>
+        <i>The Constructor: </i> prepares a <i>RestAssured</i> request object used to make a request to a resource path. The resource path for this constructor is relative, e.g. <code>/questions</code>. The base URL (i.e. something similar to <code>http://localhost:8080</code>) is, within the library, obtained from the environment variable <code>BASE_URL</code> (using the library's <a href="Env.html#static_get"><code>Env</code></a>), and prepended to the <code>resourcePath</code> at runtime. Within the constructor, the request is set up to:
         <ul>
             <li>ignore HTTPS Validation,</li>
             <li>only apply Charset, if it is defined for the request, and</li>
@@ -37,9 +38,11 @@
 
     <h4>
         <a name="Requests_baseUri">public Requests(String resourcePath, String baseUri)</a>
-        <button onclick="gotoSrc('L27-L41')">src</button>
+        <button onclick="gotoSrc('L29-L43')">src</button>
     </h4>
-    <small><i>The Constructor: </i> which also achieves same function as <a href="#Requests"><code>Requests</code></a> constructor, however, requires a <code>baseUri</code>.</small>
+    <small>
+        <i>The Constructor: </i> which also achieves same function as <a href="#Requests"><code>Requests</code></a> constructor, however, requires a <code>baseUri</code>.
+    </small>
     <pre>
         Requests req = new Requests("/questions", "http://localhost:8080");
     </pre>
@@ -47,9 +50,11 @@
 
     <h4>
         <a name="withHeader">public Requests withHeader(String key, String value)</a>
-        <button onclick="gotoSrc('L43-L46')">src</button>
+        <button onclick="gotoSrc('L45-L48')">src</button>
     </h4>
-    <small>This method is used to add a header of any kind to the request.</small>
+    <small>
+        This method is used to add a header of any kind to the request.
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withHeader("Accept-Encoding", "*");
@@ -58,9 +63,11 @@
 
     <h4>
         <a name="withAuthorization">public Requests withAuthorization(String authorization)</a>
-        <button onclick="gotoSrc('L48-L51')">src</button>
+        <button onclick="gotoSrc('L50-L53')">src</button>
     </h4>
-    <small>This method is used to add an Authorization header to the request.</small>
+    <small>
+        This method is used to add an Authorization header to the request.
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withAuthorization("eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTYyMzkwMjJ9.qiaLOGZrWzQCXD5cJLb5ZN0ibZX8GukGOu2AEODwQRY");
@@ -69,9 +76,11 @@
 
     <h4>
         <a name="withContentType">public Requests withContentType(String contentType)</a>
-        <button onclick="gotoSrc('L53-L56')">src</button>
+        <button onclick="gotoSrc('L55-L58')">src</button>
     </h4>
-    <small>This method is used to add a Content-Type header to the request.</small>
+    <small>
+        This method is used to add a Content-Type header to the request.
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withContentType("application/pdf");
@@ -80,9 +89,11 @@
 
     <h4>
         <a name="withIfMatch">public Requests withIfMatch(String ifMatch)</a>
-        <button onclick="gotoSrc('L58-L61')">src</button>
+        <button onclick="gotoSrc('L60-L63')">src</button>
     </h4>
-    <small>This method is used to add an If-Match header to the request.</small>
+    <small>
+        This method is used to add an If-Match header to the request.
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withIfMatch("622e4f5090a588cd7d4f71c08f74d1da");
@@ -91,14 +102,18 @@
 
     <h4>
         <a name="withBody">public Requests withBody(String body)</a>
-        <button onclick="gotoSrc('L63-L66')">src</button>
+        <button onclick="gotoSrc('L65-L68')">src</button>
     </h4>
-    <small>This method is used to add a body to the request.</small>
+    <small>
+        This method is used to add a body to the request.
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withBody("{\"text\": \"What is your name?\"}");
     </pre>
-    <small><a href="JsonHelper.html"><code>JsonHelper</code></a> class can also be used to load JSON files into the request body. E.g.:</small>
+    <small>
+        <a href="JsonHelper.html"><code>JsonHelper</code></a> class can also be used to load JSON files into the request body. E.g.:
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"));
@@ -111,9 +126,11 @@
 
     <h4>
         <a name="withQueryParam">public Requests withQueryParam(String key, String value)</a>
-        <button onclick="gotoSrc('L68-L71')">src</button>
+        <button onclick="gotoSrc('L70-L73')">src</button>
     </h4>
-    <small>This method is used to add query parameters to the request. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:</small>
+    <small>
+        This method is used to add query parameters to the request. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
+    </small>
     <pre>
         Requests req = (new Requests("/questions"))
                 .withQueryParam("enabled", "yes")
@@ -122,10 +139,13 @@
 
 
     <h4>
-        <a name="get">public Responses get()</a>
-        <button onclick="gotoSrc('L93-L96')">src</button>
+        <a name="get">public Responses get(boolean ... logs)</a>
+        <button onclick="gotoSrc('L105-L110')">src</button>
     </h4>
-    <small>This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object. E.g. first snippet below lists questions limiting to 3, the second snippet gets a question:</small>
+    <small>
+        This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        E.g. first snippet below lists questions limiting to 3, the second snippet gets a question. Also this method provides logging capability. See <a href="#logging">note on logging</a>.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withQueryParam("limit", "3")
@@ -135,13 +155,45 @@
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
     </pre>
+    <br>
+    <small>
+        <a name="logging"><b>Logging</b></a>
+        <br>The optional <code>logs</code> argument is used to specify <em>request logging</em> (first argument) and <em>response logging</em> (second argument).
+        E.g. the first snippet logs only on the request object, the second logs only on the response object, the third snippet logs both request and response.
+        <br>Note: Logging is applicable to all the action methods (get, post, put, delete).
+    </small>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get(true);
+    </pre>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get(false, true);
+    </pre>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .get(true, true);
+    </pre>
+    <pre class="sample">
+    Sample Request Log:
+    -------------------
+        Log
+    </pre>
+    <pre class="sample">
+    Sample Response Log:
+    --------------------
+        Log
+    </pre>
 
 
     <h4>
-        <a name="post">public Responses post()</a>
-        <button onclick="gotoSrc('L98-L101')">src</button>
+        <a name="post">public Responses post(boolean ... logs)</a>
+        <button onclick="gotoSrc('L112-L117')">src</button>
     </h4>
-    <small>This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
+    <small>
+        This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        Also this method provides logging capability. See <a href="#logging">note on logging</a>.
+    </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .withBody(JsonHelper.getJson("questions/question"))
@@ -150,10 +202,13 @@
 
 
     <h4>
-        <a name="put">public Responses put()</a>
-        <button onclick="gotoSrc('L103-L106')">src</button>
+        <a name="put">public Responses put(boolean ... logs)</a>
+        <button onclick="gotoSrc('L119-L124')">src</button>
     </h4>
-    <small>This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
+    <small>
+        This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        Also this method provides logging capability. See <a href="#logging">note on logging</a>.
+    </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
@@ -162,10 +217,13 @@
 
 
     <h4>
-        <a name="delete">public Responses delete()</a>
-        <button onclick="gotoSrc('L108-L111')">src</button>
+        <a name="delete">public Responses delete(boolean ... logs)</a>
+        <button onclick="gotoSrc('L126-L131')">src</button>
     </h4>
-    <small>This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.</small>
+    <small>
+        This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        Also this method provides logging capability. See <a href="#logging">note on logging</a>.
+    </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .delete();
