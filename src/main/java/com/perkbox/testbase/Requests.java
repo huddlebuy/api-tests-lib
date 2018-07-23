@@ -97,7 +97,7 @@ public class Requests {
         }
 
         if (logResponse) {
-            logMessage = logMessage.length() > 0 ? " and Response" : "Response";
+            logMessage += logMessage.length() > 0 ? " and Response" : "Response";
             request.filter(new ResponseLoggingFilter());
         }
 
