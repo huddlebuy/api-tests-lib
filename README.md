@@ -1,6 +1,6 @@
 # API Tests Library from Perkbox
 
-This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.13.
+This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.17.
 
 
 
@@ -8,7 +8,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
 Please find the documentation
 [here](https://rawgit.com/chinenyeze/api-tests-lib/master/doc/Documentation.html) for work in progress version or
-[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.14/doc/Documentation.html) for last tagged version.
+[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.17/doc/Documentation.html) for last tagged version.
 
 
 
@@ -84,7 +84,7 @@ Please find the documentation
                 .withAuthorization(Token.update())
                 .withBody(updatedBody)
                 .withIfMatch("4e666f2a4fa329c100016d239fad257f")
-                .put();
+                .put(true, true); // The boolean values means detailed request and response logging
 
         MapBuilder result = (new MapBuilder())
                 .add("$.message", "The item was successfully updated");

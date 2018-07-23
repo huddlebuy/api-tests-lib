@@ -140,7 +140,7 @@
 
     <h4>
         <a name="get">public Responses get(boolean ... logs)</a>
-        <button onclick="gotoSrc('L105-L110')">src</button>
+        <button onclick="gotoSrc('L111-L116')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -177,18 +177,64 @@
     <pre class="sample">
     Sample Request Log:
     -------------------
-        Log
+        ::Logging for Request.
+
+        Request method:	GET
+        Request URI:	http://localhost:8000/v1/questions/da92995e-3106-479c-b8c5-14df7f907176
+        Proxy:			&lt;none&gt;
+        Request params:	&lt;none&gt;
+        Query params:	&lt;none&gt;
+        Form params:	&lt;none&gt;
+        Path params:	&lt;none&gt;
+        Multiparts:		&lt;none&gt;
+        Headers:		Authorization=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJrYm94IiwiaWF0IjoxNTMyMzU0NzU3LCJzdWIiOiJiZjRjZWNmOC00MTYxLTExZTctYTkxOS05MmViY2I2N2ZlMzMiLCJleHAiOjE1MzIzNTgzNTcsInVzciI6InBlcmtib3hAbWFpbGluYXRvci5jb20iLCJ0ZW4iOiJ6dWNsYSIsImF1dCI6Ikg0c0lBQUFBQUFBQUFLdFd5c3dyemt6UEtDbFdzcXBXS2l4TkxTN0p6TThEYzdTTFVoTlRnSXhhSUFBQU9GdnpEeWNBQUFBPSJ9.NwfDcbPqGaMxkBCjPD08dWBFkOCSXkaQIr7SOQp7fIc
+                        Accept=*/*
+                        Content-Type=application/json
+        Cookies:		&lt;none&gt;
+        Body:			&lt;none&gt;
     </pre>
     <pre class="sample">
     Sample Response Log:
     --------------------
-        Log
+        ::Logging for Response.
+
+        HTTP/1.1 200 OK
+        Access-Control-Allow-Credentials: true
+        Access-Control-Allow-Headers: X-Platform-UUID,X-User-UUID,X-Tenant-UUID,Content-Type,Content-Length,Accept,Authorization,If-Match
+        Access-Control-Allow-Methods: POST, GET, PATCH, PUT, DELETE, OPTIONS, TRACE, HEAD
+        Access-Control-Allow-Origin: *
+        Access-Control-Expose-Headers: Etag
+        Cache: Authorization, Origin, Content-Type
+        Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+        Content-Type: application/json
+        Etag: 78440f8208c6e565f71068919078d0bf
+        Expires: -1
+        Pragma: no-cache
+        Date: Mon, 23 Jul 2018 14:32:41 GMT
+        Content-Length: 354
+
+        {
+            "Etag": "78440f8208c6e565f71068919078d0bf",
+            "answers": [
+                {
+                    "text": "Strongly disagree",
+                    "value": 1
+                },
+                {
+                    "text": "Disagree",
+                    "value": 2
+                }
+            ],
+            "id": "94d78c11-3054-4170-b020-243253c8c9b0",
+            "status": "enabled",
+            "text": "My colleagues are aware of problems I am having"
+        }
     </pre>
 
 
     <h4>
         <a name="post">public Responses post(boolean ... logs)</a>
-        <button onclick="gotoSrc('L112-L117')">src</button>
+        <button onclick="gotoSrc('L118-L123')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -203,7 +249,7 @@
 
     <h4>
         <a name="put">public Responses put(boolean ... logs)</a>
-        <button onclick="gotoSrc('L119-L124')">src</button>
+        <button onclick="gotoSrc('L125-L130')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -218,7 +264,7 @@
 
     <h4>
         <a name="delete">public Responses delete(boolean ... logs)</a>
-        <button onclick="gotoSrc('L126-L131')">src</button>
+        <button onclick="gotoSrc('L132-L137')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.

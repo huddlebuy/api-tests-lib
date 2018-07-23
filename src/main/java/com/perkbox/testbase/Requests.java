@@ -89,14 +89,20 @@ public class Requests {
             request.body(body);
         }
 
+        String logMessage = "";
+
         if (logRequest) {
-            System.out.println("\n\n::Request Log::\n\n");
+            logMessage += "Request";
             request.filter(new RequestLoggingFilter());
         }
 
         if (logResponse) {
-            System.out.println("\n\n::Response Log::\n\n");
+            logMessage = logMessage.length() > 0 ? " and Response" : "Response";
             request.filter(new ResponseLoggingFilter());
+        }
+
+        if (logRequest || logResponse) {
+            System.out.println("\n::Logging for " + logMessage + ".\n");
         }
 
         return request;
