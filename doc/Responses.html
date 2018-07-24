@@ -78,9 +78,7 @@
 
         response.assertTrue(201, "Item successfully created");        //passes
     </pre>
-    <pre class="sample">
-    Sample JSON:
-    ------------
+    <pre class="sample" data-label="Sample JSON">
         {
             "message": "Item successfully created."
         }
@@ -94,7 +92,7 @@
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
         <br>If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
-        The logging feature logs the <em>actual</em> response body and the <em>expected</em> <code>textResponse</code>, as shown in the <em>Sample output</em>.
+        The logging feature logs the <em>actual</em> response body and the <em>expected</em> <code>textResponse</code>, as shown in the <em>Sample Output</em>.
     </small>
     <pre>
         Responses response = (new Requests("/questions"))
@@ -103,9 +101,7 @@
 
         response.assertTrue(201, "Wrong text provided", true);        //fails
     </pre>
-    <pre class="sample">
-    Sample output:
-    --------------
+    <pre class="sample" data-label="Sample Output">
         Actual: {"message":"Item successfully created."}
         Expected (for contains): Wrong text provided
     </pre>
@@ -158,9 +154,7 @@
 
         response.assertTrue(200, map, true);                          //fails
     </pre>
-    <pre class="sample">
-    Sample output:
-    --------------
+    <pre class="sample" data-label="Sample Output">
         Actual: Enter your ID
         Expected: What I am expecting
     </pre>
@@ -195,7 +189,7 @@
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
         <br>If <code>log</code> is set to <code>true</code>, the logging only applies when the assertion fails. (This is to help avoid excess console prints).
-        The logging feature logs the <em>actual</em> response param value and the <em>expected</em> param value, for the key that fails. E.g. assuming the the response body has param <code>$.text</code> containing the string <em>Enter your ID</em>, then the assertion below would <strong>fail</strong> producing the <em>Sample output</em> below.
+        The logging feature logs the <em>actual</em> response param value and the <em>expected</em> param value, for the key that fails. E.g. assuming the the response body has param <code>$.text</code> containing the string <em>Enter your ID</em>, then the assertion below would <strong>fail</strong> producing the <em>Sample Output</em> below.
     </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
@@ -210,9 +204,7 @@
 
         response.assertTrue(200, map, true);                          //fails
     </pre>
-    <pre class="sample">
-    Sample output:
-    --------------
+    <pre class="sample" data-label="Sample Output">
         Actual: Enter your ID
         Expected: What I am expecting
     </pre>
@@ -238,9 +230,7 @@
 
         response.assertMatch(400, expect, Regex.ANY, Regex.UUID);
     </pre>
-    <pre class="sample">
-    Sample JSON:
-    ------------
+    <pre class="sample" data-label="Sample JSON">
         {
             "error": "Validation failed: found wrongField",
             "reference": "0969ce78-2672-44ff-95e2-733db08d388d"
@@ -278,9 +268,7 @@
 
         String text = response.getParam("$.text");
     </pre>
-    <pre class="sample">
-    Response JSON:
-    --------------
+    <pre class="sample" data-label="Response JSON">
         {
             "id": "06dcdb79-b391-4891-9ef9-daa12c22ab83",
             "text": "We are moving in the right strategic direction"
@@ -294,7 +282,7 @@
     </h4>
     <small>
         Note: This method (getUuid) is not for getting a uuid parameter from a response body, to do that use the getParam method, e.g. to get a uuid parameter, called <code>id</code>, similar to the example in getParam section, we use <code>response.getParam("$.id").</code>
-        <br>This method is used to get uuid from a response which has its body similar to the format in the <em>Sample response</em> below. The <em>Sample response</em> is our recommended response for create item endpoints.
+        <br>This method is used to get uuid from a response which has its body similar to the format in the <em>Sample Response</em> below. The <em>Sample Response</em> is our recommended response for create item endpoints.
     </small>
     <pre>
         Responses response = (new Requests("/questions"))
@@ -303,9 +291,7 @@
 
         String uuid = response.getUuid();
     </pre>
-    <pre class="sample">
-    Sample response:
-    ----------------
+    <pre class="sample" data-label="Sample Response">
         {
             "links": {
                 "self": "http://localhost:8080/questions/087dbc58-421c-11e7-a919-92ebcb67fe33"
@@ -349,7 +335,7 @@
     </h4>
     <small>
         This method is used to log output on the <code>Responses</code> object. This method prints out the response as string and the status code.
-        The <code>filter</code> argument can be any string which you deem useful to filter the log. The response log example below prints the <em>Sample output</em> below to the console.
+        The <code>filter</code> argument can be any string which you deem useful to filter the log. The response log example below prints the <em>Sample Output</em> below to the console.
     </small>
     <pre>
         Responses response = (new Requests("/questions"))
@@ -358,9 +344,7 @@
 
         response.log("CREATE_VALID_QS");
     </pre>
-    <pre class="sample">
-    Sample output:
-    --------------
+    <pre class="sample" data-label="Sample Output">
         Response::CREATE_VALID_QS:: {"links":{"self":"/v1/questions/ebe3684a-0386-4569-9269-059a52b757c9"}}
         StatusCode::CREATE_VALID_QS:: 201
     </pre>
