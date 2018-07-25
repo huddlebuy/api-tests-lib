@@ -21,12 +21,9 @@ public class Requests {
     private Map<String, String> headers;
     private Map<String, String> queryParams;
     private String body;
+    private String url;
 
-    public Requests(String resourcePath) {
-        this(resourcePath, Env.get("BASE_URL"));
-    }
-
-    public Requests(String resourcePath, String baseUri) {
+    public Requests() {
         RestAssured.useRelaxedHTTPSValidation();
 
         request = given()
@@ -34,12 +31,22 @@ public class Requests {
                         appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                 .contentType("application/json");
 
-        request.baseUri(baseUri);
-        request.basePath(resourcePath);
-
         headers = new HashMap<>();
         queryParams = new HashMap<>();
         body = null;
+    }
+
+    public Requests(String resourcePath) {
+        this(resourcePath, Env.get("BASE_URL"));
+    }
+
+    public Requests(String resourcePath, String baseUri) {
+        this();
+        url = baseUri + resourcePath;
+    }
+
+    public void withUrl(String url) {
+        this.url = url;
     }
 
     public Requests withHeader(String key, String value) {
@@ -111,28 +118,28 @@ public class Requests {
     public Responses get(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().get().then().extract();
+        response = build(logRequest, logResponse).when().get(url).then().extract();
         return new Responses(response);
     }
 
     public Responses post(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().post().then().extract();
+        response = build(logRequest, logResponse).when().post(url).then().extract();
         return new Responses(response);
     }
 
     public Responses put(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().put().then().extract();
+        response = build(logRequest, logResponse).when().put(url).then().extract();
         return new Responses(response);
     }
 
     public Responses delete(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().delete().then().extract();
+        response = build(logRequest, logResponse).when().delete(url).then().extract();
         return new Responses(response);
     }
 }
