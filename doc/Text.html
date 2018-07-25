@@ -16,23 +16,61 @@
     <small>Package: <code>com.perkbox.util</code></small>
 
 
-    <h3>Instance Methods</h3>
+    <h3>Static Members</h3>
 
 
     <h4>
-        <a name="reference">method</a>
-        <button onclick="gotoSrc('L-L')">src</button>
+        <a name="static_ALPHA">public static final String ALPHA</a>
+        <button onclick="gotoSrc('L5')">src</button>
     </h4>
-    <small>explanation</small>
+    <small>This is a text helper that returns all alphabets, all in lowercase. Can be useful in asserting that a feature allows lowercase alphabets.</small>
+
+
+    <h4>
+        <a name="static_CAPS">public static final String CAPS</a>
+        <button onclick="gotoSrc('L6')">src</button>
+    </h4>
+    <small>This is a text helper that returns all alphabets, all in uppercase. Can be useful in asserting that a feature allows uppercase alphabets.</small>
+
+
+    <h4>
+        <a name="static_NUMBERS">public static final String NUMBERS</a>
+        <button onclick="gotoSrc('L7')">src</button>
+    </h4>
+    <small>This is a text helper that returns all numbers. Can be useful in asserting that a feature allows numbers.</small>
+
+
+    <h4>
+        <a name="static_SPECIAL">public static final String SPECIAL</a>
+        <button onclick="gotoSrc('L8')">src</button>
+    </h4>
+    <small>This is a text helper that returns special characters <code><([{\^-=$!|]})?*+.>&</code>. Can be useful in asserting that a feature allows special characters.</small>
+
+
+    <h4>
+        <a name="static_ALL">public static final String ALL</a>
+        <button onclick="gotoSrc('L10')">src</button>
+    </h4>
+    <small>This is a text helper that returns a concatenation of the above <em>ALPHA</em>, <em>CAPS</em>, <em>SPECIAL</em> and <em>NUMBERS</em>.</small>
+
+
+    <h3>Static Methods</h3>
+
+
+    <h4>
+        <a name="generateText">public String generateText(int length)</a>
+        <button onclick="gotoSrc('L12-L19')">src</button>
+    </h4>
+    <small>This is a text helper that can be used to generate text of a given length.</small>
     <pre>
-        snippet
+        String text = Text.generateText(255);
     </pre>
 
 </div>
 <script src="scroller.js"></script>
 <script>
 function gotoSrc (lines) {
-    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/Template.java#' + lines;
+    var url = 'https://github.com/chinenyeze/api-tests-lib/blob/master/src/main/java/com/perkbox/util/Text.java#' + lines;
     var win = window.open(url, '_blank');
     win.focus();
 }

@@ -45,8 +45,9 @@ public class Requests {
         url = baseUri + resourcePath;
     }
 
-    public void withUrl(String url) {
+    public Requests withUrl(String url) {
         this.url = url;
+        return this;
     }
 
     public Requests withHeader(String key, String value) {
