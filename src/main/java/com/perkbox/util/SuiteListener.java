@@ -14,9 +14,9 @@ public class SuiteListener implements ISuiteListener {
         ExtractableResponse<Response> response = callHealth();
 
         String marker = "#########################################################";
-        System.out.println(marker + "\nWaiting for service to be up ....");
+        System.out.println(marker + "\nWaiting for service to be up ...");
         
-        while (response.statusCode() != 200) {
+        while (serviceReady < 20 && response.statusCode() != 200) {
             try {
                 Thread.sleep(1000);
                 serviceReady++;
@@ -25,6 +25,11 @@ public class SuiteListener implements ISuiteListener {
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        if (response.statusCode() != 200) {
+            System.out.println("Exiting... Service health check was unsuccessful.\n" + marker);
+            System.exit(-1);
         }
         
         System.out.println("Service ready!\nSeconds delayed to be ready: " + serviceReady + "\n" + marker);
