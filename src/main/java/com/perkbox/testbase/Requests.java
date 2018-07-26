@@ -28,8 +28,7 @@ public class Requests {
 
         request = given()
                 .config(RestAssured.config().encoderConfig(encoderConfig().
-                        appendDefaultContentCharsetToContentTypeIfUndefined(false)))
-                .contentType("application/json");
+                        appendDefaultContentCharsetToContentTypeIfUndefined(false)));
 
         headers = new HashMap<>();
         queryParams = new HashMap<>();
@@ -126,6 +125,7 @@ public class Requests {
     public Responses post(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
+        if (headers.get("Content-Type") == null) request.contentType("application/json");
         response = build(logRequest, logResponse).when().post(url).then().extract();
         return new Responses(response);
     }
@@ -133,6 +133,7 @@ public class Requests {
     public Responses put(boolean ... logs) {
         boolean logRequest = logs.length > 0 && logs[0];
         boolean logResponse = logs.length > 1 && logs[1];
+        if (headers.get("Content-Type") == null) request.contentType("application/json");
         response = build(logRequest, logResponse).when().put(url).then().extract();
         return new Responses(response);
     }
