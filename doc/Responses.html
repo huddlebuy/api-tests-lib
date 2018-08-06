@@ -255,18 +255,18 @@
 
 
     <h4>
-        <a name="getParam">public String getParam(String jsonPath)</a>
+        <a name="getParam">public String getParam(String path)</a>
         <button onclick="gotoSrc('L102-L104')">src</button>
     </h4>
     <small>
         This method is used to retrieve (as String) the value of a parameter from the json body of a response.
-        The path to the parameter is parsed as a <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
+        The path to the parameter is parsed as a <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
     </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
 
-        String text = response.getParam("$.text");
+        String text = response.getParam("text");
     </pre>
     <pre class="sample" data-label="Response JSON">
         {

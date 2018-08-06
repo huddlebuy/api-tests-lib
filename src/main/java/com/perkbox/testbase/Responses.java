@@ -99,8 +99,8 @@ public class Responses {
         return response.header(headerName);
     }
 
-    public String getParam(String jsonPath) {
-        return response.body().jsonPath().getString(jsonPath);
+    public String getParam(String path) {
+        return response.body().jsonPath().getString(path);
     }
 
     public String getUuid() {
