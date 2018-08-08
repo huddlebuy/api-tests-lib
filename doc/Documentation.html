@@ -13,7 +13,7 @@
         This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
-        <small class="version">version: 1.1.26</small>
+        <small class="version">version: 1.1.27</small>
     </div>
 
 
@@ -31,6 +31,9 @@
             <li><a href="Requests.html#Requests_resourcePath_baseUri">public Requests(String resourcePath, String baseUri)</a></li>
             <li class="separator">&nbsp;</li>
 
+            <li><a href="Requests.html#disableUrlEncoding">public Requests disableUrlEncoding()</a></li>
+            <li class="separator">&nbsp;</li>
+
             <li><a href="Requests.html#withUrl">public Requests withUrl(String url)</a></li>
             <li><a href="Requests.html#withHeader">public Requests withHeader(String key, String value)</a></li>
             <li><a href="Requests.html#withAuthorization">public Requests withAuthorization(String authorization)</a></li>
@@ -38,6 +41,8 @@
             <li><a href="Requests.html#withIfMatch">public Requests withIfMatch(String ifMatch)</a></li>
             <li><a href="Requests.html#withBody">public Requests withBody(String body)</a></li>
             <li><a href="Requests.html#withQueryParam">public Requests withQueryParam(String key, String value)</a></li>
+            <li><a href="Requests.html#withQueryParams">public Requests withQueryParams(Map&lt;String, String&gt; map)</a></li>
+            <li><a href="Requests.html#withQueryParams_MapBuilder">public Requests withQueryParams(MapBuilder map)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="Requests.html#get">public Responses get(boolean ... logs)</a></li>
@@ -66,10 +71,12 @@
             <li><a href="Responses.html#assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a></li>
             <li><a href="Responses.html#assertTrue_mapBuilder_log">public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></li>
             <li><a href="Responses.html#assertMatch">public void assertMatch(int statusCode, String expect, String ... regexParams)</a></li>
+            <li><a href="Responses.html#assertSchema">public void assertSchema(String file)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="Responses.html#getHeader">public String getHeader(String headerName)</a></li>
             <li><a href="Responses.html#getParam">public String getParam(String path)</a></li>
+            <li><a href="Responses.html#getList">public List&lt;Object&gt; getList(String path)</a></li>
             <li><a href="Responses.html#getUuid">public String getUuid()</a></li>
             <li><a href="Responses.html#getUuid_link">public String getUuid(String link)</a></li>
             <li><a href="Responses.html#getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a></li>
@@ -126,6 +133,11 @@
         <li><a href="JsonHelper.html#getParamAsStr">public String getParamAsStr(String jsonPath)</a></li>
         <li class="separator">&nbsp;</li>
 
+        <li><a href="JsonHelper.html#addParam">public String addParam(String jsonPath, Object value)</a></li>
+        <li><a href="JsonHelper.html#addParams">public String addParams(Map&lt;String, Object&gt; jsonPaths)</a></li>
+        <li><a href="JsonHelper.html#addParams_MapBuilder">public String addParams(MapBuilder jsonPaths)</a></li>
+        <li class="separator">&nbsp;</li>
+
         <li><a href="JsonHelper.html#modifyParam">public String modifyParam(String jsonPath, Object value)</a></li>
         <li><a href="JsonHelper.html#modifyParams">public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</a></li>
         <li><a href="JsonHelper.html#modifyParams_MapBuilder">public String modifyParams(MapBuilder jsonPaths)</a></li>
@@ -145,6 +157,11 @@
 
         <li><a href="JsonHelper.html#static_getParam">public static Object getParam(String file, String jsonPath)</a></li>
         <li><a href="JsonHelper.html#static_getParamAsStr">public static Object getParamAsStr(String file, String jsonPath)</a></li>
+        <li class="separator">&nbsp;</li>
+
+        <li><a href="JsonHelper.html#static_addParam">public static String addParam(String file, String jsonPath, Object value)</a></li>
+        <li><a href="JsonHelper.html#static_addParams">public static String addParams(String file, Map&lt;String, Object&gt; jsonPaths)</a></li>
+        <li><a href="JsonHelper.html#static_addParams_MapBuilder">public static String addParams(String file, MapBuilder jsonPaths)</a></li>
         <li class="separator">&nbsp;</li>
 
         <li><a href="JsonHelper.html#static_modifyParam">public static String modifyParam(String file, String jsonPath, Object value)</a></li>

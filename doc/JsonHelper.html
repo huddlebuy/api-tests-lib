@@ -74,8 +74,51 @@
 
 
     <h4>
-        <a name="modifyParam">public String modifyParam(String jsonPath, Object value)</a>
+        <a name="addParam">public String addParam(String jsonPath, Object value)</a>
         <button onclick="gotoSrc('L50-L52')">src</button>
+    </h4>
+    <small>Assigns the given <code>value</code> to the specified <code>jsonPath</code>, adds the pair to the JSON body in memory, and returns the resulting JSON string.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+        String jsonString = json.addParam("$.text", "A new value");
+    </pre>
+
+
+    <h4>
+        <a name="addParams">public String addParams(Map&lt;String, Object&gt; jsonPaths)</a>
+        <button onclick="gotoSrc('L54-L62')">src</button>
+    </h4>
+    <small>Adds the specified Map <code>values</code> and their respective specified <code>jsonPaths</code> to the JSON in memory, and returns the resulting JSON string.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+
+        Map&lt;String, Object&gt; jsonPaths = new HashMap<>();
+        jsonPaths.put("$.text", "This is a new value");
+        jsonPaths.put("$.status", "enabled");
+
+        String jsonString = json.addParams(jsonPaths);
+    </pre>
+
+
+    <h4>
+        <a name="addParams_MapBuilder">public String addParams(MapBuilder jsonPaths)</a>
+        <button onclick="gotoSrc('L64-L66')">src</button>
+    </h4>
+    <small>Achieves the same function as <a href="#addParams"><code>public String addParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however using the library's <code>MapBuilder</code> helper class.</small>
+    <pre>
+        JsonHelper json = new JsonHelper("questions/question");
+
+        MapBuilder jsonPaths = (new MapBuilder())
+                .add("$.text", "This is a new value")
+                .add("$.status", "enabled");
+
+        String jsonString = json.addParams(jsonPaths);
+    </pre>
+
+
+    <h4>
+        <a name="modifyParam">public String modifyParam(String jsonPath, Object value)</a>
+        <button onclick="gotoSrc('L68-L70')">src</button>
     </h4>
     <small>Replaces the value of the JSON parameter in a JSON body with the specified <code>value</code> based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>.</small>
     <pre>
@@ -86,7 +129,7 @@
 
     <h4>
         <a name="modifyParams">public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</a>
-        <button onclick="gotoSrc('L54-L62')">src</button>
+        <button onclick="gotoSrc('L72-L80')">src</button>
     </h4>
     <small>Replaces the value of the JSON parameters in a JSON body with the specified Map <code>values</code> based on the specified <code>jsonPaths</code>, and returns the resulting JSON string. The example below would replace the value of <code>text</code> with the String <code>This is a new value</code>, and the value of <code>status</code> with the String <code>enabled</code>.</small>
     <pre>
@@ -102,7 +145,7 @@
 
     <h4>
         <a name="modifyParams_MapBuilder">public String modifyParams(MapBuilder jsonPaths)</a>
-        <button onclick="gotoSrc('L64-L66')">src</button>
+        <button onclick="gotoSrc('L82-L84')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#modifyParams"><code>public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however using the library's <code>MapBuilder</code> helper class.</small>
     <pre>
@@ -118,7 +161,7 @@
 
     <h4>
         <a name="removeParam">public String removeParam(String jsonPath)</a>
-        <button onclick="gotoSrc('L68-L70')">src</button>
+        <button onclick="gotoSrc('L86-L88')">src</button>
     </h4>
     <small>Removes a JSON parameter from a JSON body based on the specified <code>jsonPath</code>, and returns the resulting JSON string. The example below would remove <code>text</code> from the JSON body.</small>
     <pre>
@@ -129,7 +172,7 @@
 
     <h4>
         <a name="removeParams">public String removeParams(List&lt;String&gt; jsonPaths)</a>
-        <button onclick="gotoSrc('L72-L80')">src</button>
+        <button onclick="gotoSrc('L90-L98')">src</button>
     </h4>
     <small>Removes a list of JSON parameters from a JSON body based on the specified <code>jsonPaths</code>, and returns the resulting JSON string. The example below would remove <code>text</code> and <code>answers</code> from the JSON body.</small>
     <pre>
@@ -148,7 +191,7 @@
 
     <h4>
         <a name="static_readFile">public static String readFile(String file)</a>
-        <button onclick="gotoSrc('L84-L86')">src</button>
+        <button onclick="gotoSrc('L102-L104')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#readFile"><code>public String readFile()</code></a>, however in a static context.</small>
     <pre>
@@ -158,7 +201,7 @@
 
     <h4>
         <a name="static_getJson">public static String getJson(String file)</a>
-        <button onclick="gotoSrc('L88-L90')">src</button>
+        <button onclick="gotoSrc('L106-L108')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#getJson"><code>public String getJson()</code></a>, however in a static context.</small>
     <pre>
@@ -168,7 +211,7 @@
 
     <h4>
         <a name="static_getParam">public static Object getParam(String file, String jsonPath)</a>
-        <button onclick="gotoSrc('L92-L94')">src</button>
+        <button onclick="gotoSrc('L110-L112')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#getParam"><code>public Object getParam(String jsonPath)</code></a>, however in a static context.</small>
     <pre>
@@ -178,7 +221,7 @@
 
     <h4>
         <a name="static_getParamAsStr">public static Object getParamAsStr(String file, String jsonPath)</a>
-        <button onclick="gotoSrc('L96-L98')">src</button>
+        <button onclick="gotoSrc('L114-L116')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#getParamAsStr"><code>public String getParamAsStr(String jsonPath)</code></a>, however in a static context.</small>
     <pre>
@@ -187,8 +230,46 @@
 
 
     <h4>
+        <a name="static_addParam">public static String addParam(String file, String jsonPath, Object value)</a>
+        <button onclick="gotoSrc('L118-L120')">src</button>
+    </h4>
+    <small>Achieves the same function as <a href="#addParam"><code>public String addParam(String jsonPath, Object value)</code></a>, however in a static context.</small>
+    <pre>
+        String jsonString = JsonHelper.addParam("questions/question", "$.text", "This is a new value");
+    </pre>
+
+
+    <h4>
+        <a name="static_addParams">public static String addParams(String file, Map&lt;String, Object&gt; jsonPaths)</a>
+        <button onclick="gotoSrc('L122-L124')">src</button>
+    </h4>
+    <small>Achieves the same function as <a href="#addParams"><code>public String addParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however in a static context.</small>
+    <pre>
+        Map&lt;String, Object&gt; jsonPaths = new HashMap<>();
+        jsonPaths.put("$.text", "This is a new value");
+        jsonPaths.put("$.status", "enabled");
+
+        String jsonString = JsonHelper.addParams("questions/question", jsonPaths);
+    </pre>
+
+
+    <h4>
+        <a name="static_addParams_MapBuilder">public static String addParams(String file, MapBuilder jsonPaths)</a>
+        <button onclick="gotoSrc('L126-L128')">src</button>
+    </h4>
+    <small>Achieves the same function as <a href="#addParams_MapBuilder"><code>public String addParams(MapBuilder jsonPaths)</code></a>, however in a static context.</small>
+    <pre>
+        MapBuilder jsonPaths = (new MapBuilder())
+                .add("$.text", "This is a new value")
+                .add("$.status", "enabled");
+
+        String jsonString = JsonHelper.addParams("questions/question", jsonPaths);
+    </pre>
+
+
+    <h4>
         <a name="static_modifyParam">public static String modifyParam(String file, String jsonPath, Object value)</a>
-        <button onclick="gotoSrc('L100-L102')">src</button>
+        <button onclick="gotoSrc('L130-L132')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#modifyParam"><code>public String modifyParam(String jsonPath, Object value)</code></a>, however in a static context.</small>
     <pre>
@@ -198,7 +279,7 @@
 
     <h4>
         <a name="static_modifyParams">public static String modifyParams(String file, Map&lt;String, Object&gt; jsonPaths)</a>
-        <button onclick="gotoSrc('L104-L106')">src</button>
+        <button onclick="gotoSrc('L134-L136')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#modifyParams"><code>public String modifyParams(Map&lt;String, Object&gt; jsonPaths)</code></a>, however in a static context.</small>
     <pre>
@@ -212,7 +293,7 @@
 
     <h4>
         <a name="static_modifyParams_MapBuilder">public static String modifyParams(String file, MapBuilder jsonPaths)</a>
-        <button onclick="gotoSrc('L108-L110')">src</button>
+        <button onclick="gotoSrc('L138-L140')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#modifyParams_MapBuilder"><code>public String modifyParams(MapBuilder jsonPaths)</code></a>, however in a static context.</small>
     <pre>
@@ -226,7 +307,7 @@
 
     <h4>
         <a name="static_removeParam">public static String removeParam(String file, String jsonPath)</a>
-        <button onclick="gotoSrc('L112-L114')">src</button>
+        <button onclick="gotoSrc('L142-L144')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#removeParam"><code>public String removeParam(String jsonPath)</code></a>, however in a static context.</small>
     <pre>
@@ -236,7 +317,7 @@
 
     <h4>
         <a name="static_removeParams">public static String removeParams(String file, List&lt;String&gt; jsonPaths)</a>
-        <button onclick="gotoSrc('L116-L118')">src</button>
+        <button onclick="gotoSrc('L146-L148')">src</button>
     </h4>
     <small>Achieves the same function as <a href="#removeParams"><code>public String removeParams(List&lt;String&gt; jsonPaths)</code></a>, however in a static context.</small>
     <pre>
@@ -253,7 +334,7 @@
 
     <h4>
         <a name="staticOnly_getParam">public static Object getParam(ExtractableResponse&lt;Response&gt; response, String jsonPath)</a>
-        <button onclick="gotoSrc('L123-L125')">src</button>
+        <button onclick="gotoSrc('L153-L155')">src</button>
     </h4>
     <small>Similar to <a href="#static_getParam"><code>public static Object getParam(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
     <pre>
@@ -267,7 +348,7 @@
 
     <h4>
         <a name="staticOnly_getParamAsStr">public static String getParamAsStr<br>&emsp;&emsp;&emsp; (ExtractableResponse&lt;Response&gt; response, String jsonPath)</a>
-        <button onclick="gotoSrc('L127-L129')">src</button>
+        <button onclick="gotoSrc('L157-L159')">src</button>
     </h4>
     <small>Similar to <a href="#static_getParamAsStr"><code>public static Object getParamAsStr(String file, String jsonPath)</code></a>, however uses JSON from a response <code>Responses</code> rather than a file. E.g. assuming a GET <code>get()</code> request has been made on an endpoint, the <code>getParam</code> is used as below with the <code>response</code> and <code>jsonPath</code> as arguments.</small>
     <pre>
@@ -281,7 +362,7 @@
 
     <h4>
         <a name="staticOnly_searchListByUniqueColumn">public static String searchListByUniqueColumn<br>&emsp;&emsp;&emsp; (ExtractableResponse&lt;Response&gt; response, String columnValue, String columnName)</a>
-        <button onclick="gotoSrc('L133-L136')">src</button>
+        <button onclick="gotoSrc('L163-L166')">src</button>
     </h4>
     <small>Searches a list endpoint by a unique column (e.g. id or uuid) to return the json of that identifier. Given a <i>Sample JSON</i> body as below, the <code>searchListByUniqueColumn</code> method would return the <i>Resultant JSON</i> as below.</small>
     <pre class="sample" data-label="Sample JSON">
@@ -323,7 +404,7 @@
 
     <h4>
         <a name="staticOnly_searchListById">public static String searchListById(ExtractableResponse&lt;Response&gt; response, String id)</a>
-        <button onclick="gotoSrc('L138-L140')">src</button>
+        <button onclick="gotoSrc('L168-L170')">src</button>
     </h4>
     <small>Searches a list endpoint by the <code>id</code> column to return the json of that id. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
     <pre>
@@ -337,7 +418,7 @@
 
     <h4>
         <a name="staticOnly_searchListByUuid">public static String searchListByUuid(ExtractableResponse&lt;Response&gt; response, String uuid)</a>
-        <button onclick="gotoSrc('L142-L144')">src</button>
+        <button onclick="gotoSrc('L172-L174')">src</button>
     </h4>
     <small>Searches a list endpoint by the <code>uuid</code> column to return the json of that uuid. Also see <a href="#staticOnly_searchListByUniqueColumn"><code>searchListByUniqueColumn</code></a>.</small>
     <pre>

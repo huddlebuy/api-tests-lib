@@ -21,7 +21,7 @@
 
     <h4>
         <a name="Responses">public Responses(ExtractableResponse&lt;Response&gt; response)</a>
-        <button onclick="gotoSrc('L16-L18')">src</button>
+        <button onclick="gotoSrc('L20-L22')">src</button>
     </h4>
     <small>
         <i>The Constructor: </i> initialises a response using the RestAssured's <code>ExtractableResponse&lt;Response&gt;</code> passed as argument.
@@ -50,7 +50,7 @@
 
     <h4>
         <a name="assertTrue">public void assertTrue(int statusCode)</a>
-        <button onclick="gotoSrc('L20-L22')">src</button>
+        <button onclick="gotoSrc('L24-L26')">src</button>
     </h4>
     <small>
         This method is used to assert that the status code of the response is same as the <code>statusCode</code> passed as argument.
@@ -66,7 +66,7 @@
 
     <h4>
         <a name="assertTrue_textResponse">public void assertTrue(int statusCode, String textResponse)</a>
-        <button onclick="gotoSrc('L24-L26')">src</button>
+        <button onclick="gotoSrc('L28-L30')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue">public void assertTrue(int statusCode)</a></code>, but further asserts that the response body contains the passed <code>textResponse</code>. E.g. Given a response with body of <em>Sample JSON</em>, the assertion below would pass.
@@ -87,7 +87,7 @@
 
     <h4>
         <a name="assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse, boolean log)</a>
-        <button onclick="gotoSrc('L28-L38')">src</button>
+        <button onclick="gotoSrc('L32-L42')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_textResponse_log">public void assertTrue(int statusCode, String textResponse)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
@@ -109,7 +109,7 @@
 
     <h4>
         <a name="assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a>
-        <button onclick="gotoSrc('L40-L42')">src</button>
+        <button onclick="gotoSrc('L44-L46')">src</button>
     </h4>
     <small>
         This method first asserts that the status code of the response is same as the <code>statusCode</code> passed as argument.
@@ -134,7 +134,7 @@
 
     <h4>
         <a name="assertTrue_fields_log">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields, boolean log)</a>
-        <button onclick="gotoSrc('L44-L61')">src</button>
+        <button onclick="gotoSrc('L48-L65')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
@@ -162,7 +162,7 @@
 
     <h4>
         <a name="assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a>
-        <button onclick="gotoSrc('L63-L65')">src</button>
+        <button onclick="gotoSrc('L67-L69')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_fields">public void assertTrue(int statusCode, Map&lt;String, Object&gt; fields)</a></code>, however, using the inbuilt MapBuilder class of the library instead of java's native Map class.
@@ -184,7 +184,7 @@
 
     <h4>
         <a name="assertTrue_mapBuilder_log">public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a>
-        <button onclick="gotoSrc('L67-L69')">src</button>
+        <button onclick="gotoSrc('L71-L73')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#assertTrue_mapBuilder">public void assertTrue(int statusCode, MapBuilder mapBuilder)</a></code>, but further provides a third boolean argument for logging to console (if set to true).
@@ -212,7 +212,7 @@
 
     <h4>
         <a name="assertMatch">public void assertMatch(int statusCode, String expect, String ... regexParams)</a>
-        <button onclick="gotoSrc('L71-L96')">src</button>
+        <button onclick="gotoSrc('L75-L100')">src</button>
     </h4>
     <small>
         This method first asserts that the status code of the response is same as the <code>statusCode</code> passed as argument.
@@ -239,8 +239,53 @@
 
 
     <h4>
+        <a name="assertSchema">public void assertSchema(String file)</a>
+        <button onclick="gotoSrc('L102-L111')">src</button>
+    </h4>
+    <small>
+        This method asserts that the response body matches the JSON schema provided in the <code>file</code>. A <em>Sample Schema</em> is shown below.
+        The library reads the json file from the <code>data/input/</code> folder of your project.
+        E.g. the schema in the code below is referenced from the file: <code>data/input/questions/questionSchema.json</code>.
+    </small>
+    <pre>
+        Responses response = (new Requests("/questions/1269ce78-2672-44ff-95e2-733db08d388d"))
+                .get();
+
+        response.assertSchema("questions/questionSchema");
+    </pre>
+    <pre class="sample" data-label="Sample Schema">
+        {
+            "description": "schema validating people and vehicles",
+            "type": "object",
+            "oneOf": [
+                {
+                    "properties": {
+                        "uuid": {
+                            "type": "string"
+                        },
+                        "driverId": {
+                            "type":" string"
+                        },
+                        "text": {
+                            "type":" string"
+                        },
+                        "answers": {
+                            "type":" array"
+                        }
+                    },
+                    "required": [
+                        "uuid", "driverId", "text"
+                    ],
+                    "additionalProperties": false
+                }
+            ]
+        }
+    </pre>
+
+
+    <h4>
         <a name="getHeader">public String getHeader(String headerName)</a>
-        <button onclick="gotoSrc('L98-L100')">src</button>
+        <button onclick="gotoSrc('L113-L115')">src</button>
     </h4>
     <small>
         This method is used to get a header from the response using the <code>headerName</code>.
@@ -256,11 +301,11 @@
 
     <h4>
         <a name="getParam">public String getParam(String path)</a>
-        <button onclick="gotoSrc('L102-L104')">src</button>
+        <button onclick="gotoSrc('L117-L119')">src</button>
     </h4>
     <small>
         This method is used to retrieve (as String) the value of a parameter from the json body of a response.
-        The path to the parameter is parsed as a <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
+        The path to the parameter is parsed as the <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
     </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
@@ -277,8 +322,48 @@
 
 
     <h4>
+        <a name="getList">public List&lt;Object&gt; getList(String path)</a>
+        <button onclick="gotoSrc('L121-L123')">src</button>
+    </h4>
+    <small>
+        This method is used to retrieve list content from the json body of a response.
+        The path to the parameter is parsed as the <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getList snippet below will return a <code>List</code> object of the <code>data</code> parameter: which is of size 3.
+    </small>
+    <pre>
+        Responses response = (new Requests("/questions"))
+                .get();
+
+        List&lt;Object&gt; list = response.getList("data");
+
+        int size = list.size();
+    </pre>
+    <pre class="sample" data-label="Response JSON">
+        {
+            "links": {...},
+            "page": 0,
+            "count": 3,
+            "total": 0,
+            "data": [
+                {
+                    "id": "06dcdb79-b391-4891-9ef9-daa12c22ab83",
+                    "text": "We are moving in the right strategic direction"
+                },
+                {
+                    "id": "13d32246-1cf4-4aae-8483-12b62d5920c0",
+                    "text": "I feel that my contributions at work are valued"
+                },
+                {
+                    "id": "1666e938-d1a5-4288-b6c4-21ef0bdd8dbd",
+                    "text": "The amount of work I am asked to do is reasonable"
+                }
+            ]
+        }
+    </pre>
+
+
+    <h4>
         <a name="getUuid">public String getUuid()</a>
-        <button onclick="gotoSrc('L106-L109')">src</button>
+        <button onclick="gotoSrc('L125-L128')">src</button>
     </h4>
     <small>
         Note: This method (getUuid) is not for getting a uuid parameter from a response body, to do that use the getParam method, e.g. to get a uuid parameter, called <code>id</code>, similar to the example in getParam section, we use <code>response.getParam("$.id").</code>
@@ -302,7 +387,7 @@
 
     <h4>
         <a name="getUuid_link">public String getUuid(String link)</a>
-        <button onclick="gotoSrc('L111-L113')">src</button>
+        <button onclick="gotoSrc('L130-L132')">src</button>
     </h4>
     <small>
         This method is used to return uuid from a link passed as argument.
@@ -315,7 +400,7 @@
 
     <h4>
         <a name="getResponse">public ExtractableResponse&lt;Response&gt; getResponse()</a>
-        <button onclick="gotoSrc('L115-L117')">src</button>
+        <button onclick="gotoSrc('L134-L136')">src</button>
     </h4>
     <small>
         This method is used to get an <code>ExtractableResponse&lt;Response&gt;</code> object from a <code>Responses</code> object.
@@ -331,7 +416,7 @@
 
     <h4>
         <a name="log">public void log(String filter)</a>
-        <button onclick="gotoSrc('L119-L122')">src</button>
+        <button onclick="gotoSrc('L138-L141')">src</button>
     </h4>
     <small>
         This method is used to log output on the <code>Responses</code> object. This method prints out the response as string and the status code.

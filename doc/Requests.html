@@ -21,7 +21,7 @@
 
     <h4>
         <a name="Requests">public Requests()</a>
-        <button onclick="gotoSrc('L26-L36')">src</button>
+        <button onclick="gotoSrc('L28-L38')">src</button>
     </h4>
     <small>
         <i>The Default Constructor: </i> prepares a <i>RestAssured</i> request object used to make a request. Within the constructor, the request is set up to:
@@ -37,7 +37,7 @@
 
     <h4>
         <a name="Requests_resourcePath">public Requests(String resourcePath)</a>
-        <button onclick="gotoSrc('L38-L40')">src</button>
+        <button onclick="gotoSrc('L40-L42')">src</button>
     </h4>
     <small>
         <i>Constructor: </i> sets the resource path for the request. The resource path for this constructor is relative, e.g. <code>/questions</code>. The base URL (i.e. something similar to <code>http://localhost:8080</code>) is, within the library, obtained from the environment variable <code>BASE_URL</code> (using the library's <a href="Env.html#static_get"><code>Env</code></a>), and prepended to the <code>resourcePath</code> at runtime.
@@ -49,7 +49,7 @@
 
     <h4>
         <a name="Requests_resourcePath_baseUri">public Requests(String resourcePath, String baseUri)</a>
-        <button onclick="gotoSrc('L42-L45')">src</button>
+        <button onclick="gotoSrc('L44-L47')">src</button>
     </h4>
     <small>
         <i>Constructor: </i> which also achieves same function as <a href="#Requests_resourcePath"><code>Requests</code></a> constructor, however, requires a <code>baseUri</code>.
@@ -60,8 +60,21 @@
 
 
     <h4>
+        <a name="disableUrlEncoding">public Requests disableUrlEncoding()</a>
+        <button onclick="gotoSrc('L49-L52')">src</button>
+    </h4>
+    <small>
+        This method is used to disable URL encoding for the request.
+    </small>
+    <pre>
+        Requests req = (new Requests())
+                .disableUrlEncoding();
+    </pre>
+
+
+    <h4>
         <a name="withUrl">public Requests withUrl(String url)</a>
-        <button onclick="gotoSrc('L47-L50')">src</button>
+        <button onclick="gotoSrc('L54-L57')">src</button>
     </h4>
     <small>
         This method is used to set the URL for the request. It works with the default constructor. Notice that the <code>url</code> is equivalent to the concatenation of the <code>baseUri</code> and <code>resourcePath</code>.
@@ -74,7 +87,7 @@
 
     <h4>
         <a name="withHeader">public Requests withHeader(String key, String value)</a>
-        <button onclick="gotoSrc('L52-L55')">src</button>
+        <button onclick="gotoSrc('L59-L62')">src</button>
     </h4>
     <small>
         This method is used to add a header of any kind to the request.
@@ -87,7 +100,7 @@
 
     <h4>
         <a name="withAuthorization">public Requests withAuthorization(String authorization)</a>
-        <button onclick="gotoSrc('L57-L60')">src</button>
+        <button onclick="gotoSrc('L64-L67')">src</button>
     </h4>
     <small>
         This method is used to add an Authorization header to the request.
@@ -100,7 +113,7 @@
 
     <h4>
         <a name="withContentType">public Requests withContentType(String contentType)</a>
-        <button onclick="gotoSrc('L62-L65')">src</button>
+        <button onclick="gotoSrc('L69-L72')">src</button>
     </h4>
     <small>
         This method is used to add a Content-Type header to the request.
@@ -113,7 +126,7 @@
 
     <h4>
         <a name="withIfMatch">public Requests withIfMatch(String ifMatch)</a>
-        <button onclick="gotoSrc('L67-L70')">src</button>
+        <button onclick="gotoSrc('L74-L77')">src</button>
     </h4>
     <small>
         This method is used to add an If-Match header to the request.
@@ -126,7 +139,7 @@
 
     <h4>
         <a name="withBody">public Requests withBody(String body)</a>
-        <button onclick="gotoSrc('L72-L75')">src</button>
+        <button onclick="gotoSrc('L79-L82')">src</button>
     </h4>
     <small>
         This method is used to add a body to the request.
@@ -150,7 +163,7 @@
 
     <h4>
         <a name="withQueryParam">public Requests withQueryParam(String key, String value)</a>
-        <button onclick="gotoSrc('L77-L80')">src</button>
+        <button onclick="gotoSrc('L84-L87')">src</button>
     </h4>
     <small>
         This method is used to add query parameters to the request. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
@@ -163,8 +176,42 @@
 
 
     <h4>
+        <a name="withQueryParams">public Requests withQueryParams(Map&lt;String, String&gt; map)</a>
+        <button onclick="gotoSrc('L89-L94')">src</button>
+    </h4>
+    <small>
+        This method is used to add query parameters to the request using a <code>Map</code>. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
+    </small>
+    <pre>
+        Map&lt;String, String&gt; map = new HashMap<>();
+        map.put("enabled", "yes");
+        map.put("limit", "3");
+
+        Requests req = (new Requests("/questions"))
+                .withQueryParams(map);
+    </pre>
+
+
+    <h4>
+        <a name="withQueryParams_MapBuilder">public Requests withQueryParams(MapBuilder map)</a>
+        <button onclick="gotoSrc('L96-L99')">src</button>
+    </h4>
+    <small>
+        This method is used to add query parameters to the request using the library's <code>MapBuilder</code>. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
+    </small>
+    <pre>
+        MapBuilder map = (new MapBuilder())
+                .add("enabled", "yes")
+                .add("limit", "3");
+
+        Requests req = (new Requests("/questions"))
+                .withQueryParams(map);
+    </pre>
+
+
+    <h4>
         <a name="get">public Responses get(boolean ... logs)</a>
-        <button onclick="gotoSrc('L118-L123')">src</button>
+        <button onclick="gotoSrc('L137-L142')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -254,7 +301,7 @@
 
     <h4>
         <a name="post">public Responses post(boolean ... logs)</a>
-        <button onclick="gotoSrc('L125-L131')">src</button>
+        <button onclick="gotoSrc('L144-L150')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -270,7 +317,7 @@
 
     <h4>
         <a name="put">public Responses put(boolean ... logs)</a>
-        <button onclick="gotoSrc('L133-L139')">src</button>
+        <button onclick="gotoSrc('L152-L158')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -286,7 +333,7 @@
 
     <h4>
         <a name="delete">public Responses delete(boolean ... logs)</a>
-        <button onclick="gotoSrc('L141-L146')">src</button>
+        <button onclick="gotoSrc('L160-L165')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.

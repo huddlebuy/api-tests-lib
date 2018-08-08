@@ -1,6 +1,6 @@
 # API Tests Library from Perkbox
 
-This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.26.
+This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.27.
 
 
 
@@ -8,7 +8,47 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
 Please find the documentation
 [here](https://rawgit.com/chinenyeze/api-tests-lib/master/doc/Documentation.html) for work in progress version or
-[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.26/doc/Documentation.html) for last tagged version.
+[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.27/doc/Documentation.html) for last tagged version.
+
+
+
+### Setting up the test project
+
+##### Naming Data Input Files
+
+All data files are stored in
+ * the folder: `data/input/{endpoint}/`
+ * as: `{your.choice}.json`
+
+Where:
+
+ * `{endpoint}` and `{Action}` is the name of the endpoint in the service being tested.
+ * `{your.choice}.json` is the specific context of the json file. E.g. `question.json`, `auth.create.json`, `schema.text.json`
+
+Library References:
+
+* JsonHelper library class provides a JsonHelper(String file) constructor and some static methods which loads json files from `data/input/`.
+* Responses library class provides an assertSchema(String file) method which loads json schema files from `data/input/`.
+
+##### Config
+
+The project config file is stored in
+ * `api-tests/resources/config.properties`
+ * Variables stored in the config can be called as `Config.get("VAR_NAME")`
+
+
+##### Env
+
+The `Env` is an environment loader.
+ * Variables stored in the environment can be called as `Env.get("VAR_NAME")`
+ * `Env` first attempts to read a variable from the environment, and if not found, it then calls `Config.get("VAR_NAME")`.
+
+
+##### TestNG Runner
+
+All test classes to be run are referenced in
+ * `api-tests/testng.xml`
+ * This is the file used to run the test.
 
 
 
