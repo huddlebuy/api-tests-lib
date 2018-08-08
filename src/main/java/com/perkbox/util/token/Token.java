@@ -63,15 +63,15 @@ public class Token {
     }
 
     public String buildExpiredReadToken(String service, String endpoint) {
-        return tokenBuilder.generateToken(String.format(readOnlyJson, service, endpoint), uuid, tenant, email, 1);
+        return generateAndExpire(readOnlyJson, service, endpoint);
     }
 
     public String buildExpiredCreateToken(String service, String endpoint) {
-        return tokenBuilder.generateToken(String.format(createOnlyJson, service, endpoint), uuid, tenant, email, 1);
+        return generateAndExpire(createOnlyJson, service, endpoint);
     }
 
     public String buildExpiredUpdateToken(String service, String endpoint) {
-        return tokenBuilder.generateToken(String.format(updateOnlyJson, service, endpoint), uuid, tenant, email, 1);
+        return generateAndExpire(updateOnlyJson, service, endpoint);
     }
 
 
@@ -212,6 +212,12 @@ public class Token {
             EXPIRED_UPDATE_PERMISSION = init().buildExpiredUpdateToken(Config.get("SERVICE"), endpoint);
         }
         return EXPIRED_UPDATE_PERMISSION;
+    }
+
+    private String generateAndExpire(String permissionJsonSyntax, String service, String endpoint) {
+        String token = tokenBuilder.generateToken(String.format(permissionJsonSyntax, service, endpoint), uuid, tenant, email, 1);
+        try{ Thread.sleep(1000); }catch(Exception e){}
+        return token;
     }
 
     private static Token init() {
