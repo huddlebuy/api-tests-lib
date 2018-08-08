@@ -2,10 +2,14 @@ package com.perkbox.testbase;
 
 import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -95,12 +99,27 @@ public class Responses {
         Assert.assertTrue(result);
     }
 
+    public void assertSchema(String file) {
+        try {
+            String dataFolder = System.getProperty("user.dir") + "/data/input/";
+            FileReader fileReader = new FileReader(dataFolder + file + ".json");
+            response.response().then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(fileReader));
+        }
+        catch (FileNotFoundException e) {
+            System.err.println("JsonHelper/readFile: " + e.getMessage());
+        }
+    }
+
     public String getHeader(String headerName) {
         return response.header(headerName);
     }
 
     public String getParam(String path) {
         return response.body().jsonPath().getString(path);
+    }
+
+    public List<Object> getList(String path) {
+        return response.body().jsonPath().getList(path);
     }
 
     public String getUuid() {
