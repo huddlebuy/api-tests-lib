@@ -47,6 +47,24 @@ public class JsonHelper {
         return getParam(jsonPath).toString();
     }
 
+    public String addParam(String jsonPath, Object value) {
+        return documentContext.add(jsonPath,value).jsonString();
+    }
+
+    public String addParams(Map<String, Object> jsonPaths) {
+        String body = "";
+
+        for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
+            body = documentContext.add(entry.getKey(), entry.getValue()).jsonString();
+        }
+
+        return body;
+    }
+
+    public String addParams(MapBuilder jsonPaths) {
+        return addParams(jsonPaths.getMap());
+    }
+
     public String modifyParam(String jsonPath, Object value) {
         return documentContext.set(jsonPath,value).jsonString();
     }
@@ -95,6 +113,18 @@ public class JsonHelper {
 
     public static Object getParamAsStr(String file, String jsonPath) {
         return (new JsonHelper(file)).getParamAsStr(jsonPath);
+    }
+
+    public static String addParam(String file, String jsonPath, Object value) {
+        return (new JsonHelper(file)).addParam(jsonPath, value);
+    }
+
+    public static String addParams(String file, Map<String, Object> jsonPaths) {
+        return (new JsonHelper(file)).addParams(jsonPaths);
+    }
+
+    public static String addParams(String file, MapBuilder jsonPaths) {
+        return addParams(file, jsonPaths.getMap());
     }
 
     public static String modifyParam(String file, String jsonPath, Object value) {
