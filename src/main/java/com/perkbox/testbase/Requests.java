@@ -1,6 +1,7 @@
 package com.perkbox.testbase;
 
 import com.perkbox.util.Env;
+import com.perkbox.util.MapBuilder;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -10,6 +11,7 @@ import io.restassured.specification.RequestSpecification;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.EncoderConfig.encoderConfig;
@@ -42,6 +44,11 @@ public class Requests {
     public Requests(String resourcePath, String baseUri) {
         this();
         url = baseUri + resourcePath;
+    }
+
+    public Requests disableUrlEncoding() {
+        RestAssured.urlEncodingEnabled = false;
+        return this;
     }
 
     public Requests withUrl(String url) {
@@ -77,6 +84,18 @@ public class Requests {
     public Requests withQueryParam(String key, String value) {
         this.queryParams.put(key, value);
         return this;
+    }
+
+    public Requests withQueryParams(Map<String, String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            this.queryParams.put(entry.getKey(), entry.getValue());
+        }
+        return this;
+    }
+
+    public Requests withQueryParams(MapBuilder map) {
+        return withQueryParams(map.getMap().entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (String)e.getValue())));
     }
 
     private RequestSpecification build(boolean logRequest, boolean logResponse) {
