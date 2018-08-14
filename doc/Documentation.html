@@ -13,7 +13,7 @@
         This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
-        <small class="version">version: 1.1.27</small>
+        <small class="version">version: 1.1.28</small>
     </div>
 
 
@@ -72,6 +72,7 @@
             <li><a href="Responses.html#assertTrue_mapBuilder_log">public void assertTrue(int statusCode, MapBuilder mapBuilder, boolean log)</a></li>
             <li><a href="Responses.html#assertMatch">public void assertMatch(int statusCode, String expect, String ... regexParams)</a></li>
             <li><a href="Responses.html#assertSchema">public void assertSchema(String file)</a></li>
+            <li><a href="Responses.html#assertDateIsInNowRange">public void assertDateIsInNowRange(String path, long delta)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="Responses.html#getHeader">public String getHeader(String headerName)</a></li>
@@ -122,10 +123,10 @@
         <li class="sub-header">Instance Methods</li>
         <li class="separator">&nbsp;</li>
 
-        <li><a href="JsonHelper.html#JsonHelper">public JsonHelper(String file)</a></li>
+        <li><a href="JsonHelper.html#JsonHelper">public JsonHelper(String jsonFile)</a></li>
+        <li><a href="JsonHelper.html#JsonHelper_isString">public JsonHelper(String json, boolean isString)</a></li>
         <li class="separator">&nbsp;</li>
 
-        <li><a href="JsonHelper.html#readFile">public String readFile()</a></li>
         <li><a href="JsonHelper.html#getJson">public String getJson()</a></li>
         <li class="separator">&nbsp;</li>
 
@@ -151,7 +152,6 @@
         <li class="sub-header">Static Methods</li>
         <li class="separator">&nbsp;</li>
 
-        <li><a href="JsonHelper.html#static_readFile">public static String readFile(String file)</a></li>
         <li><a href="JsonHelper.html#static_getJson">public static String getJson(String file)</a></li>
         <li class="separator">&nbsp;</li>
 
