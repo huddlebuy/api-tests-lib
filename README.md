@@ -1,6 +1,6 @@
 # API Tests Library from Perkbox
 
-This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.27.
+This library simplifies the api tests process. It is built on rest-assured and testng. Latest version: 1.1.28.
 
 
 
@@ -8,7 +8,7 @@ This library simplifies the api tests process. It is built on rest-assured and t
 
 Please find the documentation
 [here](https://rawgit.com/chinenyeze/api-tests-lib/master/doc/Documentation.html) for work in progress version or
-[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.27/doc/Documentation.html) for last tagged version.
+[here](https://cdn.rawgit.com/chinenyeze/api-tests-lib/1.1.28/doc/Documentation.html) for last tagged version.
 
 
 
@@ -61,7 +61,7 @@ All test classes to be run are referenced in
         String resourcePath = "/endpointOne";
         Responses response = (new Requests(resourcePath))
                 .withAuthorization(Token.create())
-                .withBody(JsonHelper.readFile("endpointOne/CreateOne-valid"))
+                .withBody(JsonHelper.getJson("endpointOne/CreateOne-valid"))
                 .post();
 
         response.log("validCreate"); // log response and statusCode
