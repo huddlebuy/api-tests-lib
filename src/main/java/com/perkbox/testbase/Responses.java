@@ -5,10 +5,15 @@ import com.perkbox.util.MapBuilder;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.assertj.core.api.Java6Assertions;
 import org.testng.Assert;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -51,7 +56,7 @@ public class Responses {
             result = false;
         }
         else if (fields != null) {
-            for (Map.Entry<String, Object> entry: fields.entrySet()) {
+            for (Map.Entry<String, Object> entry : fields.entrySet()) {
                 if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
                     if (log) {
                         System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
@@ -101,13 +106,20 @@ public class Responses {
 
     public void assertSchema(String file) {
         try {
-            String dataFolder = System.getProperty("user.dir") + "/data/input/";
-            FileReader fileReader = new FileReader(dataFolder + file + ".json");
+            String fileName = System.getProperty("user.dir") + "/data/input/" + file + ".json";
+            FileReader fileReader = new FileReader(fileName);
             response.response().then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(fileReader));
         }
         catch (FileNotFoundException e) {
-            System.err.println("JsonHelper/readFile: " + e.getMessage());
+            System.err.println("Responses/assertSchema: " + e.getMessage());
         }
+    }
+
+    public void assertDateIsInNowRange(String path, long delta) {
+        Timestamp pathTime = Timestamp.valueOf(LocalDateTime.parse(getParam(path), DateTimeFormatter.ISO_DATE_TIME));
+        String currentTime = Timestamp.valueOf(LocalDateTime.parse(Instant.now().toString(), DateTimeFormatter.ISO_DATE_TIME)).toString();
+
+        Java6Assertions.assertThat(pathTime).isCloseTo(currentTime, delta);
     }
 
     public String getHeader(String headerName) {
