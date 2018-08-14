@@ -216,7 +216,7 @@ public class Token {
 
     private String generateAndExpire(String permissionJsonSyntax, String service, String endpoint) {
         String token = tokenBuilder.generateToken(String.format(permissionJsonSyntax, service, endpoint), uuid, tenant, email, 1);
-        try{ Thread.sleep(1000); }catch(Exception e){}
+        try{ Thread.sleep(2000); }catch(Exception e){}
         return token;
     }
 
