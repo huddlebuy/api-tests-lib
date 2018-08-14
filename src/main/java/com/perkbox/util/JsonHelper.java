@@ -1,37 +1,39 @@
 package com.perkbox.util;
 
-import com.google.gson.JsonParser;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class JsonHelper {
 
-    private String file;
-
     private DocumentContext documentContext;
 
-    public JsonHelper(String file) {
-        this.file = file;
-        this.documentContext = JsonPath.parse(readFile());
+    public JsonHelper(String jsonFile) {
+        this(jsonFile, false); // For JSON File
     }
 
-    public String readFile() {
-        try {
-            String dataFolder = System.getProperty("user.dir") + "/data/input/";
-            FileReader fileReader = new FileReader(dataFolder + file + ".json");
-            return new JsonParser().parse(fileReader).toString();
+    public JsonHelper(String json, boolean isString) {
+        if (isString) { // For JSON String
+            this.documentContext = JsonPath.parse(json);
         }
-        catch (FileNotFoundException e) {
-            System.err.println("JsonHelper/readFile: " + e.getMessage());
-            return null;
+        else { // For JSON File
+            try {
+                String file = System.getProperty("user.dir") + "/data/input/" + json + ".json";
+                InputStream is = Files.newInputStream(Paths.get(file));
+                this.documentContext = JsonPath.parse(is);
+            }
+            catch (IOException e) {
+                System.err.println("JsonHelper: " + e.getMessage());
+            }
         }
     }
 
@@ -98,10 +100,6 @@ public class JsonHelper {
     }
 
     //Static methods
-
-    public static String readFile(String file) {
-        return (new JsonHelper(file)).readFile();
-    }
 
     public static String getJson(String file) {
         return (new JsonHelper(file)).getJson();
