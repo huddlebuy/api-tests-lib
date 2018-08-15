@@ -77,18 +77,6 @@ public class Token {
 
     // Static members
 
-    private static String READ_ONLY_PERMISSION;
-    private static String CREATE_ONLY_PERMISSION;
-    private static String UPDATE_ONLY_PERMISSION;
-    private static String CREATE_AND_READ_PERMISSION;
-    private static String CREATE_AND_UPDATE_PERMISSION;
-    private static String UPDATE_AND_READ_PERMISSION;
-    private static String FULL_PERMISSION;
-    private static String READ_RESTRICTED_PERMISSION;
-    private static String EXPIRED_READ_PERMISSION;
-    private static String EXPIRED_CREATE_PERMISSION;
-    private static String EXPIRED_UPDATE_PERMISSION;
-
     public static String buildStatic(String jsonString, int expiry) {
         return init().build(jsonString, expiry);
     }
@@ -98,10 +86,7 @@ public class Token {
     }
 
     public static String read(String endpoint) {
-        if (isNotSet(READ_ONLY_PERMISSION)) {
-            READ_ONLY_PERMISSION = init().buildReadOnlyToken(Config.get("SERVICE"), endpoint);
-        }
-        return READ_ONLY_PERMISSION;
+        return init().buildReadOnlyToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String create() {
@@ -109,10 +94,7 @@ public class Token {
     }
 
     public static String create(String endpoint) {
-        if (isNotSet(CREATE_ONLY_PERMISSION)) {
-            CREATE_ONLY_PERMISSION = init().buildCreateOnlyToken(Config.get("SERVICE"), endpoint);
-        }
-        return CREATE_ONLY_PERMISSION;
+        return init().buildCreateOnlyToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String update() {
@@ -120,10 +102,7 @@ public class Token {
     }
 
     public static String update(String endpoint) {
-        if (isNotSet(UPDATE_ONLY_PERMISSION)) {
-            UPDATE_ONLY_PERMISSION = init().buildUpdateOnlyToken(Config.get("SERVICE"), endpoint);
-        }
-        return UPDATE_ONLY_PERMISSION;
+        return init().buildUpdateOnlyToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String createAndRead() {
@@ -131,10 +110,7 @@ public class Token {
     }
 
     public static String createAndRead(String endpoint) {
-        if (isNotSet(CREATE_AND_READ_PERMISSION)) {
-            CREATE_AND_READ_PERMISSION = init().buildCreateAndReadToken(Config.get("SERVICE"), endpoint);
-        }
-        return CREATE_AND_READ_PERMISSION;
+        return init().buildCreateAndReadToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String createAndUpdate() {
@@ -142,10 +118,7 @@ public class Token {
     }
 
     public static String createAndUpdate(String endpoint) {
-        if (isNotSet(CREATE_AND_UPDATE_PERMISSION)) {
-            CREATE_AND_UPDATE_PERMISSION = init().buildCreateAndUpdateToken(Config.get("SERVICE"), endpoint);
-        }
-        return CREATE_AND_UPDATE_PERMISSION;
+        return init().buildCreateAndUpdateToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String updateAndRead() {
@@ -153,10 +126,7 @@ public class Token {
     }
 
     public static String updateAndRead(String endpoint) {
-        if (isNotSet(UPDATE_AND_READ_PERMISSION)) {
-            UPDATE_AND_READ_PERMISSION = init().buildUpdateAndReadToken(Config.get("SERVICE"), endpoint);
-        }
-        return UPDATE_AND_READ_PERMISSION;
+        return init().buildUpdateAndReadToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String fullPermission() {
@@ -164,10 +134,7 @@ public class Token {
     }
 
     public static String fullPermission(String endpoint) {
-        if (isNotSet(FULL_PERMISSION)) {
-            FULL_PERMISSION = init().buildFullToken(Config.get("SERVICE"), endpoint);
-        }
-        return FULL_PERMISSION;
+        return init().buildFullToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String readRestricted() {
@@ -175,10 +142,7 @@ public class Token {
     }
 
     public static String readRestricted(String endpoint) {
-        if (isNotSet(READ_RESTRICTED_PERMISSION)) {
-            READ_RESTRICTED_PERMISSION = init().buildReadRestrictedToken(Config.get("SERVICE"), endpoint);
-        }
-        return READ_RESTRICTED_PERMISSION;
+        return init().buildReadRestrictedToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String expiredRead() {
@@ -186,10 +150,7 @@ public class Token {
     }
 
     public static String expiredRead(String endpoint) {
-        if (isNotSet(EXPIRED_READ_PERMISSION)) {
-            EXPIRED_READ_PERMISSION = init().buildExpiredReadToken(Config.get("SERVICE"), endpoint);
-        }
-        return EXPIRED_READ_PERMISSION;
+        return init().buildExpiredReadToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String expiredCreate() {
@@ -197,10 +158,7 @@ public class Token {
     }
 
     public static String expiredCreate(String endpoint) {
-        if (isNotSet(EXPIRED_CREATE_PERMISSION)) {
-            EXPIRED_CREATE_PERMISSION = init().buildExpiredCreateToken(Config.get("SERVICE"), endpoint);
-        }
-        return EXPIRED_CREATE_PERMISSION;
+        return init().buildExpiredCreateToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String expiredUpdate() {
@@ -208,10 +166,7 @@ public class Token {
     }
 
     public static String expiredUpdate(String endpoint) {
-        if (isNotSet(EXPIRED_UPDATE_PERMISSION)) {
-            EXPIRED_UPDATE_PERMISSION = init().buildExpiredUpdateToken(Config.get("SERVICE"), endpoint);
-        }
-        return EXPIRED_UPDATE_PERMISSION;
+        return init().buildExpiredUpdateToken(Config.get("SERVICE"), endpoint);
     }
 
     private String generateAndExpire(String permissionJsonSyntax, String service, String endpoint) {
