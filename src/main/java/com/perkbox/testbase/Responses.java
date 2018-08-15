@@ -128,7 +128,7 @@ public class Responses {
     }
 
     public String getParam(String jsonPath) {
-        return JsonPath.parse(response.body().asString()).read(jsonPath);
+        return JsonPath.parse(response.body().asString()).read(jsonPath).toString();
     }
 
     public List<Object> getList(String jsonPath) {
