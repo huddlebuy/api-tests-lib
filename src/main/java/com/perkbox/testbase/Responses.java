@@ -1,5 +1,6 @@
 package com.perkbox.testbase;
 
+import com.jayway.jsonpath.JsonPath;
 import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -126,12 +127,12 @@ public class Responses {
         return response.header(headerName);
     }
 
-    public String getParam(String path) {
-        return response.body().jsonPath().getString(path);
+    public String getParam(String jsonPath) {
+        return JsonPath.parse(response.body().asString()).read(jsonPath);
     }
 
-    public List<Object> getList(String path) {
-        return response.body().jsonPath().getList(path);
+    public List<Object> getList(String jsonPath) {
+        return JsonPath.parse(response.body().asString()).read(jsonPath);
     }
 
     public String getUuid() {
