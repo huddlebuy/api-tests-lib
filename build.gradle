@@ -1,5 +1,5 @@
 group 'com.perkbox'
-version '1.1.30'
+version '1.1.31'
 
 apply plugin: 'java'
 
