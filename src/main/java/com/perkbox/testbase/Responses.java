@@ -116,7 +116,7 @@ public class Responses {
     }
 
     public void assertDateIsInNowRange(String path, long delta) {
-        Timestamp pathTime = Timestamp.valueOf(LocalDateTime.parse(getParam(path), DateTimeFormatter.ISO_DATE_TIME));
+        Timestamp pathTime = Timestamp.valueOf(getParam(path).substring(0, 19).replace("T", " "));
         String currentTime = Timestamp.valueOf(LocalDateTime.parse(Instant.now().toString(), DateTimeFormatter.ISO_DATE_TIME)).toString();
 
         Java6Assertions.assertThat(pathTime).isCloseTo(currentTime, delta);
