@@ -99,8 +99,42 @@
 
 
     <h4>
+        <a name="withHeaders">public Requests withHeaders(Map&lt;String, String&gt; map)</a>
+        <button onclick="gotoSrc('L64-L69')">src</button>
+    </h4>
+    <small>
+        This method is used to add a header of any kind to the request using a <code>Map</code>.
+    </small>
+    <pre>
+        Map&lt;String, String&gt; map = new HashMap<>();
+        map.put("Accept-Encoding", "*");
+        map.put("Content-Type", "application/json");
+
+        Requests req = (new Requests("/questions"))
+                .withHeaders(map);
+    </pre>
+
+
+    <h4>
+        <a name="withHeaders_MapBuilder">public Requests withHeaders(MapBuilder map)</a>
+        <button onclick="gotoSrc('L71-L74')">src</button>
+    </h4>
+    <small>
+        This method is used to add a header of any kind to the request using the library's <code>MapBuilder</code>.
+    </small>
+    <pre>
+        MapBuilder map = (new MapBuilder())
+                .add("Accept-Encoding", "*")
+                .add("Content-Type", "application/json");
+
+        Requests req = (new Requests("/questions"))
+                .withHeaders(map);
+    </pre>
+
+
+    <h4>
         <a name="withAuthorization">public Requests withAuthorization(String authorization)</a>
-        <button onclick="gotoSrc('L64-L67')">src</button>
+        <button onclick="gotoSrc('L76-L79')">src</button>
     </h4>
     <small>
         This method is used to add an Authorization header to the request.
@@ -113,7 +147,7 @@
 
     <h4>
         <a name="withContentType">public Requests withContentType(String contentType)</a>
-        <button onclick="gotoSrc('L69-L72')">src</button>
+        <button onclick="gotoSrc('L81-L84')">src</button>
     </h4>
     <small>
         This method is used to add a Content-Type header to the request.
@@ -126,7 +160,7 @@
 
     <h4>
         <a name="withIfMatch">public Requests withIfMatch(String ifMatch)</a>
-        <button onclick="gotoSrc('L74-L77')">src</button>
+        <button onclick="gotoSrc('L86-L89')">src</button>
     </h4>
     <small>
         This method is used to add an If-Match header to the request.
@@ -139,7 +173,7 @@
 
     <h4>
         <a name="withBody">public Requests withBody(String body)</a>
-        <button onclick="gotoSrc('L79-L82')">src</button>
+        <button onclick="gotoSrc('L91-L94')">src</button>
     </h4>
     <small>
         This method is used to add a body to the request.
@@ -163,7 +197,7 @@
 
     <h4>
         <a name="withQueryParam">public Requests withQueryParam(String key, String value)</a>
-        <button onclick="gotoSrc('L84-L87')">src</button>
+        <button onclick="gotoSrc('L96-L99')">src</button>
     </h4>
     <small>
         This method is used to add query parameters to the request. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
@@ -177,7 +211,7 @@
 
     <h4>
         <a name="withQueryParams">public Requests withQueryParams(Map&lt;String, String&gt; map)</a>
-        <button onclick="gotoSrc('L89-L94')">src</button>
+        <button onclick="gotoSrc('L101-L106')">src</button>
     </h4>
     <small>
         This method is used to add query parameters to the request using a <code>Map</code>. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
@@ -194,7 +228,7 @@
 
     <h4>
         <a name="withQueryParams_MapBuilder">public Requests withQueryParams(MapBuilder map)</a>
-        <button onclick="gotoSrc('L96-L99')">src</button>
+        <button onclick="gotoSrc('L108-L111')">src</button>
     </h4>
     <small>
         This method is used to add query parameters to the request using the library's <code>MapBuilder</code>. E.g. to make a request with URL format of <code>/questions?enabled=yes&limit=3</code>, the request call will look like below:
@@ -211,7 +245,7 @@
 
     <h4>
         <a name="get">public Responses get(boolean ... logs)</a>
-        <button onclick="gotoSrc('L137-L142')">src</button>
+        <button onclick="gotoSrc('L113-L118')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -301,7 +335,7 @@
 
     <h4>
         <a name="post">public Responses post(boolean ... logs)</a>
-        <button onclick="gotoSrc('L144-L150')">src</button>
+        <button onclick="gotoSrc('L120-L126')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -317,7 +351,7 @@
 
     <h4>
         <a name="put">public Responses put(boolean ... logs)</a>
-        <button onclick="gotoSrc('L152-L158')">src</button>
+        <button onclick="gotoSrc('L128-L134')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
@@ -333,7 +367,7 @@
 
     <h4>
         <a name="delete">public Responses delete(boolean ... logs)</a>
-        <button onclick="gotoSrc('L160-L165')">src</button>
+        <button onclick="gotoSrc('L136-L141')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.
