@@ -316,18 +316,18 @@
 
 
     <h4>
-        <a name="getParam">public String getParam(String path)</a>
+        <a name="getParam">public String getParam(String jsonPath)</a>
         <button onclick="gotoSrc('L129-L131')">src</button>
     </h4>
     <small>
         This method is used to retrieve (as String) the value of a parameter from the json body of a response.
-        The path to the parameter is parsed as the <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
+        The path to the parameter is parsed as the <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getParam snippet below will return the String <em>We are moving in the right strategic direction</em>.
     </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
                 .get();
 
-        String text = response.getParam("text");
+        String text = response.getParam("$.text");
     </pre>
     <pre class="sample" data-label="Response JSON">
         {
@@ -338,18 +338,18 @@
 
 
     <h4>
-        <a name="getList">public List&lt;Object&gt; getList(String path)</a>
+        <a name="getList">public List&lt;Object&gt; getList(String jsonPath)</a>
         <button onclick="gotoSrc('L133-L135')">src</button>
     </h4>
     <small>
         This method is used to retrieve list content from the json body of a response.
-        The path to the parameter is parsed as the <code>path</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getList snippet below will return a <code>List</code> object of the <code>data</code> parameter: which is of size 3.
+        The path to the parameter is parsed as the <code>jsonPath</code> argument. E.g. given that the <em>Response JSON</em> below represents the response body, the getList snippet below will return a <code>List</code> object of the <code>data</code> parameter: which is of size 3.
     </small>
     <pre>
         Responses response = (new Requests("/questions"))
                 .get();
 
-        List&lt;Object&gt; list = response.getList("data");
+        List&lt;Object&gt; list = response.getList("$.data");
 
         int size = list.size();
     </pre>
