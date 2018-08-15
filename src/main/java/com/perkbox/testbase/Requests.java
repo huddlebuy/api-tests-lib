@@ -61,6 +61,18 @@ public class Requests {
         return this;
     }
 
+    public Requests withHeaders(Map<String, String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            this.headers.put(entry.getKey(), entry.getValue());
+        }
+        return this;
+    }
+
+    public Requests withHeaders(MapBuilder map) {
+        return withHeaders(map.getMap().entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (String)e.getValue())));
+    }
+
     public Requests withAuthorization(String authorization) {
         this.headers.put("Authorization", authorization);
         return this;
@@ -98,6 +110,36 @@ public class Requests {
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> (String)e.getValue())));
     }
 
+    public Responses get(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().get(url).then().extract();
+        return new Responses(response);
+    }
+
+    public Responses post(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        if (headers.get("Content-Type") == null) request.contentType("application/json");
+        response = build(logRequest, logResponse).when().post(url).then().extract();
+        return new Responses(response);
+    }
+
+    public Responses put(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        if (headers.get("Content-Type") == null) request.contentType("application/json");
+        response = build(logRequest, logResponse).when().put(url).then().extract();
+        return new Responses(response);
+    }
+
+    public Responses delete(boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+        response = build(logRequest, logResponse).when().delete(url).then().extract();
+        return new Responses(response);
+    }
+
     private RequestSpecification build(boolean logRequest, boolean logResponse) {
         //add headers
         if (headers != null && !headers.isEmpty()) {
@@ -132,35 +174,5 @@ public class Requests {
         }
 
         return request;
-    }
-
-    public Responses get(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().get(url).then().extract();
-        return new Responses(response);
-    }
-
-    public Responses post(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        if (headers.get("Content-Type") == null) request.contentType("application/json");
-        response = build(logRequest, logResponse).when().post(url).then().extract();
-        return new Responses(response);
-    }
-
-    public Responses put(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        if (headers.get("Content-Type") == null) request.contentType("application/json");
-        response = build(logRequest, logResponse).when().put(url).then().extract();
-        return new Responses(response);
-    }
-
-    public Responses delete(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().delete(url).then().extract();
-        return new Responses(response);
     }
 }
