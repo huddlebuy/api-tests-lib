@@ -46,7 +46,7 @@ public class JsonHelper {
     }
 
     public String getParamAsStr(String jsonPath) {
-        return getParam(jsonPath).toString();
+        return String.valueOf(getParam(jsonPath));
     }
 
     public String addParam(String jsonPath, Object value) {
