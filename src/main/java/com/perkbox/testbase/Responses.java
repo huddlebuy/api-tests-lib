@@ -128,7 +128,8 @@ public class Responses {
     }
 
     public String getParam(String jsonPath) {
-        return String.valueOf((Object)JsonPath.parse(response.body().asString()).read(jsonPath));
+        Object value = JsonPath.parse(response.body().asString()).read(jsonPath);
+        return value == null ? null : String.valueOf(value);
     }
 
     public List<Object> getList(String jsonPath) {
