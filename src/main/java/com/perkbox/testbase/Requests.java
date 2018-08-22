@@ -111,36 +111,32 @@ public class Requests {
     }
 
     public Responses get(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().get(url).then().extract();
-        return new Responses(response);
+        return build("get", logs);
     }
 
     public Responses post(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
         if (headers.get("Content-Type") == null) request.contentType("application/json");
-        response = build(logRequest, logResponse).when().post(url).then().extract();
-        return new Responses(response);
+        return build("post", logs);
     }
 
     public Responses put(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
         if (headers.get("Content-Type") == null) request.contentType("application/json");
-        response = build(logRequest, logResponse).when().put(url).then().extract();
-        return new Responses(response);
+        return build("put", logs);
+    }
+
+    public Responses patch(boolean ... logs) {
+        if (headers.get("Content-Type") == null) request.contentType("application/json");
+        return build("patch", logs);
     }
 
     public Responses delete(boolean ... logs) {
-        boolean logRequest = logs.length > 0 && logs[0];
-        boolean logResponse = logs.length > 1 && logs[1];
-        response = build(logRequest, logResponse).when().delete(url).then().extract();
-        return new Responses(response);
+        return build("delete", logs);
     }
 
-    private RequestSpecification build(boolean logRequest, boolean logResponse) {
+    private Responses build(String action, boolean ... logs) {
+        boolean logRequest = logs.length > 0 && logs[0];
+        boolean logResponse = logs.length > 1 && logs[1];
+
         //add headers
         if (headers != null && !headers.isEmpty()) {
             request.headers(headers);
@@ -173,6 +169,21 @@ public class Requests {
             System.out.println("\n::Logging for " + logMessage + ".\n");
         }
 
-        return request;
+        switch (action.toLowerCase()) {
+            case "get":
+                response = request.when().get(url).then().extract(); break;
+            case "post":
+                response = request.when().post(url).then().extract(); break;
+            case "put":
+                response = request.when().put(url).then().extract(); break;
+            case "patch":
+                response = request.when().patch(url).then().extract(); break;
+            case "delete":
+                response = request.when().delete(url).then().extract(); break;
+            default:
+                System.out.println("\nError: Invalid HTTP method.\n");
+        }
+
+        return new Responses(response);
     }
 }
