@@ -134,3 +134,8 @@ All test classes to be run are referenced in
 ```
 
 
+
+### License
+
+This project is licensed under GNU General Public License v3.0
+
