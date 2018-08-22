@@ -245,10 +245,10 @@
 
     <h4>
         <a name="get">public Responses get(boolean ... logs)</a>
-        <button onclick="gotoSrc('L113-L118')">src</button>
+        <button onclick="gotoSrc('L113-L115')">src</button>
     </h4>
     <small>
-        This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        This method is used to make a HTTP GET request. <i>Notice:</i> the get method like other action methods (post, put, patch, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
         E.g. first snippet below lists questions limiting to 3, the second snippet gets a question. Also this method provides logging capability. See <a href="#logging">note on logging</a>.
     </small>
     <pre>
@@ -265,7 +265,7 @@
         <a name="logging"><b>Logging</b></a>
         <br>The optional <code>logs</code> argument is used to specify <em>request logging</em> (first argument) and <em>response logging</em> (second argument).
         E.g. the first snippet logs only on the request object, the second logs only on the response object, the third snippet logs both request and response.
-        <br>Note: Logging is applicable to all the action methods (get, post, put, delete).
+        <br>Note: Logging is applicable to all the action methods (get, post, put, patch, delete).
     </small>
     <pre>
         Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
@@ -335,10 +335,10 @@
 
     <h4>
         <a name="post">public Responses post(boolean ... logs)</a>
-        <button onclick="gotoSrc('L120-L126')">src</button>
+        <button onclick="gotoSrc('L117-L120')">src</button>
     </h4>
     <small>
-        This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        This method is used to make a HTTP POST request. <i>Notice:</i> the post method like other action methods (get, put, patch, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
         This method uses <code>application/json</code> as default Content-Type.
         Also, this method provides logging capability. See <a href="#logging">note on logging</a>.
     </small>
@@ -351,10 +351,10 @@
 
     <h4>
         <a name="put">public Responses put(boolean ... logs)</a>
-        <button onclick="gotoSrc('L128-L134')">src</button>
+        <button onclick="gotoSrc('L122-L125')">src</button>
     </h4>
     <small>
-        This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        This method is used to make a HTTP PUT request. <i>Notice:</i> the put method like other action methods (get, post, patch, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
         This method uses <code>application/json</code> as default Content-Type.
         Also, this method provides logging capability. See <a href="#logging">note on logging</a>.
     </small>
@@ -366,8 +366,24 @@
 
 
     <h4>
+        <a name="patch">public Responses patch(boolean ... logs)</a>
+        <button onclick="gotoSrc('L127-L130')">src</button>
+    </h4>
+    <small>
+        This method is used to make a HTTP PATCH request. <i>Notice:</i> the patch method like other action methods (get, post, put, delete) returns a <a href="Responses.html"><code>Responses</code></a> object.
+        This method uses <code>application/json</code> as default Content-Type.
+        Also, this method provides logging capability. See <a href="#logging">note on logging</a>.
+    </small>
+    <pre>
+        Responses response = (new Requests("/questions/06dcdb79-b391-4891-9ef9-daa12c22ab83"))
+                .withBody(JsonHelper.modifyParam("questions/question", "$.text", "What is your favourite colour?"))
+                .patch();
+    </pre>
+
+
+    <h4>
         <a name="delete">public Responses delete(boolean ... logs)</a>
-        <button onclick="gotoSrc('L136-L141')">src</button>
+        <button onclick="gotoSrc('L132-L134')">src</button>
     </h4>
     <small>
         This method is used to make a HTTP DELETE request. <i>Notice:</i> the delete method like other action methods (get, post, put) returns a <a href="Responses.html"><code>Responses</code></a> object.
