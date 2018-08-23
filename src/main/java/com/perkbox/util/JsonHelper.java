@@ -4,6 +4,9 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,14 +53,25 @@ public class JsonHelper {
     }
 
     public String addParam(String jsonPath, Object value) {
-        return documentContext.add(jsonPath,value).jsonString();
+        try {
+            JSONObject obj = (JSONObject) new JSONParser().parse(getJson());
+            obj.put(jsonPath.startsWith("$.") ? jsonPath.substring(2) : jsonPath, value); //remove $.
+            String newJson = obj.toJSONString();
+            documentContext = JsonPath.parse(newJson);
+            return newJson;
+        } catch (ParseException e) {
+            System.err.println("JsonHelper.addParam: " + e.getMessage());
+            return null;
+        }
     }
 
     public String addParams(Map<String, Object> jsonPaths) {
         String body = "";
 
         for (Map.Entry<String, Object> entry : jsonPaths.entrySet()) {
-            body = documentContext.add(entry.getKey(), entry.getValue()).jsonString();
+            String newJson = addParam(entry.getKey(), entry.getValue());
+            documentContext = JsonPath.parse(newJson);
+            body = newJson;
         }
 
         return body;
