@@ -58,12 +58,18 @@ public class Responses {
         }
         else if (fields != null) {
             for (Map.Entry<String, Object> entry : fields.entrySet()) {
-                if (!JsonHelper.getParam(response, entry.getKey()).equals(entry.getValue())) {
-                    if (log) {
-                        System.out.println("Actual: " + JsonHelper.getParam(response, entry.getKey()));
-                        System.out.println("Expected: " + entry.getValue());
-                    }
+                Object actual = JsonHelper.getParam(response, entry.getKey());
+                Object expected = entry.getValue();
+
+                if (actual instanceof String && !actual.equals(expected)) {
                     result = false;
+                } else if (actual instanceof List && !((List) actual).contains(expected)) {
+                    result = false;
+                }
+
+                if (!result && log) {
+                    System.out.println("Actual: " + actual);
+                    System.out.println("Expected: " + expected);
                 }
             }
         }
