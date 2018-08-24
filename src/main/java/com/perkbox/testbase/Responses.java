@@ -1,7 +1,6 @@
 package com.perkbox.testbase;
 
 import com.jayway.jsonpath.JsonPath;
-import com.perkbox.util.JsonHelper;
 import com.perkbox.util.MapBuilder;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.ExtractableResponse;
@@ -58,15 +57,16 @@ public class Responses {
         }
         else if (fields != null) {
             for (Map.Entry<String, Object> entry : fields.entrySet()) {
-                Object actual = JsonHelper.getParam(response, entry.getKey());
+                Object actual = JsonPath.parse(response.asString()).read(entry.getKey());
                 Object expected = entry.getValue();
+                boolean listToString = (actual instanceof List) && (expected instanceof String);
 
-                if (actual instanceof String && !actual.equals(expected)) {
-                    result = false;
-                } else if (actual instanceof List && !((List) actual).contains(expected)) {
+                if (listToString && !((List) actual).contains(expected)) {
                     result = false;
                 }
-
+                if (!listToString && !actual.equals(expected)) {
+                    result = false;
+                }
                 if (!result && log) {
                     System.out.println("Actual: " + actual);
                     System.out.println("Expected: " + expected);
