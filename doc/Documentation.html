@@ -13,11 +13,54 @@
         This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
-        <small class="version">version: 1.1.37</small>
+        <small class="version">version: 1.2.0</small>
     </div>
 
 
     <div class="package">Package: com.perkbox.testbase</div>
+
+
+    <button class="accordion" id="abstractTest">AbstractTest <span class="float-right">&#10004;</span></button>
+    <div class="panel">
+        <ul>
+            <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#AbstractTest">public AbstractTest(String endpoint, String jsonData)</a></li>
+            <li><a href="AbstractTest.html#AbstractTest_logLevel">public AbstractTest(String endpoint, String jsonData, int logLevel)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#get">public Responses get(String uuid)</a></li>
+            <li><a href="AbstractTest.html#get_token">public Responses get(String uuid, String token)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#getEtag">public String getEtag(String uuid)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#list">public Requests list()</a></li>
+            <li><a href="AbstractTest.html#list_token">public Requests list(String token)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#create">public Responses create()</a></li>
+            <li><a href="AbstractTest.html#create_body">public Responses create(String body)</a></li>
+            <li><a href="AbstractTest.html#create_bodyToken">public Responses create(String body, String token)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#update">public Responses update(String uuid, String body)</a></li>
+            <li><a href="AbstractTest.html#update_etag">public Responses update(String uuid, String body, String etag)</a></li>
+            <li><a href="AbstractTest.html#update_etagToken">public Responses update(String uuid, String body, String etag, String token)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#patch">public Responses patch(String uuid, String body)</a></li>
+            <li><a href="AbstractTest.html#patch_etag">public Responses patch(String uuid, String body, String etag)</a></li>
+            <li><a href="AbstractTest.html#patch_etagToken">public Responses patch(String uuid, String body, String etag, String token)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#delete">public Responses delete(String uuid)</a></li>
+            <li><a href="AbstractTest.html#delete_token">public Responses delete(String uuid, String token)</a></li>
+            <li class="separator">&nbsp;</li>
+        </ul>
+    </div>
 
 
     <button class="accordion" id="requests">Requests <span class="float-right">&#10004;</span></button>
@@ -277,6 +320,7 @@
             <li><a href="Token.html#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildDeleteOnlyToken">public String buildDeleteOnlyToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></li>
@@ -285,6 +329,7 @@
             <li><a href="Token.html#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></li>
             <li><a href="Token.html#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></li>
+            <li><a href="Token.html#buildExpiredDeleteToken">public String buildExpiredDeleteToken(String service, String endpoint)</a></li>
             <li class="separator">&nbsp;</li>
 
 
@@ -300,6 +345,8 @@
             <li><a href="Token.html#static_create_endpoint">public static String create(String endpoint)</a></li>
             <li><a href="Token.html#static_update">public static String update()</a></li>
             <li><a href="Token.html#static_update_endpoint">public static String update(String endpoint)</a></li>
+            <li><a href="Token.html#static_delete">public static String delete()</a></li>
+            <li><a href="Token.html#static_delete_endpoint">public static String delete(String endpoint)</a></li>
             <li><a href="Token.html#static_createAndRead">public static String createAndRead()</a></li>
             <li><a href="Token.html#static_createAndRead_endpoint">public static String createAndRead(String endpoint)</a></li>
             <li><a href="Token.html#static_createAndUpdate">public static String createAndUpdate()</a></li>
@@ -316,6 +363,8 @@
             <li><a href="Token.html#static_expiredCreate_endpoint">public static String expiredCreate(String endpoint)</a></li>
             <li><a href="Token.html#static_expiredUpdate">public static String expiredUpdate()</a></li>
             <li><a href="Token.html#static_expiredUpdate_endpoint">public static String expiredUpdate(String endpoint)</a></li>
+            <li><a href="Token.html#static_expiredDelete">public static String expiredDelete()</a></li>
+            <li><a href="Token.html#static_expiredDelete_endpoint">public static String expiredDelete(String endpoint)</a></li>
             <li class="separator">&nbsp;</li>
         </ul>
     </div>

@@ -21,7 +21,7 @@
 
     <h4>
         <a name="Token">public Token(String uuid, String tenant, String email)</a>
-        <button onclick="gotoSrc('L22-L27')">src</button>
+        <button onclick="gotoSrc('L23-L28')">src</button>
     </h4>
     <small>
         <i>The Constructor: </i> which requires a user's <code>uuid</code>, <code>tenant</code> and <code>email</code> as arguments; which is used by the class to create the token for the user.
@@ -33,7 +33,7 @@
 
     <h4>
         <a name="build">public String build(String jsonString, int expiry)</a>
-        <button onclick="gotoSrc('L29-L31')">src</button>
+        <button onclick="gotoSrc('L30-L32')">src</button>
     </h4>
     <small>
         This method is used to build the token (using the <code><a href="TokenBuilder.html">TokenBuilder</a></code> class) using two arguments: a <code>jsonString</code> which specifies the permission of the user, and an <code>expiry</code> which specifies life span of the user in seconds.
@@ -48,7 +48,7 @@
 
     <h4>
         <a name="buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L33-L35')">src</button>
+        <button onclick="gotoSrc('L34-L36')">src</button>
     </h4>
     <small>
         This method is used to generate a read-only token for a user, using the <em>Read-only permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -71,7 +71,7 @@
 
     <h4>
         <a name="buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L37-L39')">src</button>
+        <button onclick="gotoSrc('L38-L40')">src</button>
     </h4>
     <small>
         This method is used to generate a create-only token for a user, using the <em>Create-only permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -94,7 +94,7 @@
 
     <h4>
         <a name="buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L41-L43')">src</button>
+        <button onclick="gotoSrc('L42-L44')">src</button>
     </h4>
     <small>
         This method is used to generate an update-only token for a user, using the <em>Update-only permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -116,8 +116,31 @@
 
 
     <h4>
+        <a name="buildDeleteOnlyToken">public String buildDeleteOnlyToken(String service, String endpoint)</a>
+        <button onclick="gotoSrc('L46-L48')">src</button>
+    </h4>
+    <small>
+        This method is used to generate a delete-only token for a user, using the <em>Delete-only permission</em> format shown below; and with an expiry of 3600 seconds.
+        The first string format <code>%1s</code> is placeholder for the <code>service</code> argument, while the second <code>%2s</code> is placeholder for the <code>endpoint</code> argument.
+    </small>
+    <pre>
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildDeleteOnlyToken("exam", "questions");
+    </pre>
+    <pre class="sample" data-label="Delete-only permission">
+        {
+            "%1s": {
+                "%2s": {
+                    "+delete": { }
+                }
+            }
+        }
+    </pre>
+
+
+    <h4>
         <a name="buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L45-L47')">src</button>
+        <button onclick="gotoSrc('L50-L52')">src</button>
     </h4>
     <small>
         This method is used to generate a token with a create and read permissions for a user, using the <em>Create and Read permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -141,7 +164,7 @@
 
     <h4>
         <a name="buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L49-L51')">src</button>
+        <button onclick="gotoSrc('L54-L56')">src</button>
     </h4>
     <small>
         This method is used to generate a token with a create and update permissions for a user, using the <em>Create and Update permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -165,7 +188,7 @@
 
     <h4>
         <a name="buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L53-L55')">src</button>
+        <button onclick="gotoSrc('L58-L60')">src</button>
     </h4>
     <small>
         This method is used to generate a token with an update and read permissions for a user, using the <em>Update and Read permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -189,7 +212,7 @@
 
     <h4>
         <a name="buildFullToken">public String buildFullToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L57-L59')">src</button>
+        <button onclick="gotoSrc('L62-L64')">src</button>
     </h4>
     <small>
         This method is used to generate a token with a read, create and update permissions for a user, using the <em>Full permission</em> format shown below; and with an expiry of 3600 seconds.
@@ -214,7 +237,7 @@
 
     <h4>
         <a name="buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L61-L63')">src</button>
+        <button onclick="gotoSrc('L66-L68')">src</button>
     </h4>
     <small>
         This method is used to generate a token with a read-only access where the user is restricted from accessing some fields depending on the logic specified by the service.
@@ -240,7 +263,7 @@
 
     <h4>
         <a name="buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L65-L67')">src</button>
+        <button onclick="gotoSrc('L70-L72')">src</button>
     </h4>
     <small>
         This method is used to generate an expired token with read permission.
@@ -254,7 +277,7 @@
 
     <h4>
         <a name="buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L69-L71')">src</button>
+        <button onclick="gotoSrc('L74-L76')">src</button>
     </h4>
     <small>
         This method is used to generate an expired token with create permission.
@@ -268,7 +291,7 @@
 
     <h4>
         <a name="buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a>
-        <button onclick="gotoSrc('L73-L75')">src</button>
+        <button onclick="gotoSrc('L78-L80')">src</button>
     </h4>
     <small>
         This method is used to generate an expired token with update permission.
@@ -280,12 +303,26 @@
     </pre>
 
 
+    <h4>
+        <a name="buildExpiredDeleteToken">public String buildExpiredDeleteToken(String service, String endpoint)</a>
+        <button onclick="gotoSrc('L82-L84')">src</button>
+    </h4>
+    <small>
+        This method is used to generate an expired token with delete permission.
+        This function is similar to <code><a href="#buildDeleteOnlyToken">public String buildDeleteOnlyToken(String service, String endpoint)</a></code>, however the token life span is 1 second, so it expires before a test is run.
+    </small>
+    <pre>
+        Token token = new Token("530440ac-81b2-4052-aa64-1ab5978dc16c", "hungry-lads", "person@kitchen.ca");
+        String jwt  = token.buildExpiredDeleteToken("exam", "questions");
+    </pre>
+
+
     <h3>Static Methods</h3>
 
 
     <h4>
         <a name="static_buildStatic">public static String buildStatic(String jsonString, int expiry)</a>
-        <button onclick="gotoSrc('L80-L82')">src</button>
+        <button onclick="gotoSrc('L89-L91')">src</button>
     </h4>
     <small>
         This method is the static equivalence of <code><a href="#build">public String build(String jsonString, int expiry)</a></code>.
@@ -300,7 +337,7 @@
 
     <h4>
         <a name="static_read">public static String read()</a>
-        <button onclick="gotoSrc('L84-L86')">src</button>
+        <button onclick="gotoSrc('L93-L95')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></code>.
@@ -313,7 +350,7 @@
 
     <h4>
         <a name="static_read_endpoint">public static String read(String endpoint)</a>
-        <button onclick="gotoSrc('L88-L90')">src</button>
+        <button onclick="gotoSrc('L97-L99')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildReadOnlyToken">public String buildReadOnlyToken(String service, String endpoint)</a></code>.
@@ -326,7 +363,7 @@
 
     <h4>
         <a name="static_create">public static String create()</a>
-        <button onclick="gotoSrc('L92-L94')">src</button>
+        <button onclick="gotoSrc('L101-L103')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></code>.
@@ -339,7 +376,7 @@
 
     <h4>
         <a name="static_create_endpoint">public static String create(String endpoint)</a>
-        <button onclick="gotoSrc('L96-L98')">src</button>
+        <button onclick="gotoSrc('L105-L107')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateOnlyToken">public String buildCreateOnlyToken(String service, String endpoint)</a></code>.
@@ -352,7 +389,7 @@
 
     <h4>
         <a name="static_update">public static String update()</a>
-        <button onclick="gotoSrc('L100-L102')">src</button>
+        <button onclick="gotoSrc('L109-L111')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></code>.
@@ -365,7 +402,7 @@
 
     <h4>
         <a name="static_update_endpoint">public static String update(String endpoint)</a>
-        <button onclick="gotoSrc('L104-L106')">src</button>
+        <button onclick="gotoSrc('L113-L115')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildUpdateOnlyToken">public String buildUpdateOnlyToken(String service, String endpoint)</a></code>.
@@ -377,8 +414,34 @@
 
 
     <h4>
+        <a name="static_delete">public static String delete()</a>
+        <button onclick="gotoSrc('L117-L119')">src</button>
+    </h4>
+    <small>
+        This method is a static equivalence of <code><a href="#buildDeleteOnlyToken">public String buildDeleteOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
+    <pre>
+        String jwt  = Token.delete();
+    </pre>
+
+
+    <h4>
+        <a name="static_delete_endpoint">public static String delete(String endpoint)</a>
+        <button onclick="gotoSrc('L121-L123')">src</button>
+    </h4>
+    <small>
+        This method is a static equivalence of <code><a href="#buildDeleteOnlyToken">public String buildDeleteOnlyToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
+    <pre>
+        String jwt  = Token.delete("questions");
+    </pre>
+
+
+    <h4>
         <a name="static_createAndRead">public static String createAndRead()</a>
-        <button onclick="gotoSrc('L108-L110')">src</button>
+        <button onclick="gotoSrc('L125-L127')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></code>.
@@ -391,7 +454,7 @@
 
     <h4>
         <a name="static_createAndRead_endpoint">public static String createAndRead(String endpoint)</a>
-        <button onclick="gotoSrc('L112-L114')">src</button>
+        <button onclick="gotoSrc('L129-L131')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateAndReadToken">public String buildCreateAndReadToken(String service, String endpoint)</a></code>.
@@ -404,7 +467,7 @@
 
     <h4>
         <a name="static_createAndUpdate">public static String createAndUpdate()</a>
-        <button onclick="gotoSrc('L116-L118')">src</button>
+        <button onclick="gotoSrc('L133-L135')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></code>.
@@ -417,7 +480,7 @@
 
     <h4>
         <a name="static_createAndUpdate_endpoint">public static String createAndUpdate(String endpoint)</a>
-        <button onclick="gotoSrc('L120-L122')">src</button>
+        <button onclick="gotoSrc('L137-L139')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildCreateAndUpdateToken">public String buildCreateAndUpdateToken(String service, String endpoint)</a></code>.
@@ -430,7 +493,7 @@
 
     <h4>
         <a name="static_updateAndRead">public static String updateAndRead()</a>
-        <button onclick="gotoSrc('L124-L126')">src</button>
+        <button onclick="gotoSrc('L141-L143')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></code>.
@@ -443,7 +506,7 @@
 
     <h4>
         <a name="static_updateAndRead_endpoint">public static String updateAndRead(String endpoint)</a>
-        <button onclick="gotoSrc('L128-L130')">src</button>
+        <button onclick="gotoSrc('L145-L147')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildUpdateAndReadToken">public String buildUpdateAndReadToken(String service, String endpoint)</a></code>.
@@ -456,7 +519,7 @@
 
     <h4>
         <a name="static_fullPermission">public static String fullPermission()</a>
-        <button onclick="gotoSrc('L132-L134')">src</button>
+        <button onclick="gotoSrc('L149-L151')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildFullToken">public String buildFullToken(String service, String endpoint)</a></code>.
@@ -469,7 +532,7 @@
 
     <h4>
         <a name="static_fullPermission_endpoint">public static String fullPermission(String endpoint)</a>
-        <button onclick="gotoSrc('L136-L138')">src</button>
+        <button onclick="gotoSrc('L153-L155')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildFullToken">public String buildFullToken(String service, String endpoint)</a></code>.
@@ -482,7 +545,7 @@
 
     <h4>
         <a name="static_readRestricted">public static String readRestricted()</a>
-        <button onclick="gotoSrc('L140-L142')">src</button>
+        <button onclick="gotoSrc('L157-L159')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a></code>.
@@ -495,7 +558,7 @@
 
     <h4>
         <a name="static_readRestricted_endpoint">public static String readRestricted(String endpoint)</a>
-        <button onclick="gotoSrc('L144-L146')">src</button>
+        <button onclick="gotoSrc('L161-L163')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildReadRestrictedToken">public String buildReadRestrictedToken(String service, String endpoint)</a></code>.
@@ -508,7 +571,7 @@
 
     <h4>
         <a name="static_expiredRead">public static String expiredRead()</a>
-        <button onclick="gotoSrc('L148-L150')">src</button>
+        <button onclick="gotoSrc('L165-L167')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></code>.
@@ -521,7 +584,7 @@
 
     <h4>
         <a name="static_expiredRead_endpoint">public static String expiredRead(String endpoint)</a>
-        <button onclick="gotoSrc('L152-L154')">src</button>
+        <button onclick="gotoSrc('L169-L171')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredReadToken">public String buildExpiredReadToken(String service, String endpoint)</a></code>.
@@ -534,7 +597,7 @@
 
     <h4>
         <a name="static_expiredCreate">public static String expiredCreate()</a>
-        <button onclick="gotoSrc('L156-L158')">src</button>
+        <button onclick="gotoSrc('L173-L175')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></code>.
@@ -547,7 +610,7 @@
 
     <h4>
         <a name="static_expiredCreate_endpoint">public static String expiredCreate(String endpoint)</a>
-        <button onclick="gotoSrc('L160-L162')">src</button>
+        <button onclick="gotoSrc('L177-L179')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredCreateToken">public String buildExpiredCreateToken(String service, String endpoint)</a></code>.
@@ -560,7 +623,7 @@
 
     <h4>
         <a name="static_expiredUpdate">public static String expiredUpdate()</a>
-        <button onclick="gotoSrc('L164-L166')">src</button>
+        <button onclick="gotoSrc('L181-L183')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></code>.
@@ -573,7 +636,7 @@
 
     <h4>
         <a name="static_expiredUpdate_endpoint">public static String expiredUpdate(String endpoint)</a>
-        <button onclick="gotoSrc('L168-L170')">src</button>
+        <button onclick="gotoSrc('L185-L187')">src</button>
     </h4>
     <small>
         This method is a static equivalence of <code><a href="#buildExpiredUpdateToken">public String buildExpiredUpdateToken(String service, String endpoint)</a></code>.
@@ -581,6 +644,32 @@
     </small>
     <pre>
         String jwt  = Token.expiredUpdate("questions");
+    </pre>
+
+
+    <h4>
+        <a name="static_expiredDelete">public static String expiredDelete()</a>
+        <button onclick="gotoSrc('L189-L191')">src</button>
+    </h4>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredDeleteToken">public String buildExpiredDeleteToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code>, <code>SERVICE</code> and <code>ENDPOINT</code> specified within <em>config.properties</em> file.
+    </small>
+    <pre>
+        String jwt  = Token.expiredDelete();
+    </pre>
+
+
+    <h4>
+        <a name="static_expiredDelete_endpoint">public static String expiredDelete(String endpoint)</a>
+        <button onclick="gotoSrc('L193-L195')">src</button>
+    </h4>
+    <small>
+        This method is a static equivalence of <code><a href="#buildExpiredDeleteToken">public String buildExpiredDeleteToken(String service, String endpoint)</a></code>.
+        The token is built using <code>UUID</code>, <code>TENANT</code>, <code>EMAIL</code> and <code>SERVICE</code> specified within <em>config.properties</em> file.
+    </small>
+    <pre>
+        String jwt  = Token.expiredDelete("questions");
     </pre>
 
 </div>
