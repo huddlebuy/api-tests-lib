@@ -12,6 +12,7 @@ public class Token {
     private String readOnlyJson = "{ \"%1s\": { \"%2s\": { \"+read\": { } } } } ";
     private String createOnlyJson = "{ \"%1s\": { \"%2s\": { \"+create\": { } } } } ";
     private String updateOnlyJson = "{ \"%1s\": { \"%2s\": { \"+update\": { } } } } ";
+    private String deleteOnlyJson = "{ \"%1s\": { \"%2s\": { \"+delete\": { } } } } ";
     private String createAndReadJson = "{ \"%1s\": { \"%2s\": { \"+create\": { }, \"+read\": { } } } } ";
     private String createAndUpdateJson = "{ \"%1s\": { \"%2s\": { \"+create\": { }, \"+update\": { } } } } ";
     private String updateAndReadJson = "{ \"%1s\": { \"%2s\": { \"+update\": { }, \"+read\": { } } } } ";
@@ -40,6 +41,10 @@ public class Token {
 
     public String buildUpdateOnlyToken(String service, String endpoint) {
         return tokenBuilder.generateToken(String.format(updateOnlyJson, service, endpoint), uuid, tenant, email, 3600);
+    }
+
+    public String buildDeleteOnlyToken(String service, String endpoint) {
+        return tokenBuilder.generateToken(String.format(deleteOnlyJson, service, endpoint), uuid, tenant, email, 3600);
     }
 
     public String buildCreateAndReadToken(String service, String endpoint) {
@@ -74,6 +79,10 @@ public class Token {
         return generateAndExpire(updateOnlyJson, service, endpoint);
     }
 
+    public String buildExpiredDeleteToken(String service, String endpoint) {
+        return generateAndExpire(deleteOnlyJson, service, endpoint);
+    }
+
 
     // Static members
 
@@ -103,6 +112,14 @@ public class Token {
 
     public static String update(String endpoint) {
         return init().buildUpdateOnlyToken(Config.get("SERVICE"), endpoint);
+    }
+
+    public static String delete() {
+        return delete(Config.get("ENDPOINT"));
+    }
+
+    public static String delete(String endpoint) {
+        return init().buildDeleteOnlyToken(Config.get("SERVICE"), endpoint);
     }
 
     public static String createAndRead() {
@@ -167,6 +184,14 @@ public class Token {
 
     public static String expiredUpdate(String endpoint) {
         return init().buildExpiredUpdateToken(Config.get("SERVICE"), endpoint);
+    }
+
+    public static String expiredDelete() {
+        return expiredDelete(Config.get("ENDPOINT"));
+    }
+
+    public static String expiredDelete(String endpoint) {
+        return init().buildExpiredDeleteToken(Config.get("SERVICE"), endpoint);
     }
 
     private String generateAndExpire(String permissionJsonSyntax, String service, String endpoint) {
