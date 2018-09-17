@@ -1,9 +1,10 @@
 package com.perkbox.testbase;
 
 import com.perkbox.util.JsonHelper;
+import com.perkbox.util.SuiteListener;
 import com.perkbox.util.token.Token;
 
-public abstract class AbstractTest {
+public abstract class AbstractTest extends SuiteListener {
 
     public static final int LOG_NONE = 0;
     public static final int LOG_GET = 1;
