@@ -18,6 +18,7 @@
     <br><br>
     <small>
         The <code>AbstractTest</code> class can be extended by test classes and its methods can be used as helpers for making HTTP requests, as shown in this documentation page.
+        Also, the <code>AbstractTest</code> class extends the <code>SuiteListener</code> so as to provide reporting capability (implemented in the <code>SuiteListener</code>) to test classes.
     </small>
 
 
@@ -26,7 +27,7 @@
 
     <h4>
         <a name="AbstractTest">public AbstractTest(String endpoint, String jsonData)</a>
-        <button onclick="gotoSrc('L21-L23')">src</button>
+        <button onclick="gotoSrc('L22-L24')">src</button>
     </h4>
     <small>
         <i>Constructor:</i> which requires an <code>endpoint</code> argument (used for the resource path and token generation) and a <code>jsonData</code> argument (used to specify the json file used for the tests, e.g. used for request body).
@@ -44,7 +45,7 @@
 
     <h4>
         <a name="AbstractTest_logLevel">public AbstractTest(String endpoint, String jsonData, int logLevel)</a>
-        <button onclick="gotoSrc('L25-L31')">src</button>
+        <button onclick="gotoSrc('L26-L32')">src</button>
     </h4>
     <small>
         <i>Constructor:</i> which also achieves same function as <code><a href="#AbstractTest">public AbstractTest(String endpoint, String jsonData)</a></code> constructor, however, requires a <code>logLevel</code>.
@@ -70,7 +71,7 @@
 
     <h4>
         <a name="get">public Responses get(String uuid)</a>
-        <button onclick="gotoSrc('L33-L35')">src</button>
+        <button onclick="gotoSrc('L34-L36')">src</button>
     </h4>
     <small>
         This method is used to issue a get request on a resource using its <code>uuid</code> and the appropriate valid read token.
@@ -94,7 +95,7 @@
 
     <h4>
         <a name="get_token">public Responses get(String uuid, String token)</a>
-        <button onclick="gotoSrc('L37-L43')">src</button>
+        <button onclick="gotoSrc('L38-L44')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#get">public Responses get(String uuid)</a></code>, however it also provides a second parameter to specify the <code>token</code> used to make the request.
@@ -117,7 +118,7 @@
 
     <h4>
         <a name="getEtag">public String getEtag(String uuid)</a>
-        <button onclick="gotoSrc('L45-L47')">src</button>
+        <button onclick="gotoSrc('L46-L48')">src</button>
     </h4>
     <small>This method is used to get the Etag of a resource by issuing a get request on its <code>uuid</code>.</small>
     <pre>
@@ -138,7 +139,7 @@
 
     <h4>
         <a name="list">public Requests list()</a>
-        <button onclick="gotoSrc('L49-L51')">src</button>
+        <button onclick="gotoSrc('L50-L52')">src</button>
     </h4>
     <small>
         This method is used to issue a get request for obtaining a list of resources.
@@ -182,7 +183,7 @@
 
     <h4>
         <a name="list_token">public Requests list(String token)</a>
-        <button onclick="gotoSrc('L53-L59')">src</button>
+        <button onclick="gotoSrc('L54-L60')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#list">public Requests list()</a></code>, however it also provides a second parameter to specify the <code>token</code> used to make the request.
@@ -205,7 +206,7 @@
 
     <h4>
         <a name="create">public Responses create()</a>
-        <button onclick="gotoSrc('L61-L63')">src</button>
+        <button onclick="gotoSrc('L62-L64')">src</button>
     </h4>
     <small>
         This method is used to issue a post request for creating a new resource using the appropriate valid create token.
@@ -230,7 +231,7 @@
 
     <h4>
         <a name="create_body">public Responses create(String body)</a>
-        <button onclick="gotoSrc('L65-L67')">src</button>
+        <button onclick="gotoSrc('L66-L68')">src</button>
     </h4>
     <small>This method achieves the same function as <code><a href="#create">public Responses create()</a></code>, however the request body is required as an argument.</small>
     <pre>
@@ -251,7 +252,7 @@
 
     <h4>
         <a name="create_bodyToken">public Responses create(String body, String token)</a>
-        <button onclick="gotoSrc('L69-L76')">src</button>
+        <button onclick="gotoSrc('L70-L77')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#create_body">public Responses create(String body)</a></code>, however a second parameter is required as the <code>token</code> used to make the request.
@@ -274,7 +275,7 @@
 
     <h4>
         <a name="update">public Responses update(String uuid, String body)</a>
-        <button onclick="gotoSrc('L78-L80')">src</button>
+        <button onclick="gotoSrc('L79-L81')">src</button>
     </h4>
     <small>
         This method is used to issue a put request for updating an existing resource using the appropriate valid update token.
@@ -300,7 +301,7 @@
 
     <h4>
         <a name="update_etag">public Responses update(String uuid, String body, String etag)</a>
-        <button onclick="gotoSrc('L82-L84')">src</button>
+        <button onclick="gotoSrc('L83-L85')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#update">public Responses update(String uuid, String body)</a></code>, however a third parameter is required as the <code>etag</code> used to make the request.
@@ -325,7 +326,7 @@
 
     <h4>
         <a name="update_etagToken">public Responses update(String uuid, String body, String etag, String token)</a>
-        <button onclick="gotoSrc('L86-L93')">src</button>
+        <button onclick="gotoSrc('L87-L94')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#update_etag">public Responses update(String uuid, String body, String etag)</a></code>, however a fourth parameter is required as the <code>token</code> used to make the request.
@@ -350,7 +351,7 @@
 
     <h4>
         <a name="patch">public Responses patch(String uuid, String body)</a>
-        <button onclick="gotoSrc('L95-L97')">src</button>
+        <button onclick="gotoSrc('L96-L98')">src</button>
     </h4>
     <small>
         This method is used to issue a patch request for patching an existing resource using the appropriate valid update token.
@@ -376,7 +377,7 @@
 
     <h4>
         <a name="patch_etag">public Responses patch(String uuid, String body, String etag)</a>
-        <button onclick="gotoSrc('L99-L101')">src</button>
+        <button onclick="gotoSrc('L100-L102')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#patch">public Responses patch(String uuid, String body)</a></code>, however a third parameter is required as the <code>etag</code> used to make the request.
@@ -401,7 +402,7 @@
 
     <h4>
         <a name="patch_etagToken">public Responses patch(String uuid, String body, String etag, String token)</a>
-        <button onclick="gotoSrc('L103-L110')">src</button>
+        <button onclick="gotoSrc('L104-L111')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#patch_etag">public Responses patch(String uuid, String body, String etag)</a></code>, however a fourth parameter is required as the <code>token</code> used to make the request.
@@ -426,7 +427,7 @@
 
     <h4>
         <a name="delete">public Responses delete(String uuid)</a>
-        <button onclick="gotoSrc('L112-L114')">src</button>
+        <button onclick="gotoSrc('L113-L115')">src</button>
     </h4>
     <small>
         This method is used to issue a delete request on a resource using its <code>uuid</code> and the appropriate valid delete token.
@@ -450,7 +451,7 @@
 
     <h4>
         <a name="delete_token">public Responses delete(String uuid, String token)</a>
-        <button onclick="gotoSrc('L116-L122')">src</button>
+        <button onclick="gotoSrc('L117-L123')">src</button>
     </h4>
     <small>
         This method achieves the same function as <code><a href="#delete">public Responses delete(String uuid)</a></code>, however it also provides a second parameter to specify the <code>token</code> used to make the request.
