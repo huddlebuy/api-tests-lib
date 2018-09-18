@@ -32,7 +32,7 @@
             <li><code>endpoint</code>: This is the name of the test class. By convention the test class names are associated with endpoints and their actions, e.g. <code>CreateQuestion</code>.</li>
             <li><code>method</code>: This is name of the test method. By convention the test method names are to be descriptive names of the testcases, e.g. <code>noStatusShouldError</code>.</li>
             <li><code>testData</code>: This is the data used for the test. This field is populated only when <code>@DataProvider</code> is used to pass test data to your testcase.</li>
-            <li><code>description</code>: This is the description provided for a testcase using the <code>@Description</code> annotation.</li>
+            <li><code>description</code>: This is the description provided for a testcase using the <code>@Report</code> annotation, e.g. <code>@Report(description = "Only enabled users can login")</code>.</li>
             <li><code>status</code>: This is the status of the test. It can be either of PASSED, FAILED or INCOMPLETE.</li>
         </ul>
         Note: Reports are stored in <code>{project}/data/output/report.json</code> file.
