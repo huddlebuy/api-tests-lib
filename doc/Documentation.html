@@ -13,7 +13,7 @@
         This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
-        <small class="version">version: 1.2.0</small>
+        <small class="version">version: 1.2.1</small>
     </div>
 
 
@@ -41,14 +41,14 @@
             <li><a href="AbstractTest.html#list_token">public Requests list(String token)</a></li>
             <li class="separator">&nbsp;</li>
 
-            <li><a href="AbstractTest.html#create">public Responses create()</a></li>
-            <li><a href="AbstractTest.html#create_body">public Responses create(String body)</a></li>
-            <li><a href="AbstractTest.html#create_bodyToken">public Responses create(String body, String token)</a></li>
+            <li><a href="AbstractTest.html#post">public Responses post()</a></li>
+            <li><a href="AbstractTest.html#post_body">public Responses post(String body)</a></li>
+            <li><a href="AbstractTest.html#post_bodyToken">public Responses post(String body, String token)</a></li>
             <li class="separator">&nbsp;</li>
 
-            <li><a href="AbstractTest.html#update">public Responses update(String uuid, String body)</a></li>
-            <li><a href="AbstractTest.html#update_etag">public Responses update(String uuid, String body, String etag)</a></li>
-            <li><a href="AbstractTest.html#update_etagToken">public Responses update(String uuid, String body, String etag, String token)</a></li>
+            <li><a href="AbstractTest.html#put">public Responses put(String uuid, String body)</a></li>
+            <li><a href="AbstractTest.html#put_etag">public Responses put(String uuid, String body, String etag)</a></li>
+            <li><a href="AbstractTest.html#put_etagToken">public Responses put(String uuid, String body, String etag, String token)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="AbstractTest.html#patch">public Responses patch(String uuid, String body)</a></li>
@@ -270,6 +270,10 @@
     <div class="panel">
         <ul>
             <li class="sub-header">Instance Methods</li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="SuiteListener.html#addToReport">public void addToReport(ITestResult result)</a></li>
+            <li><a href="SuiteListener.html#writeReport">public void writeReport()</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="SuiteListener.html#onStart">public void onStart(ISuite iSuite)</a></li>

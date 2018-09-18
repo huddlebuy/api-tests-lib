@@ -28,6 +28,7 @@
         </ul>
         The data stored in the report for each test case are:
         <ul>
+            <li><code>package</code>: This is the package of the test class. It is used to group the test reports in work sheets in excel, e.g. <code>Questions</code>.</li>
             <li><code>endpoint</code>: This is the name of the test class. By convention the test class names are associated with endpoints and their actions, e.g. <code>CreateQuestion</code>.</li>
             <li><code>method</code>: This is name of the test method. By convention the test method names are to be descriptive names of the testcases, e.g. <code>noStatusShouldError</code>.</li>
             <li><code>testData</code>: This is the data used for the test. This field is populated only when <code>@DataProvider</code> is used to pass test data to your testcase.</li>
@@ -40,7 +41,7 @@
 
     <h4>
         <a name="addToReport">public void addToReport(ITestResult result)</a>
-        <button onclick="gotoSrc('L23-L30')">src</button>
+        <button onclick="gotoSrc('L28-L59')">src</button>
     </h4>
     <small>
         In reporting, this method is used to add details of a testcase (i.e. a test method) to the <code>report</code> <i>ArrayList</i>. The <code>@AfterMethod</code> annotation means that this method is automatically executed after every testcase is run, so it does not need to be called.
@@ -50,7 +51,7 @@
 
     <h4>
         <a name="writeReport">public void writeReport()</a>
-        <button onclick="gotoSrc('L32-L54')">src</button>
+        <button onclick="gotoSrc('L61-L106')">src</button>
     </h4>
     <small>
         In reporting, this method is used to retrieve all the reported information held in the <code>report</code> <i>ArrayList</i>, and writes them to the <code>report.json</code> file. The <code>@AfterTest</code> annotation means that this method is automatically executed after all the the tests registered to the SuiteListener have completed execution.
@@ -60,7 +61,7 @@
 
     <h4>
         <a name="onStart">public void onStart(ISuite iSuite)</a>
-        <button onclick="gotoSrc('L56-L79')">src</button>
+        <button onclick="gotoSrc('L108-L131')">src</button>
     </h4>
     <small>This method is executed just before the API tests are launched (by the TestNG SuiteRunner). The <code>SuiteListener</code>, which implements TestNG's <code>org.testng.ISuiteListener</code> interface, is applied as a <i>listener</i> within the <code>testng.xml</code> test entry file, as shown in the <i>Sample testng.xml</i> below.
         <br>Within the <i>Perkbox API Test Library</i> this method makes a HTTP GET request to the health endpoint of the service under test (SUT). And once a <code>200</code> status code is returned then the test proceeds else after 20 seconds the process exits with error notification. If health check does not apply to your SUT, simply skip adding this listener to your <code>testng.xml</code> file. The parameters of the health request made by the library are as follows:
@@ -93,7 +94,7 @@
 
     <h4>
         <a name="onFinish">public void onFinish(ISuite suite)</a>
-        <button onclick="gotoSrc('L81')">src</button>
+        <button onclick="gotoSrc('L133')">src</button>
     </h4>
     <small>This method is invoked after the SuiteRunner has run all the test suites. It has been added here because it's specified within <code>org.testng.ISuiteListener</code> interface.
         <br>Within the <i>Perkbox API Test Library</i> this method is empty.

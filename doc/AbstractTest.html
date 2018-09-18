@@ -143,7 +143,7 @@
     </h4>
     <small>
         This method is used to issue a get request for obtaining a list of resources.
-        Unlike <code>get</code>, <code>create</code>, <code>update</code> and <code>patch</code>, the <code>list</code> method returns a <code>Requests</code> object.
+        Unlike <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code> and <code>delete</code>, the <code>list</code> method returns a <code>Requests</code> object.
         This means <code>.get()</code> needs to be called in order to send the request and access the response from <code>Responses</code> object.<br>
         The intention of using <code>Requests</code> as the return type for <code>list</code> is to provide the capability to apply query parameters before sending the request, as shown in the <code>listWithQueryParams</code> function of the snippet below.
     </small>
@@ -168,7 +168,7 @@
                 Responses listBeforeCreate = list().get();
                 int countBefore = Integer.parseInt(listBeforeCreate.getParam("$.count"));
 
-                create(); // create a resource
+                post(); // create a resource
 
                 Responses listAfterCreate = list().get();
                 int countAfter = Integer.parseInt(listAfterCreate.getParam("$.count"));
@@ -205,7 +205,7 @@
 
 
     <h4>
-        <a name="create">public Responses create()</a>
+        <a name="post">public Responses post()</a>
         <button onclick="gotoSrc('L62-L64')">src</button>
     </h4>
     <small>
@@ -222,7 +222,7 @@
 
             @Test
             public void validCreate() {
-                Responses response = create();
+                Responses response = post();
                 response.assertTrue(200);
             }
         }
@@ -230,10 +230,10 @@
 
 
     <h4>
-        <a name="create_body">public Responses create(String body)</a>
+        <a name="post_body">public Responses post(String body)</a>
         <button onclick="gotoSrc('L66-L68')">src</button>
     </h4>
-    <small>This method achieves the same function as <code><a href="#create">public Responses create()</a></code>, however the request body is required as an argument.</small>
+    <small>This method achieves the same function as <code><a href="#post">public Responses post()</a></code>, however the request body is required as an argument.</small>
     <pre>
         public class CreateQuestion extends AbstractTest {
 
@@ -243,7 +243,7 @@
 
             @Test
             public void validCreate() {
-                Responses response = create(JsonHelper.getJson("questions/question"));
+                Responses response = post(JsonHelper.getJson("questions/question"));
                 response.assertTrue(200);
             }
         }
@@ -251,11 +251,11 @@
 
 
     <h4>
-        <a name="create_bodyToken">public Responses create(String body, String token)</a>
+        <a name="post_bodyToken">public Responses post(String body, String token)</a>
         <button onclick="gotoSrc('L70-L77')">src</button>
     </h4>
     <small>
-        This method achieves the same function as <code><a href="#create_body">public Responses create(String body)</a></code>, however a second parameter is required as the <code>token</code> used to make the request.
+        This method achieves the same function as <code><a href="#create_body">public Responses post(String body)</a></code>, however a second parameter is required as the <code>token</code> used to make the request.
     </small>
     <pre>
         public class CreateQuestion extends AbstractTest {
@@ -266,7 +266,7 @@
 
             @Test
             public void readOnlyTokenShouldError() {
-                Responses response = create(JsonHelper.getJson("questions/question"), Token.read("questions"));
+                Responses response = post(JsonHelper.getJson("questions/question"), Token.read("questions"));
                 response.assertTrue(403, "\"code\":\"PBERR000x789\"");
             }
         }
@@ -274,7 +274,7 @@
 
 
     <h4>
-        <a name="update">public Responses update(String uuid, String body)</a>
+        <a name="put">public Responses put(String uuid, String body)</a>
         <button onclick="gotoSrc('L79-L81')">src</button>
     </h4>
     <small>
@@ -292,7 +292,7 @@
 
             @Test
             public void noStatusShouldError() {
-                Responses response = update("06920c43-1349-4485-b616-1a9da42c1b64", JsonHelper.removeParam("questions/question", "$.status"));
+                Responses response = put("06920c43-1349-4485-b616-1a9da42c1b64", JsonHelper.removeParam("questions/question", "$.status"));
                 response.assertTrue(400, "\"code\":\"PBERR000x002\"");
             }
         }
@@ -300,11 +300,11 @@
 
 
     <h4>
-        <a name="update_etag">public Responses update(String uuid, String body, String etag)</a>
+        <a name="put_etag">public Responses put(String uuid, String body, String etag)</a>
         <button onclick="gotoSrc('L83-L85')">src</button>
     </h4>
     <small>
-        This method achieves the same function as <code><a href="#update">public Responses update(String uuid, String body)</a></code>, however a third parameter is required as the <code>etag</code> used to make the request.
+        This method achieves the same function as <code><a href="#put">public Responses put(String uuid, String body)</a></code>, however a third parameter is required as the <code>etag</code> used to make the request.
     </small>
     <pre>
         public class UpdateQuestion extends AbstractTest {
@@ -317,7 +317,7 @@
 
             @Test
             public void wrongIfMatchShouldError() {
-                Responses response = update(uuid, JsonHelper.getJson("questions/question"), "2d13a44709a0b80ba41d7f7c11e98f49");
+                Responses response = put(uuid, JsonHelper.getJson("questions/question"), "2d13a44709a0b80ba41d7f7c11e98f49");
                 response.assertTrue(412, "\"code\":\"PBERR000x666\"");
             }
         }
@@ -325,11 +325,11 @@
 
 
     <h4>
-        <a name="update_etagToken">public Responses update(String uuid, String body, String etag, String token)</a>
+        <a name="put_etagToken">public Responses put(String uuid, String body, String etag, String token)</a>
         <button onclick="gotoSrc('L87-L94')">src</button>
     </h4>
     <small>
-        This method achieves the same function as <code><a href="#update_etag">public Responses update(String uuid, String body, String etag)</a></code>, however a fourth parameter is required as the <code>token</code> used to make the request.
+        This method achieves the same function as <code><a href="#put_etag">public Responses put(String uuid, String body, String etag)</a></code>, however a fourth parameter is required as the <code>token</code> used to make the request.
     </small>
     <pre>
         public class UpdateQuestion extends AbstractTest {
@@ -342,7 +342,7 @@
 
             @Test
             public void invalidTokenShouldError() {
-                Responses response = update(uuid, JsonHelper.getJson("questions/question"), getEtag(uuid), "invalid.token");
+                Responses response = put(uuid, JsonHelper.getJson("questions/question"), getEtag(uuid), "invalid.token");
                 response.assertTrue(401, "\"code\":\"PBERR000x123\"");
             }
         }
