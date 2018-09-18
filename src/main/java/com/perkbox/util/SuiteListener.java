@@ -1,8 +1,8 @@
 package com.perkbox.util;
 
 import com.perkbox.testbase.Requests;
-import com.perkbox.util.reporting.ReportEntity;
 import com.perkbox.util.reporting.Report;
+import com.perkbox.util.reporting.ReportEntity;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.apache.poi.ss.usermodel.*;
@@ -15,18 +15,22 @@ import org.testng.annotations.AfterSuite;
 
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SuiteListener implements ISuiteListener {
 
-    private static ArrayList<ReportEntity> report = new ArrayList<>();
-    private static final boolean WITH_REPORTING = Config.get("TEST_REPORTING").equals("enabled");
+    private static final boolean DISABLED_HEALTH_CHECK = Config.get("HEALTH_CHECK") != null && Config.get("HEALTH_CHECK").equals("disabled");
+    private static final boolean ENABLED_REPORTING = Config.get("TEST_REPORTING") != null && Config.get("TEST_REPORTING").equals("enabled");
     private static final String[] COLUMNS = {"Endpoint", "Method", "Test Data", "Description", "Status"};
+    private static ArrayList<ReportEntity> report = new ArrayList<>();
 
     @AfterMethod
     public void addToReport(ITestResult result) {
-        if (WITH_REPORTING) {
+        if (ENABLED_REPORTING) {
             String status;
 
             switch (result.getStatus()) {
@@ -60,7 +64,7 @@ public class SuiteListener implements ISuiteListener {
 
     @AfterSuite
     public void writeReport() {
-        if (WITH_REPORTING) {
+        if (ENABLED_REPORTING) {
             try {
                 String file = System.getProperty("user.dir") + "/data/output/report.xlsx";
 
@@ -106,28 +110,30 @@ public class SuiteListener implements ISuiteListener {
     }
 
     public void onStart(ISuite iSuite) {
-        int serviceReady = 0;
-        ExtractableResponse<Response> response = callHealth();
+        if (!DISABLED_HEALTH_CHECK) {
+            int serviceReady = 0;
+            ExtractableResponse<Response> response = callHealth();
 
-        String marker = "#########################################################";
-        System.out.println(marker + "\nWaiting for service to be up ...");
+            String marker = "#########################################################";
+            System.out.println(marker + "\nWaiting for service to be up ...");
 
-        while (serviceReady < 20 && response.statusCode() != 200) {
-            try {
-                Thread.sleep(1000);
-                serviceReady++;
-                response = callHealth();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (serviceReady < 20 && response.statusCode() != 200) {
+                try {
+                    Thread.sleep(1000);
+                    serviceReady++;
+                    response = callHealth();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
 
-        if (response.statusCode() != 200) {
-            System.out.println("Exiting... Service health check was unsuccessful.\n" + marker);
-            System.exit(-1);
-        }
+            if (response.statusCode() != 200) {
+                System.out.println("Exiting... Service health check was unsuccessful.\n" + marker);
+                System.exit(-1);
+            }
 
-        System.out.println("Service ready!\nSeconds delayed to be ready: " + serviceReady + "\n" + marker);
+            System.out.println("Service ready!\nSeconds delayed to be ready: " + serviceReady + "\n" + marker);
+        }
     }
 
     public void onFinish(ISuite suite) {}
