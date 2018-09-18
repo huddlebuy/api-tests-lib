@@ -59,15 +59,15 @@ public abstract class AbstractTest extends SuiteListener {
         return request;
     }
 
-    public Responses create() {
-        return create(JsonHelper.getJson(jsonData));
+    public Responses post() {
+        return post(JsonHelper.getJson(jsonData));
     }
 
-    public Responses create(String body) {
-        return create(body, Token.create(endpoint));
+    public Responses post(String body) {
+        return post(body, Token.create(endpoint));
     }
 
-    public Responses create(String body, String token) {
+    public Responses post(String body, String token) {
         Requests request = new Requests(path);
         if (token != null) {
             request.withAuthorization(token);
@@ -76,15 +76,15 @@ public abstract class AbstractTest extends SuiteListener {
         return logLevel == LOG_POST || logAll ? request.post(true, true) : request.post();
     }
 
-    public Responses update(String uuid, String body) {
-        return update(uuid, body, getEtag(uuid));
+    public Responses put(String uuid, String body) {
+        return put(uuid, body, getEtag(uuid));
     }
 
-    public Responses update(String uuid, String body, String etag) {
-        return update(uuid, body, etag, Token.update(endpoint));
+    public Responses put(String uuid, String body, String etag) {
+        return put(uuid, body, etag, Token.update(endpoint));
     }
 
-    public Responses update(String uuid, String body, String etag, String token) {
+    public Responses put(String uuid, String body, String etag, String token) {
         Requests request = new Requests(path + "/" + uuid);
         if (token != null) {
             request.withAuthorization(token);
