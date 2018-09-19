@@ -51,7 +51,7 @@
 
     <h4>
         <a name="writeReport">public void writeReport()</a>
-        <button onclick="gotoSrc('L66-L110')">src</button>
+        <button onclick="gotoSrc('L65-L110')">src</button>
     </h4>
     <small>
         In reporting, this method is used to retrieve all the reported information held in the <code>report</code> <i>ArrayList</i>, and writes them to the <code>report.json</code> file. The <code>@AfterTest</code> annotation means that this method is automatically executed after all the the tests registered to the SuiteListener have completed execution.
@@ -61,7 +61,7 @@
 
     <h4>
         <a name="onStart">public void onStart(ISuite iSuite)</a>
-        <button onclick="gotoSrc('L112-L137')">src</button>
+        <button onclick="gotoSrc('L112-L136')">src</button>
     </h4>
     <small>This method is executed just before the API tests are launched (by the TestNG SuiteRunner). The <code>SuiteListener</code>, which implements TestNG's <code>org.testng.ISuiteListener</code> interface, is applied as a <i>listener</i> within the <code>testng.xml</code> test entry file, as shown in the <i>Sample testng.xml</i> below.
         <br>Within the <i>Perkbox API Test Library</i> this method makes a HTTP GET request to the health endpoint of the service under test (SUT). And once a <code>200</code> status code is returned then the test proceeds else after 20 seconds the process exits with error notification. If health check does not apply to your SUT, simply add <code>HEALTH_CHECK=disabled</code> to your <code>config.properties</code> file. The parameters of the health request made by the library are as follows:
@@ -94,7 +94,7 @@
 
     <h4>
         <a name="onFinish">public void onFinish(ISuite suite)</a>
-        <button onclick="gotoSrc('L139')">src</button>
+        <button onclick="gotoSrc('L138')">src</button>
     </h4>
     <small>This method is invoked after the SuiteRunner has run all the test suites. It has been added here because it's specified within <code>org.testng.ISuiteListener</code> interface.
         <br>Within the <i>Perkbox API Test Library</i> this method is empty.
