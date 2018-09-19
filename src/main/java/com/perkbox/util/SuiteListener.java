@@ -123,13 +123,12 @@ public class SuiteListener implements ISuiteListener {
                     serviceReady++;
                     response = callHealth();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    exitOnStart(marker);
                 }
             }
 
             if (response.statusCode() != 200) {
-                System.out.println("Exiting... Service health check was unsuccessful.\n" + marker);
-                System.exit(-1);
+                exitOnStart(marker);
             }
 
             System.out.println("Service ready!\nSeconds delayed to be ready: " + serviceReady + "\n" + marker);
@@ -142,30 +141,27 @@ public class SuiteListener implements ISuiteListener {
         return new Requests(Env.get("HEALTH_URL")).get().getResponse();
     }
 
+    private void exitOnStart(String marker) {
+        System.out.println("Exiting... Service health check was unsuccessful.\n" + marker);
+        System.exit(-1);
+    }
+
     private void createSheet(Workbook workbook, String sheetName, ArrayList<ReportEntity> report) {
         Sheet sheet = workbook.createSheet(sheetName);
 
-        // Create a Font for styling header cells
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerFont.setFontHeightInPoints((short) 14);
-        headerFont.setColor(IndexedColors.LIGHT_BLUE.getIndex());
-
-        // Create a CellStyle with the font
-        CellStyle headerCellStyle = workbook.createCellStyle();
-        headerCellStyle.setFont(headerFont);
-
-        // Create a Row
+        // Create style, row and cells for the header
+        CellStyle headerStyle = style(workbook, 16, true, IndexedColors.LIGHT_BLUE);
         Row headerRow = sheet.createRow(0);
 
-        // Create cells
         for (int i = 0; i < COLUMNS.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(COLUMNS[i]);
-            cell.setCellStyle(headerCellStyle);
+            createCell(headerRow, headerStyle, i, COLUMNS[i]);
         }
 
-        // Create Other rows and cells with report data
+        // Create styles, rows and cells for report data
+        CellStyle cellStyle = style(workbook, 14, false, IndexedColors.BLACK);
+        CellStyle passStyle = style(workbook, 14, false, IndexedColors.GREEN);
+        CellStyle failStyle = style(workbook, 14, false, IndexedColors.RED);
+
         int index = 0, rowNum = 1;
         for (ReportEntity entity : report) {
             if (index != 0 && !report.get(index).endpoint.equals(report.get(index - 1).endpoint)) {
@@ -175,16 +171,37 @@ public class SuiteListener implements ISuiteListener {
 
             Row row = sheet.createRow(rowNum++);
 
-            row.createCell(0).setCellValue(entity.endpoint);
-            row.createCell(1).setCellValue(entity.method);
-            row.createCell(2).setCellValue(entity.testData);
-            row.createCell(3).setCellValue(entity.description);
-            row.createCell(4).setCellValue(entity.status);
+            createCell(row, cellStyle, 0, entity.endpoint);
+            createCell(row, cellStyle, 1, entity.method);
+            createCell(row, cellStyle, 2, entity.testData);
+            createCell(row, cellStyle, 3, entity.description);
+            CellStyle style = entity.status.equals("PASSED") ? passStyle : failStyle;
+            createCell(row, style, 4, entity.status);
         }
 
         // Resize all columns to fit the content size
         for (int i = 0; i < COLUMNS.length; i++) {
             sheet.autoSizeColumn(i);
         }
+    }
+
+    private void createCell(Row row, CellStyle style, int column, String value) {
+        Cell cell = row.createCell(column);
+        cell.setCellValue(value);
+        cell.setCellStyle(style);
+    }
+
+    private CellStyle style(Workbook workbook, int fontSize, boolean bold, IndexedColors color) {
+        // Create a Font for styling header cells
+        Font cellFont = workbook.createFont();
+        cellFont.setFontHeightInPoints((short) fontSize);
+        cellFont.setBold(bold);
+        cellFont.setColor(color.getIndex());
+
+        // Create a CellStyle with the font
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setFont(cellFont);
+
+        return cellStyle;
     }
 }
