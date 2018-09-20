@@ -15,13 +15,25 @@
     <h2>TokenBuilder</h2>
     <small>Package: <code>com.perkbox.util.token</code></small>
 
+    <br><br>
+    <small>
+        The <code>TokenBuilder</code> class holds the logic used by the library to generate JWT tokens using HS256 algorithm.
+        Some important configuration variables used in this class for token generation are:
+        <ul>
+            <li><code>ISSUER</code>: If set, the library uses its value as the issuer, else it uses <code>perkbox</code> as the issuer.</li>
+            <li><code>TOKEN_KEY</code>: If set, the library uses its value as the token secret key, else it uses the value of <code>PERKBOX_TOKEN_KEY</code>.</li>
+            <li><code>PERKBOX_TOKEN_KEY</code>: This is the used secret key if <code>TOKEN_KEY</code> is not set.</li>
+        </ul>
+        Note: these variables can be defined in the <code>config.properties</code> file or in your test execution environment.
+    </small>
+
 
     <h3>Instance Methods</h3>
 
 
     <h4>
         <a name="TokenBuilder">public TokenBuilder()</a>
-        <button onclick="gotoSrc('L23-L25')">src</button>
+        <button onclick="gotoSrc('L26-L28')">src</button>
     </h4>
     <small>
         <i>The Constructor: </i> which used to instantiate the class, also sets the token expiry to 1800 seconds by default.
@@ -34,7 +46,7 @@
 
     <h4>
         <a name="withUser">public TokenBuilder withUser(String user)</a>
-        <button onclick="gotoSrc('L27-L30')">src</button>
+        <button onclick="gotoSrc('L30-L33')">src</button>
     </h4>
     <small>
         This method is used to specify the user's UUID inside the token, using the <code>user</code> argument.
@@ -47,7 +59,7 @@
 
     <h4>
         <a name="withTenant">public TokenBuilder withTenant(String tenant)</a>
-        <button onclick="gotoSrc('L32-L35')">src</button>
+        <button onclick="gotoSrc('L35-L38')">src</button>
     </h4>
     <small>
         This method is used to specify the user's tenant inside the token, using the <code>tenant</code> argument.
@@ -61,7 +73,7 @@
 
     <h4>
         <a name="withEmail">public TokenBuilder withEmail(String email)</a>
-        <button onclick="gotoSrc('L37-L40')">src</button>
+        <button onclick="gotoSrc('L40-L43')">src</button>
     </h4>
     <small>
         This method is used to specify the user's email inside the token, using the <code>email</code> argument.
@@ -76,7 +88,7 @@
 
     <h4>
         <a name="lock">public TokenBuilder lock(String secret)</a>
-        <button onclick="gotoSrc('L42-L45')">src</button>
+        <button onclick="gotoSrc('L45-L48')">src</button>
     </h4>
     <small>
         This method is used to specify the secret key used to lock the token, using the <code>secret</code> argument.
@@ -92,7 +104,7 @@
 
     <h4>
         <a name="expiresIn">public TokenBuilder expiresIn(int expiresIn)</a>
-        <button onclick="gotoSrc('L47-L50')">src</button>
+        <button onclick="gotoSrc('L50-L53')">src</button>
     </h4>
     <small>
         This method is used to specify the expiration of the token, in seconds, using the <code>expiresIn</code> argument.
@@ -109,7 +121,7 @@
 
     <h4>
         <a name="withPermissions">public TokenBuilder withPermissions(String permissionsJson)</a>
-        <button onclick="gotoSrc('L52-L55')">src</button>
+        <button onclick="gotoSrc('L55-L58')">src</button>
     </h4>
     <small>
         This method is used to specify the permissions (a JSON string) being applied to the token, using the <code>permissionsJson</code> argument.
@@ -129,7 +141,7 @@
 
     <h4>
         <a name="build">public String build() throws MissingResourceException, IOException</a>
-        <button onclick="gotoSrc('L57-L74')">src</button>
+        <button onclick="gotoSrc('L60-L77')">src</button>
     </h4>
     <small>
         This method is used to build the JWT token.
@@ -153,7 +165,7 @@
 
     <h4>
         <a name="generateToken">public String generateToken<br>&emsp;&emsp;&emsp; (String permissionJson, String UserUuid, String tenant, String userEmail, int expiry)</a>
-        <button onclick="gotoSrc('L76-L88')">src</button>
+        <button onclick="gotoSrc('L79-L90')">src</button>
     </h4>
     <small>
         This method fulfills the same function as <code><a href="#build">public String build() throws MissingResourceException, IOException</a></code>.

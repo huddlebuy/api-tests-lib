@@ -20,6 +20,9 @@ public class TokenBuilder {
     private String secret;
     private int expiresIn;
 
+    private static final String ISSUER = Env.get("ISSUER") != null ? Env.get("ISSUER") : "perkbox";
+    private static final String TOKEN_KEY = Env.get("TOKEN_KEY") != null ? Env.get("TOKEN_KEY") : Env.get("PERKBOX_TOKEN_KEY");
+
     public TokenBuilder() {
         this.expiresIn = 1800;
     }
@@ -66,7 +69,7 @@ public class TokenBuilder {
         if (this.secret == null || this.secret.isEmpty())
             throw new MissingResourceException("Secret key missing", "TokenBuilder", "secret");
 
-        return Jwts.builder().setHeaderParam("alg", "HS256").setIssuer("perkbox")
+        return Jwts.builder().setHeaderParam("alg", "HS256").setIssuer(ISSUER)
                 .setIssuedAt(new Date(System.currentTimeMillis())).setSubject(this.userId)
                 .setExpiration(new Date(System.currentTimeMillis() + (this.expiresIn * 1000))).claim("usr", this.email)
                 .claim("ten", this.tenant).claim("aut", JsonToEncoded(this.permissionsJson))
@@ -78,9 +81,8 @@ public class TokenBuilder {
 
         try {
             token = (new TokenBuilder()).withUser(UserUuid).withTenant(tenant).withEmail(userEmail)
-                    .withPermissions(permissionJson).expiresIn(expiry).lock(Env.get("PERKBOX_TOKEN_KEY")).build();
-        }
-        catch (IOException e) {
+                    .withPermissions(permissionJson).expiresIn(expiry).lock(TOKEN_KEY).build();
+        } catch (IOException e) {
             System.out.println("Unable to generate createToken: " + e.getMessage());
         }
 
