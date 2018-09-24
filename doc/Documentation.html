@@ -13,7 +13,7 @@
         This documentation exemplifies the use of <a href="https://github.com/chinenyeze/api-tests-lib">the library</a>.
         <br>
         <small>&#10004; Completed documentation.</small>
-        <small class="version">version: 1.2.4</small>
+        <small class="version">version: 1.2.5</small>
     </div>
 
 
@@ -26,8 +26,13 @@
             <li class="sub-header">Instance Methods</li>
             <li class="separator">&nbsp;</li>
 
-            <li><a href="AbstractTest.html#AbstractTest">public AbstractTest(String endpoint, String jsonData)</a></li>
-            <li><a href="AbstractTest.html#AbstractTest_logLevel">public AbstractTest(String endpoint, String jsonData, int logLevel)</a></li>
+            <li><a href="AbstractTest.html#AbstractTest">public AbstractTest(String endpoint)</a></li>
+            <li><a href="AbstractTest.html#AbstractTest_2">public AbstractTest(String endpoint, String jsonData)</a></li>
+            <li><a href="AbstractTest.html#AbstractTest_3">public AbstractTest(String endpoint, String jsonData, int logLevel)</a></li>
+            <li class="separator">&nbsp;</li>
+
+            <li><a href="AbstractTest.html#setLogLevel">public void setLogLevel(int logLevel)</a></li>
+            <li><a href="AbstractTest.html#setTokenEndpoint">public void setTokenEndpoint(String tokenEndpoint)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="AbstractTest.html#get">public Responses get(String uuid)</a></li>
@@ -35,6 +40,7 @@
             <li class="separator">&nbsp;</li>
 
             <li><a href="AbstractTest.html#getEtag">public String getEtag(String uuid)</a></li>
+            <li><a href="AbstractTest.html#getEtag_token">public String getEtag(String uuid, String token)</a></li>
             <li class="separator">&nbsp;</li>
 
             <li><a href="AbstractTest.html#list">public Requests list()</a></li>
